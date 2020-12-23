@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"strict": true,
+		"noImplicitAny": true,
+		"outDir": ".transpiled",
+	},
+	"include": [ "src/eslintrc.ts", "src/eslintrc.important.ts", "src/eslintrc.all.ts" ],
+}

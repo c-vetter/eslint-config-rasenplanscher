@@ -1,3 +1,11 @@
+.transpiled
+.rules-definitions
+.providers.ts
+
+
+################
+
+
 # Logs
 logs
 *.log
