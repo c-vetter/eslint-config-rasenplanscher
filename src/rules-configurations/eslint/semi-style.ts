@@ -1,11 +1,13 @@
-import { TASTE } from '../../priorities'
-import semiStyle from '../../.rules-definitions/eslint/semi-style'
+import Configuration from './semi-style.d'
 
-export default {
-	rule: semiStyle,
-	priority: TASTE,
+const configuration:Configuration = {
+	ruleId: 'semi-style',
+	providerId: 'eslint',
+	priority: 'TASTE',
 	activate: true,
 	options: [
-		'first'
+		'first',
 	],
 }
+
+export default configuration

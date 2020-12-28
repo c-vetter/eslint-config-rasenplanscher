@@ -1,0 +1,9 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"outDir": "../.transpiled",
+	},
+	"include": [ "eslintrc.ts", "eslintrc.important.ts", "eslintrc.all.ts" ],
+}

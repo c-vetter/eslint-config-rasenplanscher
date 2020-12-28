@@ -1,9 +1,9 @@
-import { IMPORTANT } from '../../priorities'
-import semi from '../../.rules-definitions/eslint/semi'
+import Configuration from './semi.d'
 
-export default {
-	rule: semi,
-	priority: IMPORTANT,
+const configuration:Configuration = {
+	ruleId: 'semi',
+	providerId: 'eslint',
+	priority: 'IMPORTANT',
 	activate: true,
 	options: [
 		'never',
@@ -12,3 +12,5 @@ export default {
 		},
 	],
 }
+
+export default configuration

@@ -1,12 +1,17 @@
 import { camelCase } from "case-anything";
 import { Dirent, outputFile, pathExistsSync, readdir } from 'fs-extra'
 
-import { root, src, rulesDefinitions, rulesConfigurations, PathBuilder, trimTs } from '../_paths'
+import { rulesDefinitions, rulesConfigurations, PathBuilder, trimTs } from './paths'
 
-Promise.all([
-	buildIndices(rulesDefinitions),
-	buildIndices(rulesConfigurations),
-])
+
+const roots = {
+	rulesDefinitions,
+	rulesConfigurations,
+}
+
+const root = process.argv[2] as keyof typeof roots
+
+buildIndices(roots[root])
 .catch(error => {
 	console.error(error)
 })
@@ -28,7 +33,7 @@ function buildIndex(scope:PathBuilder, ...directory:string[]) {
 	.then(entries => entries.filter(entry => entry.name !== indexName))
 	.then(entries =>[
 		entries.filter(entry => entry.isDirectory() && pathExistsSync(scope(...directory, entry.name, indexName))),
-		entries.filter(entry => entry.isFile() && entry.name.endsWith('.ts')),
+		entries.filter(entry => entry.isFile() && entry.name.endsWith('.ts') && !entry.name.endsWith('.d.ts')),
 	])
 	.then(([directories, files]) => ([
 		[
@@ -54,7 +59,7 @@ function buildIndex(scope:PathBuilder, ...directory:string[]) {
 }
 
 function varName (entry:Dirent) {
-	return camelCase(clippedName(entry))
+	return `_${camelCase(clippedName(entry))}_`
 }
 function clippedName(entry:Dirent) {
 	return trimTs(entry.name)

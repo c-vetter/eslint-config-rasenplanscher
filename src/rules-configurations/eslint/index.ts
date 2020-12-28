@@ -1,7 +1,7 @@
-import semiStyle from './semi-style'
-import semi from './semi'
+import _semiStyle_ from './semi-style'
+import _semi_ from './semi'
 
 export default [
-	semiStyle,
-	semi
+	_semiStyle_,
+	_semi_
 ]

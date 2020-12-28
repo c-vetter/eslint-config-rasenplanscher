@@ -1,5 +1,5 @@
-import eslint from './eslint'
+import _eslint_ from './eslint'
 
 export default [
-	...eslint
+	..._eslint_
 ]
