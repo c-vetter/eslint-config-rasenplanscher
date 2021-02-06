@@ -173,7 +173,7 @@ function generateConfig (data:RuleData) {
 			.replace(/'/g, `\\'`)
 			.replace(/"/g, `'`)
 			.replace(/\n}$/, `,\n}`)
-		}\n\nexport default ${configToken}`,
+		}\n\nexport default ${configToken}\n`,
 	))
 }
 
