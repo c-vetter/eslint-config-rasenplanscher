@@ -24,7 +24,7 @@ The following will be as precise as feasible while keeping in mind that it is me
 		A point in a line of text that is at a variable distance from the beginning of the line. The distance depends on the settings and capabilities of the editor in use. The distance of any single `Tab stop` can vary between editors, between machines, between users. `Tab stop`s are most often set at consistent intervals of multiples of a `space`.
 	+	**Tab key**\
 		A key on a keyboard (or typewriter) that used to “skip ahead” in some manner dependent on context and configuration.
-	+	[There is some history to the concepts here.](./no-mixed-spaces-and-tabs.tab-history.md)
+	+	[There is some history to the concepts here.](no-mixed-spaces-and-tabs.tab-history.md)
 +	**Tab width / tab size**\
 	The width of a `tab character`. Usually given as a multiple of `space`.
 +	**Column**\
