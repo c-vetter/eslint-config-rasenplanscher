@@ -13,6 +13,7 @@ import { importable, rulesConfigurations, rulesDefinitions, support } from './pa
 import priorities, { IMPORTANT, HELPFUL, TASTE } from './priorities'
 import { EslintProvider, providers } from './providers'
 import { RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOptions, RuleDefinition } from './Rule'
+import { outdent } from 'outdent'
 
 
 inquirer.registerPrompt('autocomplete', autocomplete)
@@ -54,15 +55,23 @@ export function processRule (rule:RuleDefinition) {
 	return Promise.all([
 		(
 			pathExists(typingFile)
-			.then(exists => ((exists || generateTypes(data)) as PromiseLike<void>))
+			.then(exists => (exists ? null : generateTypes(data)))
 		),
 		(
 			pathExists(configFile)
-			.then(exists => ((exists || generateConfig(data)) as PromiseLike<void>))
+			.then(exists => (exists ? null : generateConfig(data)))
 			.then(() => code(configFile))
+		),
+		(
+			pathExists(reasonFile)
+			.then(exists => (exists ? null : generateDoc(data)))
+			.then(() => code(reasonFile))
 		),
 	])
 }
+
+
+//
 
 
 const configToken = 'configuration'
@@ -71,9 +80,8 @@ const baseTypeToken = 'RuleConfiguration'
 const optionsTypeToken = 'Options'
 
 
-function generateTypes(data:RuleData) {
-	return import(data.definitionFile)
-	.then(i => i.default.meta.schema as JSONSchema|JSONSchema[])
+function generateTypes (data:RuleData) {
+	return Promise.resolve(data.rule.meta.schema!)
 	.then(schema => (
 		Array.isArray(schema)
 		? wrapped(schema)
@@ -81,17 +89,22 @@ function generateTypes(data:RuleData) {
 	))
 	.then(schema => parseSchema(schema, { name: optionsTypeToken }))
 	.then(ast => printer.printNodes(ast))
-	.then(types => types.replace(/^export /gm, ''))
-	.then(types => (
-		`import { ${baseTypeToken} } from '${
+	.then(types => outdent`
+		import { ${baseTypeToken} } from '${
 			importable(support('Rule'), data.typingFile)
-		}'\n\n${
-			types
-		}\n\ntype ${configTypeToken} = ${baseTypeToken}<${
+		}'
+
+		${
+			types.replace(/^export /gm, '')
+		}
+
+		type ${configTypeToken} = ${baseTypeToken}<${
 			optionsTypeToken
 			// https://github.com/microsoft/TypeScript/issues/3792#issuecomment-303526468
-		}>\n\nexport default ${configTypeToken}`
-	))
+		}>
+
+		export default ${configTypeToken}
+	`)
 	.then(types => outputFile(data.typingFile, types))
 
 	function wrapped (schema:JSONSchema[]) : JSONSchema {
@@ -135,13 +148,16 @@ function generateConfig (data:RuleData) {
 					// some rules lack a meta.type and a meta.docs.category, specifically in plugin react
 					default: HELPFUL,
 				}[
-					data.rule.meta.type || (
+					data.rule.meta.type
+					|| (
 						data.rule.meta.docs.category as (
 							| 'Possible Errors'
 							| 'Best Practices'
 							| 'Stylistic Issues'
 						)
-					) || 'default']
+					)
+					|| 'default'
+				]
 			},
 			{
 				type: 'confirm',
@@ -165,17 +181,35 @@ function generateConfig (data:RuleData) {
 	}))
 	.then((ruleConfig:RuleConfiguration) => outputFile(
 		data.configFile,
-		`import ${configTypeToken} from '${
-			importable(data.typingFile, data.configFile)
-		}'\n\nconst ${configToken}:${configTypeToken} = ${
-			JSON.stringify(ruleConfig, null, '\t')
-			.replace(/"(\w+)":/g, '$1:')
-			.replace(/'/g, `\\'`)
-			.replace(/"/g, `'`)
-			.replace(/\n}$/, `,\n}`)
-		}\n\nexport default ${configToken}\n`,
+		outdent`
+			import ${configTypeToken} from '${
+				importable(data.typingFile, data.configFile)
+			}'
+
+			const ${configToken}:${configTypeToken} = ${
+				JSON.stringify(ruleConfig, null, '\t')
+				.replace(/"(\w+)":/g, '$1:')
+				.replace(/'/g, `\\'`)
+				.replace(/"/g, `'`)
+				.replace(/\n}$/, `,\n}`)
+			}
+
+			export default ${configToken}
+
+		`,
 	))
 }
+function generateDoc (data:RuleData) {
+	return Promise.resolve(data.rule.id)
+	.then(id => outdent`
+		${id}
+		${'='.repeat(id.length)}
+	`)
+	.then(doc => outputFile(data.reasonFile, doc))
+}
+
+
+//
 
 
 function code (...filepaths:string[]) {

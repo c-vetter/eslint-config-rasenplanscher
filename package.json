@@ -70,5 +70,8 @@
 			"ecmaVersion": 2021,
 			"sourceType": "module"
 		}
+	},
+	"dependencies": {
+		"outdent": "^0.8.0"
 	}
 }
