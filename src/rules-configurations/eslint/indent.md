@@ -2,6 +2,7 @@ indent
 =====
 The reason for going with tabs is that they are the more appropriate representation of intent. For a detailed explanation, see [Tabs versus Spaces](indent.tabs-vs-spaces.md).
 
+
 The one simple rule
 -------------------
 What is between paired tokens is indented one level more than the token, everything else keeps indentation level.
@@ -15,6 +16,7 @@ Paired tokens are:
 
 The option settings follow a rather simple strategy: subordinate things are indented one level deeper than their respective “containers”, items at the same structural level are aligned. When in doubt, prefer indentation.
 
+
 Indentation versus Alignment
 ----------------------------
 Alignment at the start of a line is not worth the effort.
@@ -24,7 +26,8 @@ To see why that is, an example may be helpful. Let's use the following array ass
 const arrayOfAwesomeAncestors = [ Andrew, Agnes, Aramir, Agatha, Aesir ]
 ```
 
-That one should be spread to multiple lines. There are three basic strategies for that.
+That one should be spread to multiple lines. There are three basic strategies for that: break, align, indent.
+
 +	**Single break**
 	```js
 	const arrayOfAwesomeAncestors = [

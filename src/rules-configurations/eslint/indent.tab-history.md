@@ -1,8 +1,8 @@
 Copied for safe-keeping from
-https://web.archive.org/web/20090615091848/http://www.nabble.com/-long--Re:-Elastic-tabstops-p20025677.html
+https://web.archive.org/web/20090615091848/http://www.nabble.com/-long--Re:-Elastic-tabstops-p20025677.html on 2021-02-06
 
 
---------
+----
 
 <pre>
 On 17/10/2008, at 09:18 , David Tulloh wrote:

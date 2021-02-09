@@ -1,6 +1,7 @@
 Tabs versus Spaces
-==============
-Many things have been said on this topic, and regrettably, most often, there are some hidden assumptions that foul the resulting recommendations.
+=================
+Many things have been said on this topic, and regrettably most discussions devolve into a religious arguments over personal preferences. This document is intended as an objective investigation of the subject, so far as the author is capable of that.
+
 
 First principles: a glossary of terms
 -------------------------------------
@@ -45,9 +46,124 @@ The following will be as precise as feasible while keeping in mind that it is me
 In the code samples following later, Tab characters will be visualized by character sequences such as `--->`. The number of characters will be employed according to each sample's intended tab width.
 
 
+Why use X
+---------
+Reasons in favor of tabs:
++	Less disk space
++	Semantically the most appropriate character
++	Every user can have their individual settings regarding tab width
+
+Reasons in favor of spaces:
++	Visual appearance is kept more faithfully
+
+First off, the disk space argument is just about irrelevant today, so we will ignore that.
+
+
+### Semantics
+The tab character signifies “tabulation”, arranging text in rows and columns. Obviously, when indenting, we are not meaning to jump to a completely different column in a table, but rather to visualize some kind of hierarchy. Therefore, there is some difference in meaning.
+
+However, much of the alignment done beyond the beginning of the line is actually intended to tabulate. That means we have a middling semantic match for indentation and a good match for alignment.
+
+
+### Visual fidelity vs Individual configuration
+To reiterate:
++	Tabs: Every user can have their individual settings regarding tab width
++	Spaces: Visual appearance is kept more faithfully
+
+Both are true, and both have some merit. That begs the question how valuable the two qualities of visual fidelity and individual configuration are, relative to each other.
+
+Obviously, there's a lot of personal preference to that. And that is probably one of the main reasons why this debate is as fierce as it is. Still, let's see what we can find objectively.
+
+#### Individual configuration
+Are individual settings relevant? Yes. Of course, we could all use the same hardware and software with the same configuration, but nobody actually advocates that as the ideal way forward. The simple fact is that humans are too different individually for any single configuration to be ideal, or even appropriate, for everybody. Even for one individual, the ideal configuration will usually change over time. Eyes usually deteriorate over time, so generally, people will benefit from larger font sizes the older they become. Hence, individual settings are a goode thing.
+
+But does that mean that tab widths should be configurable? Not necessarily. However, without configuration, there would need to be a definitive size, and that just does not exist. Also, configurable tabstops enable you to have comfortable spacious indentation on a 4k desktop screen while using tight utilitarian tabstops on your ultra-mobile device.
+
+In short: tabs enable device-appropriate settings, which is definitely a win.
+
+#### Visual fidelity
+Generally, when people espouse the visual fidelity of spaces over tabs, they think about aligning pieces of code over multiple lines.
+
+Let's examine a code snippet with different alignments:
+```js
+// 4-columns tabstops
+/**
+ * @param-->{string}--->name
+ * @param-->{boolean}-->count
+ * @returns>{number}
+ */
+function go (name, count) {
+--->/**
+---> * @param-->{string}--->name
+---> * @param-->{boolean}-->count
+---> * @returns>{number}
+---> */
+--->function go (name, count) {…
+```
+```js
+// 8-columns tabstops
+/**
+ * @param------>{string}------->name
+ * @param------>{boolean}------>count
+ * @returns---->{number}
+ */
+function go (name, count) {
+------->/**
+-------> * @param------>{string}------->name
+-------> * @param------>{boolean}------>count
+-------> * @returns---->{number}
+-------> */
+------->function go (name, count) {…
+```
+```js
+// 2-columns tabstops
+/**
+ * @param>{string}->name
+ * @param>{boolean}>count
+ * @returns>{number}
+ */
+function go (name, count) {
+->/**
+-> * @param>{string}->name
+-> * @param>{boolean}>count
+-> * @returns>{number}
+-> */
+->function go (name, count) {…
+```
+Looking at, it as obvious that with normal, equal-width tabstops, there can be readability issues.
+
+#### A mixed strategy to the rescue
+Note, that the issues in the previous examples are detrimental only within the comment blocks while the indentation tab characters do not hamper readability. Therefore, it is recommended to use [tabs for indentation, spaces for alignment](https://www.emacswiki.org/emacs/SmartTabs) in order to achieve a good tradeoff between semantic correctness and visual fidelity.
+
+#### A better way
+There is, however, a far superior approach: [Elastic tabstops](indent.elastic-tabstops.md)
+
+Editor support is still in its infancy, unfortunately. Still, sufficiently modern teams and projects are invited to give it a go because it enables a developer experience that combines:
++	ease of use: one tab and you're good
++	configurability: set tab stops as appropriate for *your* use-case
++	robustness: no forgetting to update spaces when word lengths change
++	proper semantics: again, tabs
++	no more columns: see below
+
+##### Columns
+Much of the thought that goes into this debate is directly tied to the idea of arranging code in character-wide columns, thereby putting the monospace constraint of fonts. That is somewhat of a vicious circle. Combining elastic tabstops with proportional type is a way out of that boxy thinking.
+
+There is very little practical value in having fixed-width columns. Multi-line selections are easier for columnar data, but 1) if it's intentionally columnar, elastic tabstops solve that problem at least as well, and 2) if accidentally columnar, it's usually of no value to do a column-constrained multi-line selection. In practice, word-constrained selections are far more common, and require good editor support anyway.
+
+On the other hand, centuries of type-setting tell us that when given the choice, people prefer reading proportional fonts over monospace. The two basic reasons for the fact that monospace is the standard in coding are habit and developer resources for editor software. Habit, because people are lazy and afraid of change. Resources because beautiful typography is far more difficult than tabular arrangement of characters.
+
+
+----
+
+
+> [WIP]\
+> The rest of this document is still somewhat unorganized and more or less a braindump.
+
+
 Common misconceptions
 ---------------------
 Merely reading through the glossary terms above, one can see some potential for misunderstandings. Let's look at some of the most important issues.
+
 
 ### Fonts
 Often overlooked, the font used is one of the primary factors in how tabs and spaces work, and consequently have great impact on the validity of many assumptions and recommendations.
@@ -61,6 +177,12 @@ In the early years of computer technology, available resources were far more con
 One such assumption is that in a code editor, a monospace font is used. That assumption is a fair assumption, for the most part.
 
 What's important for this discussion is the fact that **modern code editors allow you to use proportional fonts**. That has important implications for many aspects of the debate.
+
+
+### “A Tab is a multiple of a space”
+Some people arguing against tabs point out the apparent problem of alignments breaking when someone uses tab widths other than what the original author used.
+
+That argument implicitly assumes that a tab character represents multiple space characters, effectively being some kind of compression mechanism. That way of using tabs is obviously problematic and should be avoided.
 
 
 ### Columns, Characters, Spaces, Tab widths
