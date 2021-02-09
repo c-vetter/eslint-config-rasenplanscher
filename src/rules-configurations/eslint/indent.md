@@ -8,11 +8,14 @@ The one simple rule
 What is between paired tokens is indented one level more than the token, everything else keeps indentation level.
 
 Paired tokens are:
-+ parentheses `()`
-+ brackets `[]`
-+ braces `{}`
-+ angles `<>`
-+ backticks ` `` `
++ parentheses `(`…`)`
++ brackets `[`…`]`
++ braces `{`…`}`
++ angles `<`…`>`
++ HTML tag delimiters `<`…`/>`
++ HTML comment delimiters `<!--`…`-->`
++ backticks `` ` ``…`` ` ``
++ block comment delimiters `/*`…`*/` *(unless using [documentation comments](https://jsdoc.app/about-getting-started.html))*
 
 The option settings follow a rather simple strategy: subordinate things are indented one level deeper than their respective “containers”, items at the same structural level are aligned. When in doubt, prefer indentation.
 
