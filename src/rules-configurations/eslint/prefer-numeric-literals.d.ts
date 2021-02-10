@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("last" | "first"))[]
+type Options = never[]
 
 type Configuration = RuleConfiguration<Options>
 

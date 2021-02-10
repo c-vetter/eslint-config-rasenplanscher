@@ -1,6 +1,8 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("last" | "first"))[]
+type Options = (("always" | "never") | {
+	exceptions?: ("{}" | "[]" | "()" | "empty")[]
+})[]
 
 type Configuration = RuleConfiguration<Options>
 

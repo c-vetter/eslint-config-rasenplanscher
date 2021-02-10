@@ -1,6 +1,8 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("last" | "first"))[]
+type Options = (("always" | "never") | {
+	exceptAfterSingleLine?: boolean
+})[]
 
 type Configuration = RuleConfiguration<Options>
 

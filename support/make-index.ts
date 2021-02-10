@@ -1,4 +1,4 @@
-import { camelCase } from "case-anything";
+import { camelCase } from "case-anything"
 import { Dirent, outputFile, pathExistsSync, readdir } from 'fs-extra'
 
 import { rulesDefinitions, rulesConfigurations, PathBuilder, trimTs } from './paths'

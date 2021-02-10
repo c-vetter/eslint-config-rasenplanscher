@@ -20,12 +20,12 @@ inquirer.registerPrompt('autocomplete', autocomplete)
 
 
 type RuleData = {
-	rule: RuleDefinition;
-	provider: EslintProvider;
-	configFile: string;
-	typingFile: string;
-	definitionFile: string;
-	reasonFile: string;
+	rule: RuleDefinition
+	provider: EslintProvider
+	configFile: string
+	typingFile: string
+	definitionFile: string
+	reasonFile: string
 }
 
 
@@ -95,7 +95,11 @@ function generateTypes (data:RuleData) {
 		}'
 
 		${
-			types.replace(/^export /gm, '')
+			types
+			.replace(/;$/gm, '')
+			.replace(/(?<=(?:^|\n)(    )*)    /g, '\t')
+			.replace(/^export /, '')
+			.replace(/^\(\)\[\]$/, 'never[]')
 		}
 
 		type ${configTypeToken} = ${baseTypeToken}<${
@@ -204,6 +208,7 @@ function generateDoc (data:RuleData) {
 	.then(id => outdent`
 		${id}
 		${'='.repeat(id.length)}
+
 	`)
 	.then(doc => outputFile(data.reasonFile, doc))
 }

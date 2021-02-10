@@ -37,6 +37,30 @@ const configuration = {
 }
 
 const configuration$1 = {
+	ruleId: 'lines-between-class-members',
+	providerId: 'eslint',
+	priority: 'HELPFUL',
+	activate: true,
+	options: ['always'],
+}
+
+const configuration$2 = {
+	ruleId: 'no-case-declarations',
+	providerId: 'eslint',
+	priority: 'HELPFUL',
+	activate: true,
+	options: [],
+}
+
+const configuration$3 = {
+	ruleId: 'no-func-assign',
+	providerId: 'eslint',
+	priority: 'IMPORTANT',
+	activate: true,
+	options: [],
+}
+
+const configuration$4 = {
 	ruleId: 'no-mixed-spaces-and-tabs',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -44,7 +68,35 @@ const configuration$1 = {
 	options: ['smart-tabs'],
 }
 
-const configuration$2 = {
+const configuration$5 = {
+	ruleId: 'no-nonoctal-decimal-escape',
+	providerId: 'eslint',
+	priority: 'HELPFUL',
+	activate: true,
+	options: [],
+}
+
+const configuration$6 = {
+	ruleId: 'no-useless-rename',
+	providerId: 'eslint',
+	priority: 'IMPORTANT',
+	activate: true,
+	options: [{
+		ignoreDestructuring: false,
+		ignoreExport: false,
+		ignoreImport: false,
+	}],
+}
+
+const configuration$7 = {
+	ruleId: 'prefer-numeric-literals',
+	providerId: 'eslint',
+	priority: 'HELPFUL',
+	activate: true,
+	options: [],
+}
+
+const configuration$8 = {
 	ruleId: 'semi-style',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -54,7 +106,7 @@ const configuration$2 = {
 	],
 }
 
-const configuration$3 = {
+const configuration$9 = {
 	ruleId: 'semi',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -67,11 +119,35 @@ const configuration$3 = {
 	],
 }
 
+const configuration$a = {
+	ruleId: 'sort-keys',
+	providerId: 'eslint',
+	priority: 'TASTE',
+	activate: false,
+	options: [],
+}
+
+const configuration$b = {
+	ruleId: 'space-in-parens',
+	providerId: 'eslint',
+	priority: 'TASTE',
+	activate: true,
+	options: ['never'],
+}
+
 const _eslint_ = [
 	configuration,
 	configuration$1,
 	configuration$2,
-	configuration$3
+	configuration$3,
+	configuration$4,
+	configuration$5,
+	configuration$6,
+	configuration$7,
+	configuration$8,
+	configuration$9,
+	configuration$a,
+	configuration$b
 ]
 
 const rulesConfigurations = [
