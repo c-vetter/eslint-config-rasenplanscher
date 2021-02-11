@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 
-import { random, scoped, select } from './edit-config.strategies'
+import { random, randomIncomplete, randomNew, scoped, scopedNew, select, selectNew } from './edit-config.strategies'
 
 
 inquirer.prompt([
@@ -10,15 +10,31 @@ inquirer.prompt([
 		message: 'Strategy:',
 		choices: [
 			{
-				name: 'random',
+				name: 'random, new',
+				value: randomNew,
+			},
+			{
+				name: 'random, incomplete',
+				value: randomIncomplete,
+			},
+			{
+				name: 'random, all',
 				value: random,
 			},
 			{
-				name: 'scoped',
+				name: 'scoped, new',
+				value: scopedNew,
+			},
+			{
+				name: 'scoped, all',
 				value: scoped,
 			},
 			{
-				name: 'select',
+				name: 'select, new',
+				value: selectNew,
+			},
+			{
+				name: 'select, all',
 				value: select,
 			},
 		],

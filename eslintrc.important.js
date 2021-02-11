@@ -39,7 +39,7 @@ const configuration = {
 const configuration$1 = {
 	ruleId: 'lines-between-class-members',
 	providerId: 'eslint',
-	priority: 'HELPFUL',
+	priority: 'TASTE',
 	activate: true,
 	options: ['always'],
 }
@@ -77,6 +77,14 @@ const configuration$5 = {
 }
 
 const configuration$6 = {
+	ruleId: 'no-useless-call',
+	providerId: 'eslint',
+	priority: 'HELPFUL',
+	activate: true,
+	options: [],
+}
+
+const configuration$7 = {
 	ruleId: 'no-useless-rename',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -88,7 +96,7 @@ const configuration$6 = {
 	}],
 }
 
-const configuration$7 = {
+const configuration$8 = {
 	ruleId: 'prefer-numeric-literals',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -96,7 +104,23 @@ const configuration$7 = {
 	options: [],
 }
 
-const configuration$8 = {
+const configuration$9 = {
+	ruleId: 'prefer-rest-params',
+	providerId: 'eslint',
+	priority: 'HELPFUL',
+	activate: true,
+	options: [],
+}
+
+const configuration$a = {
+	ruleId: 'prefer-spread',
+	providerId: 'eslint',
+	priority: 'HELPFUL',
+	activate: true,
+	options: [],
+}
+
+const configuration$b = {
 	ruleId: 'semi-style',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -106,7 +130,7 @@ const configuration$8 = {
 	],
 }
 
-const configuration$9 = {
+const configuration$c = {
 	ruleId: 'semi',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -119,7 +143,7 @@ const configuration$9 = {
 	],
 }
 
-const configuration$a = {
+const configuration$d = {
 	ruleId: 'sort-keys',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -127,7 +151,7 @@ const configuration$a = {
 	options: [],
 }
 
-const configuration$b = {
+const configuration$e = {
 	ruleId: 'space-in-parens',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -147,7 +171,10 @@ const _eslint_ = [
 	configuration$8,
 	configuration$9,
 	configuration$a,
-	configuration$b
+	configuration$b,
+	configuration$c,
+	configuration$d,
+	configuration$e
 ]
 
 const rulesConfigurations = [

@@ -8,64 +8,35 @@ import { outputFile, pathExists } from 'fs-extra'
 import inquirer from 'inquirer'
 import autocomplete from 'inquirer-autocomplete-prompt'
 import open from 'open'
-
-import { importable, rulesConfigurations, rulesDefinitions, support } from './paths'
-import priorities, { IMPORTANT, HELPFUL, TASTE } from './priorities'
-import { EslintProvider, providers } from './providers'
-import { RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOptions, RuleDefinition } from './Rule'
 import { outdent } from 'outdent'
+
+import { importable, support } from './paths'
+import priorities, { IMPORTANT, HELPFUL, TASTE } from './priorities'
+import { RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOptions, RuleData, RuleDefinition } from './Rule'
+import { Mutable } from './utility'
 
 
 inquirer.registerPrompt('autocomplete', autocomplete)
 
 
-type RuleData = {
-	rule: RuleDefinition
-	provider: EslintProvider
-	configFile: string
-	typingFile: string
-	definitionFile: string
-	reasonFile: string
-}
-
-
-export function processRule (rule:RuleDefinition) {
-	const provider = providers.find(({ id }) => id === rule.providerId)
-	if (!provider) throw new Error(`No provider found for rule ${rule.id}`)
-
-	if (!rule.meta.docs?.url) throw new Error(`No documentation url found for rule ${rule.id}`)
-	open(rule.meta.docs.url)
-
-	const configFile = rulesConfigurations(provider.name, `${rule.key}.ts`)
-	const typingFile = rulesConfigurations(provider.name, `${rule.key}.d.ts`)
-	const reasonFile = rulesConfigurations(provider.name, `${rule.key}.md`)
-	const definitionFile = rulesDefinitions(provider.name, `${rule.key}.ts`)
-
-	const data = {
-		rule,
-		provider,
-		configFile,
-		typingFile,
-		reasonFile,
-		definitionFile,
-	}
-
-	code(reasonFile)
+export function processRule (data:RuleData) {
+	if (!data.rule.meta.docs?.url) throw new Error(`No documentation url found for rule ${data.rule.id}`)
+	open(data.rule.meta.docs.url)
 
 	return Promise.all([
 		(
-			pathExists(typingFile)
+			pathExists(data.typingFile)
 			.then(exists => (exists ? null : generateTypes(data)))
 		),
 		(
-			pathExists(configFile)
+			pathExists(data.configFile)
 			.then(exists => (exists ? null : generateConfig(data)))
-			.then(() => code(configFile))
+			.then(() => code(data.configFile))
 		),
 		(
-			pathExists(reasonFile)
+			pathExists(data.reasonFile)
 			.then(exists => (exists ? null : generateDoc(data)))
-			.then(() => code(reasonFile))
+			.then(() => code(data.reasonFile))
 		),
 	])
 }
@@ -79,9 +50,14 @@ const configTypeToken = 'Configuration'
 const baseTypeToken = 'RuleConfiguration'
 const optionsTypeToken = 'Options'
 
-
 function generateTypes (data:RuleData) {
-	return Promise.resolve(data.rule.meta.schema!)
+	return Promise.resolve(
+		data.rule.meta.schema as (
+			Mutable<
+				Exclude<typeof data.rule.meta.schema, undefined>
+			>
+		)
+	)
 	.then(schema => (
 		Array.isArray(schema)
 		? wrapped(schema)
@@ -99,7 +75,7 @@ function generateTypes (data:RuleData) {
 			.replace(/;$/gm, '')
 			.replace(/(?<=(?:^|\n)(    )*)    /g, '\t')
 			.replace(/^export /, '')
-			.replace(/^\(\)\[\]$/, 'never[]')
+			.replace(/\(\)\[\]$/, 'never[]')
 		}
 
 		type ${configTypeToken} = ${baseTypeToken}<${
@@ -139,7 +115,7 @@ function generateConfig (data:RuleData) {
 				name: 'priority',
 				message: 'Priority:',
 				choices: priorities,
-				default: {
+				default: ({
 					problem: IMPORTANT,
 					suggestion: HELPFUL,
 					layout: TASTE,
@@ -151,7 +127,7 @@ function generateConfig (data:RuleData) {
 
 					// some rules lack a meta.type and a meta.docs.category, specifically in plugin react
 					default: HELPFUL,
-				}[
+				} as const)[
 					data.rule.meta.type
 					|| (
 						data.rule.meta.docs.category as (

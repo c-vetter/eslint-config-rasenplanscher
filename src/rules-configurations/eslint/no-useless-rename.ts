@@ -1,4 +1,3 @@
-import { constants } from 'fs-extra'
 import Configuration from './no-useless-rename.d'
 
 const configuration:Configuration = {

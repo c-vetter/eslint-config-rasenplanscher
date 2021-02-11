@@ -44,7 +44,7 @@ Array.from(rulesMap.entries())
 		.replace(/'/g, `\\'`)
 		.replace(/"/g, `'`)
 		.replace(/\n}$/, `,\n}`)
-	}`,
+	} as const`,
 ] as const)
 .forEach(([filePath, fileContent]) => {
 	outputFile(filePath, fileContent)

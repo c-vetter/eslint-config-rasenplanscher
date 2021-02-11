@@ -3,7 +3,7 @@ import Configuration from './lines-between-class-members.d'
 const configuration:Configuration = {
 	ruleId: 'lines-between-class-members',
 	providerId: 'eslint',
-	priority: 'HELPFUL',
+	priority: 'TASTE',
 	activate: true,
 	options: ['always'],
 }
