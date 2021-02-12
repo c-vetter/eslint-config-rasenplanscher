@@ -1,6 +1,19 @@
 'use strict'
 
 const configuration = {
+	ruleId: 'camelcase',
+	providerId: 'eslint',
+	priority: 'TASTE',
+	activate: false,
+}
+
+const configuration$1 = {
+	ruleId: 'id-match',
+	providerId: 'eslint',
+	ignore: true,
+}
+
+const configuration$2 = {
 	ruleId: 'indent',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -36,7 +49,7 @@ const configuration = {
 	],
 }
 
-const configuration$1 = {
+const configuration$3 = {
 	ruleId: 'lines-between-class-members',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -44,7 +57,19 @@ const configuration$1 = {
 	options: ['always'],
 }
 
-const configuration$2 = {
+const configuration$4 = {
+	ruleId: 'new-cap',
+	providerId: 'eslint',
+	priority: 'HELPFUL',
+	activate: true,
+	options: [{
+		newIsCap: true,
+		capIsNew: true,
+		properties: true,
+	}],
+}
+
+const configuration$5 = {
 	ruleId: 'no-case-declarations',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -52,7 +77,7 @@ const configuration$2 = {
 	options: [],
 }
 
-const configuration$3 = {
+const configuration$6 = {
 	ruleId: 'no-func-assign',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -60,7 +85,7 @@ const configuration$3 = {
 	options: [],
 }
 
-const configuration$4 = {
+const configuration$7 = {
 	ruleId: 'no-mixed-spaces-and-tabs',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -68,7 +93,7 @@ const configuration$4 = {
 	options: ['smart-tabs'],
 }
 
-const configuration$5 = {
+const configuration$8 = {
 	ruleId: 'no-nonoctal-decimal-escape',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -76,7 +101,21 @@ const configuration$5 = {
 	options: [],
 }
 
-const configuration$6 = {
+const configuration$9 = {
+	ruleId: 'no-restricted-properties',
+	providerId: 'eslint',
+	ignore: true,
+}
+
+const configuration$a = {
+	ruleId: 'no-return-assign',
+	providerId: 'eslint',
+	priority: 'IMPORTANT',
+	activate: true,
+	options: ['always'],
+}
+
+const configuration$b = {
 	ruleId: 'no-useless-call',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -84,7 +123,7 @@ const configuration$6 = {
 	options: [],
 }
 
-const configuration$7 = {
+const configuration$c = {
 	ruleId: 'no-useless-rename',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -96,7 +135,18 @@ const configuration$7 = {
 	}],
 }
 
-const configuration$8 = {
+const configuration$d = {
+	ruleId: 'prefer-arrow-callback',
+	providerId: 'eslint',
+	priority: 'HELPFUL',
+	activate: true,
+	options: [{
+		allowNamedFunctions: false,
+		allowUnboundThis: false,
+	}],
+}
+
+const configuration$e = {
 	ruleId: 'prefer-numeric-literals',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -104,7 +154,7 @@ const configuration$8 = {
 	options: [],
 }
 
-const configuration$9 = {
+const configuration$f = {
 	ruleId: 'prefer-rest-params',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -112,7 +162,7 @@ const configuration$9 = {
 	options: [],
 }
 
-const configuration$a = {
+const configuration$g = {
 	ruleId: 'prefer-spread',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -120,7 +170,7 @@ const configuration$a = {
 	options: [],
 }
 
-const configuration$b = {
+const configuration$h = {
 	ruleId: 'semi-style',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -130,7 +180,7 @@ const configuration$b = {
 	],
 }
 
-const configuration$c = {
+const configuration$i = {
 	ruleId: 'semi',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -143,15 +193,14 @@ const configuration$c = {
 	],
 }
 
-const configuration$d = {
+const configuration$j = {
 	ruleId: 'sort-keys',
 	providerId: 'eslint',
 	priority: 'TASTE',
 	activate: false,
-	options: [],
 }
 
-const configuration$e = {
+const configuration$k = {
 	ruleId: 'space-in-parens',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -174,7 +223,13 @@ const _eslint_ = [
 	configuration$b,
 	configuration$c,
 	configuration$d,
-	configuration$e
+	configuration$e,
+	configuration$f,
+	configuration$g,
+	configuration$h,
+	configuration$i,
+	configuration$j,
+	configuration$k
 ]
 
 const rulesConfigurations = [
@@ -209,7 +264,7 @@ function canRequire(id) {
 function makeEslintrc(...priorities) {
 	return {
 		rules: (rulesConfigurations
-		.filter((config => !config.ignore))
+		.filter(excludeIgnored)
 		.filter(config => priorities.includes(config.priority))
 		.filter(config => providers[config.providerId])
 		.reduce((r, config) => ({
@@ -219,6 +274,9 @@ function makeEslintrc(...priorities) {
                 : 'off')
 		}), {})),
 	}
+}
+function excludeIgnored(config) {
+	return !config.ignore
 }
 
 const IMPORTANT = 'IMPORTANT'

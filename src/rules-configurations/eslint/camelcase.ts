@@ -1,7 +1,7 @@
-import Configuration from './sort-keys.d'
+import Configuration from './camelcase.d'
 
 const configuration:Configuration = {
-	ruleId: 'sort-keys',
+	ruleId: 'camelcase',
 	providerId: 'eslint',
 	priority: 'TASTE',
 	activate: false,

@@ -4,6 +4,7 @@ import { DeepReadonly } from './utility'
 import { Priority } from './priorities'
 import { EslintProvider } from './providers'
 
+
 export type RuleDefinition = DeepReadonly<{
 	id: string
 	key: string
@@ -44,22 +45,38 @@ export type RuleConfigurationBase = {
 	ruleId: string
 	providerId: string
 }
-
 export type RuleConfigurationIgnore = {
 	ignore: true
 }
-
-export type RuleConfigurationOptions<T extends any[]=any[]> = {
+export type RuleConfigurationSet = {
 	ignore?: false
 	priority: Priority
-	activate: boolean
-	options: T
+}
+export type RuleConfigurationOff = {
+	activate: false
+}
+export type RuleConfigurationOptions<O extends unknown[] = unknown[]> = {
+	activate: true
+	options: O
 }
 
-export type RuleConfigurationWithIgnore = RuleConfigurationBase & RuleConfigurationIgnore
-export type RuleConfigurationWithOptions<T extends any[]=any[]> = RuleConfigurationBase & RuleConfigurationOptions<T>
+export type RuleConfigurationIgnored = (
+	& RuleConfigurationBase
+	& RuleConfigurationIgnore
+)
+export type RuleConfigurationInactive = (
+	& RuleConfigurationBase
+	& RuleConfigurationSet
+	& RuleConfigurationOff
+)
+export type RuleConfigurationActive<O extends unknown[] = unknown[]> = (
+	& RuleConfigurationBase
+	& RuleConfigurationSet
+	& RuleConfigurationOptions<O>
+)
 
-export type RuleConfiguration<T extends any[]=any[]> = (
-	| RuleConfigurationWithIgnore
-	| RuleConfigurationWithOptions<T>
+export type RuleConfiguration<O extends unknown[] = unknown[]> = (
+	| RuleConfigurationIgnored
+	| RuleConfigurationInactive
+	| RuleConfigurationActive<O>
 )
