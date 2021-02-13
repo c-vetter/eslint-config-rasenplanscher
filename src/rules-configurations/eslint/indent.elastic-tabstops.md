@@ -23,7 +23,7 @@ For as long as we continue to define each tabstop as being a multiple of N chara
 
 The simple solution is to redefine how tabs are interpreted by the text editor. Rather than saying that a tab character places the text that follows it at the next Nth column, we should say that a tab character is a delimiter between table cells in a manner more reminiscent of how they're used in tab separated value (TSV) files. When used for text or code I call this format "Tab Separated Columns". Seen in this light, we can see that space aligned files are analogous to the old fixed width data files, and we all know the advantages that delimited files have over those. For one thing, you can use sed or other tools to substitute strings in files and everything will still line up when you load them in the editor. Another advantage is that proportional fonts can now be used (in itself not a new idea \- see [Smalltalk](https://nickgravgaard.com/elastic-tabstops/images/smalltalk.png), [Oberon](https://nickgravgaard.com/elastic-tabstops/images/oberon.png) and Plan 9's [Acme](https://nickgravgaard.com/elastic-tabstops/images/acme.png)).
 
-![animation showing code in an editor with elastic tabstops being edited](columnblocks_coloured.gif)
+![animation showing code in an editor with elastic tabstops being edited](indent.elastic-tabstops.gif)
 
 This animated diagram shows how the elastic tabstops mechanism aligns text. A tab character is represented as a vertical line.
 
