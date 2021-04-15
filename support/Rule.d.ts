@@ -49,7 +49,7 @@ export type RuleConfigurationIgnore = {
 	ignore: true
 }
 export type RuleConfigurationSet = {
-	ignore?: false
+	ignore?: never
 	priority: Priority
 }
 export type RuleConfigurationOff = {

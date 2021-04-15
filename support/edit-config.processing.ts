@@ -11,8 +11,8 @@ import open from 'open'
 import { outdent } from 'outdent'
 
 import { importable, support } from './paths'
-import priorities, { IMPORTANT, HELPFUL, TASTE } from './priorities'
-import { RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOptions, RuleData, RuleDefinition } from './Rule'
+import priorities, { IMPORTANT, HELPFUL, TASTE, Priority } from './priorities'
+import { RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOff, RuleConfigurationOptions, RuleConfigurationSet, RuleData, RuleDefinition } from './Rule'
 import { Mutable } from './utility'
 
 
@@ -146,13 +146,17 @@ function generateConfig (data:RuleData) {
 				default: true,
 			},
 		])
-		.then(({ activate, priority }) => ({
+		.then(({ activate, priority }:{ activate:boolean, priority:Priority }) => ({
 			priority,
 			activate,
-			options: [] as any[],
+			options: (
+				activate
+				? []
+				: undefined
+			),
 		}))
 	}) as (
-		(data:{ ignore: boolean }) => PromiseLike<RuleConfigurationIgnore|RuleConfigurationOptions>
+		(data:{ ignore: boolean }) => PromiseLike<RuleConfigurationIgnore|(RuleConfigurationSet&(RuleConfigurationOff|RuleConfigurationOptions))>
 	))
 	.then(config => ({
 		ruleId: data.rule.id,
