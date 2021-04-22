@@ -10,6 +10,6 @@ type Options = ({
 	message?: string
 })[]
 
-type Configuration = RuleConfiguration<Options>
+type Configuration = RuleConfiguration<'no-restricted-properties', Options>
 
 export default Configuration

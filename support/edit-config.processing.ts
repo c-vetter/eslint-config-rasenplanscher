@@ -78,12 +78,16 @@ function generateTypes (data:RuleData) {
 			.replace(/\(\)\[\]$/, 'never[]')
 		}
 
-		type ${configTypeToken} = ${baseTypeToken}<${
+		type ${configTypeToken} = ${baseTypeToken}<'${
+			data.rule.id
+		}', ${
 			optionsTypeToken
-			// https://github.com/microsoft/TypeScript/issues/3792#issuecomment-303526468
 		}>
 
-		export default ${configTypeToken}
+		export default ${
+			// https://github.com/microsoft/TypeScript/issues/3792#issuecomment-303526468
+			configTypeToken
+		}
 	`)
 	.then(types => outputFile(data.typingFile, types))
 

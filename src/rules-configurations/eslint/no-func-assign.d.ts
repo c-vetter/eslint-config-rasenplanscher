@@ -1,7 +1,7 @@
- import { RuleConfiguration } from '../../../support/Rule'
+import { RuleConfiguration } from '../../../support/Rule'
 
 type Options = never[]
 
-type Configuration = RuleConfiguration<Options>
+type Configuration = RuleConfiguration<'no-func-assign', Options>
 
 export default Configuration

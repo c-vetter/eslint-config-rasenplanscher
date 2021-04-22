@@ -13,7 +13,7 @@ import { rulesConfigurations, rulesDefinitions } from './paths'
 
 inquirer.registerPrompt('autocomplete', autocomplete)
 
-const rules = allRules.map(ruleData)
+const rules = () => allRules.map(ruleData)
 
 
 export function select () {
@@ -45,11 +45,11 @@ export function random () {
 	.then(processRule)
 }
 export function randomIncomplete () {
-	return randomRule(incompleteRules(rules))
+	return randomRule(incompleteRules(rules()))
 	.then(processRule)
 }
 export function randomNew () {
-	return randomRule(newRules(rules))
+	return randomRule(newRules(rules()))
 	.then(processRule)
 }
 
@@ -99,7 +99,7 @@ function selectRule (rules:RuleData[]) {
 	)
 }
 
-async function randomRule (options = rules) {
+async function randomRule (options = rules()) {
 	return options[Math.floor(options.length * Math.random())]
 }
 
@@ -116,7 +116,7 @@ function newRules (rules:RuleData[]) {
 }
 
 function rulesForProvider (provider:EslintProvider) {
-	return rules.filter(({ provider: { id } }) => id === provider.id)
+	return rules().filter(({ provider: { id } }) => id === provider.id)
 }
 
 function ruleData (rule:RuleDefinition) : RuleData {

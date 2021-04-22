@@ -41,9 +41,9 @@ export type RuleData = {
 }
 
 
-export type RuleConfigurationBase = {
-	ruleId: string
-	providerId: string
+type RuleConfigurationBase<I extends string = string> = {
+	ruleId: I extends `${string}/${infer R}` ? R : string extends I ? string : I,
+	providerId: I extends `${infer P}/${string}` ? P : string extends I ? string : 'eslint',
 }
 export type RuleConfigurationIgnore = {
 	ignore: true
@@ -60,23 +60,23 @@ export type RuleConfigurationOptions<O extends unknown[] = unknown[]> = {
 	options: O
 }
 
-export type RuleConfigurationIgnored = (
-	& RuleConfigurationBase
+export type RuleConfigurationIgnored<I extends string = string> = (
+	& RuleConfigurationBase<I>
 	& RuleConfigurationIgnore
 )
-export type RuleConfigurationInactive = (
-	& RuleConfigurationBase
+export type RuleConfigurationInactive<I extends string = string> = (
+	& RuleConfigurationBase<I>
 	& RuleConfigurationSet
 	& RuleConfigurationOff
 )
-export type RuleConfigurationActive<O extends unknown[] = unknown[]> = (
-	& RuleConfigurationBase
+export type RuleConfigurationActive<I extends string = string, O extends unknown[] = unknown[]> = (
+	& RuleConfigurationBase<I>
 	& RuleConfigurationSet
 	& RuleConfigurationOptions<O>
 )
 
-export type RuleConfiguration<O extends unknown[] = unknown[]> = (
-	| RuleConfigurationIgnored
-	| RuleConfigurationInactive
-	| RuleConfigurationActive<O>
+export type RuleConfiguration<I extends string = string, O extends unknown[] = unknown[]> = (
+	| RuleConfigurationIgnored<I>
+	| RuleConfigurationInactive<I>
+	| RuleConfigurationActive<I, O>
 )

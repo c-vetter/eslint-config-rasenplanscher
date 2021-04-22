@@ -10,6 +10,6 @@ type Options = ({
 	properties?: boolean
 })[]
 
-type Configuration = RuleConfiguration<Options>
+type Configuration = RuleConfiguration<'new-cap', Options>
 
 export default Configuration

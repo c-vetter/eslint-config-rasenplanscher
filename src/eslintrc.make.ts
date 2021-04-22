@@ -28,7 +28,7 @@ export default function makeEslintrc (...priorities:Priority[]) {
 
 
 function excludeIgnored<
-	C extends RuleConfiguration<O>,
+	C extends RuleConfiguration<string, O>,
 	O extends unknown[],
 > (
 	config:C

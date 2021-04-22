@@ -6,6 +6,6 @@ type Options = (("asc" | "desc") | {
 	minKeys?: number
 })[]
 
-type Configuration = RuleConfiguration<Options>
+type Configuration = RuleConfiguration<'sort-keys', Options>
 
 export default Configuration

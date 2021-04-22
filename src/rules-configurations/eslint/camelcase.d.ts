@@ -8,6 +8,6 @@ type Options = ({
 	allow?: (string)[]
 })[]
 
-type Configuration = RuleConfiguration<Options>
+type Configuration = RuleConfiguration<'camelcase', Options>
 
 export default Configuration

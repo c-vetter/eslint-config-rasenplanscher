@@ -6,6 +6,6 @@ type Options = (string | {
 	ignoreDestructuring?: boolean
 })[]
 
-type Configuration = RuleConfiguration<Options>
+type Configuration = RuleConfiguration<'id-match', Options>
 
 export default Configuration

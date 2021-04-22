@@ -6,6 +6,6 @@ type Options = ({
 	ignoreExport?: boolean
 })[]
 
-type Configuration = RuleConfiguration<Options>
+type Configuration = RuleConfiguration<'no-useless-rename', Options>
 
 export default Configuration
