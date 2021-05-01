@@ -41,4 +41,6 @@ If the developer is in a hurry, they may miss the semicolon and incur a SyntaxEr
 
 While that is obviously an edge case, it is a reality in some companies, and nuisance everywhere else. The only developers who do not consciously feel that pain are those who are accustomed to it. The pain is there anyway.
 
-In summary, manual semicolons are actually harmful and should only be employed where absolutely necessary. See [semi-style](semi-style.md).
+In summary, manual semicolons are actually harmful and should only be employed where absolutely necessary. The rule that actually looks out for that is [no-unexpected-multiline](no-unexpected-multiline.md).
+
+Also, see [semi-style](semi-style.md).

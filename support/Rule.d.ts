@@ -42,8 +42,9 @@ export type RuleData = {
 
 
 type RuleConfigurationBase<I extends string = string> = {
-	ruleId: I extends `${string}/${infer R}` ? R : string extends I ? string : I,
-	providerId: I extends `${infer P}/${string}` ? P : string extends I ? string : 'eslint',
+	id: I
+	ruleId: I extends `${string}/${infer R}` ? R : string extends I ? string : I
+	providerId: I extends `${infer P}/${string}` ? P : string extends I ? string : 'eslint'
 }
 export type RuleConfigurationIgnore = {
 	ignore: true
@@ -58,6 +59,7 @@ export type RuleConfigurationOff = {
 export type RuleConfigurationOptions<O extends unknown[] = unknown[]> = {
 	activate: true
 	options: O
+	optionsDangerzone?: O
 }
 
 export type RuleConfigurationIgnored<I extends string = string> = (

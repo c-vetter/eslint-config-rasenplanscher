@@ -1,9 +1,10 @@
 import Configuration from './semi-style.d'
 
 const configuration:Configuration = {
+	id: 'semi-style',
 	ruleId: 'semi-style',
 	providerId: 'eslint',
-	priority: 'TASTE',
+	priority: 'HELPFUL',
 	activate: true,
 	options: [
 		'first',

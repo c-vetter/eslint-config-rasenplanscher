@@ -1,9 +1,10 @@
 import Configuration from './semi.d'
 
 const configuration:Configuration = {
+	id: 'semi',
 	ruleId: 'semi',
 	providerId: 'eslint',
-	priority: 'IMPORTANT',
+	priority: 'HELPFUL',
 	activate: true,
 	options: [
 		'never',

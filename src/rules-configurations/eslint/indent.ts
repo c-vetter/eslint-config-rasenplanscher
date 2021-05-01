@@ -1,6 +1,7 @@
 import Configuration from './indent.d'
 
 const configuration:Configuration = {
+	id: 'indent',
 	ruleId: 'indent',
 	providerId: 'eslint',
 	priority: 'TASTE',

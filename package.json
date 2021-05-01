@@ -6,6 +6,7 @@
 	"files": [
 		"eslintrc.all.js",
 		"eslintrc.important.js",
+		"eslintrc.make.js",
 		"eslintrc.js"
 	],
 	"scripts": {

@@ -1,6 +1,7 @@
 import _arrayElementNewline_ from './array-element-newline'
 import _camelcase_ from './camelcase'
 import _consistentReturn_ from './consistent-return'
+import _curly_ from './curly'
 import _idMatch_ from './id-match'
 import _indent_ from './indent'
 import _linesBetweenClassMembers_ from './lines-between-class-members'
@@ -13,6 +14,7 @@ import _noNonoctalDecimalEscape_ from './no-nonoctal-decimal-escape'
 import _noRestrictedProperties_ from './no-restricted-properties'
 import _noReturnAssign_ from './no-return-assign'
 import _noThisBeforeSuper_ from './no-this-before-super'
+import _noUnexpectedMultiline_ from './no-unexpected-multiline'
 import _noUselessCall_ from './no-useless-call'
 import _noUselessRename_ from './no-useless-rename'
 import _preferArrowCallback_ from './prefer-arrow-callback'
@@ -28,6 +30,7 @@ export default [
 	_arrayElementNewline_,
 	_camelcase_,
 	_consistentReturn_,
+	_curly_,
 	_idMatch_,
 	_indent_,
 	_linesBetweenClassMembers_,
@@ -40,6 +43,7 @@ export default [
 	_noRestrictedProperties_,
 	_noReturnAssign_,
 	_noThisBeforeSuper_,
+	_noUnexpectedMultiline_,
 	_noUselessCall_,
 	_noUselessRename_,
 	_preferArrowCallback_,

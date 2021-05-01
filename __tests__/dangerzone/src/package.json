@@ -1,0 +1,10 @@
+{
+	"name": "all",
+	"scripts": {
+		"test": "eslint --fix index.js *>&1 > eslint.log"
+	},
+	"devDependencies": {
+		"eslint": "^7.25.0",
+		"eslint-config-rp": "file:../../.."
+	}
+}
