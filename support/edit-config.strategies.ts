@@ -19,38 +19,38 @@ const rules = () => allRules.map(ruleData)
 export function select () {
 	return selectProvider()
 	.then(selectRule)
-	.then(processRule)
+	.then(dispatch)
 }
 export function selectNew () {
 	return selectProvider()
 	.then(newRules)
 	.then(selectRule)
-	.then(processRule)
+	.then(dispatch)
 }
 
 export function scoped () {
 	return selectProvider()
 	.then(randomRule)
-	.then(processRule)
+	.then(dispatch)
 }
 export function scopedNew () {
 	return selectProvider()
 	.then(newRules)
 	.then(randomRule)
-	.then(processRule)
+	.then(dispatch)
 }
 
 export function random () {
 	return randomRule()
-	.then(processRule)
+	.then(dispatch)
 }
 export function randomIncomplete () {
 	return randomRule(incompleteRules(rules()))
-	.then(processRule)
+	.then(dispatch)
 }
 export function randomNew () {
 	return randomRule(newRules(rules()))
-	.then(processRule)
+	.then(dispatch)
 }
 
 
@@ -144,4 +144,71 @@ function ruleData (rule:RuleDefinition) : RuleData {
 		exists: existance.some(x=>(x===true)),
 		complete: existance.every(x=>(x===true)),
 	}
+}
+
+
+//
+
+type FilterExtends<
+A,
+> = A extends { meta : { docs: { extendsBaseRule: undefined|never } }} ? A : never
+
+
+type FilterByKey<
+	A extends RuleDefinition,
+	B extends RuleDefinition,
+> = (
+	A extends { key: B['key'] }
+	? A extends { id: B['id'] }
+	? never
+	: B extends { key: A['key'] }
+	? [A['id'] | B['id']]
+	: never
+	: never
+)
+
+
+type FakeNews = {
+	id: 'fake-news',
+	key: 'fake-news',
+	providerId: 'fake-news',
+	meta: {
+		docs: {
+			url: 'fake-news.info',
+		},
+	},
+}
+type NewsFake = {
+	id: 'news-fake',
+	key: 'news-fake',
+	providerId: 'news-fake',
+	meta: {
+		docs: {
+			url: 'news-fake.info',
+		},
+	},
+}
+
+function dispatch (data:RuleData) {
+	const all = rules().filter((x) => {
+		if (x.rule.key === data.rule.key) return true
+
+		if (typeof data.rule.meta.docs.extendsBaseRule === 'string') {
+			if (x.rule.key === data.rule.meta.docs.extendsBaseRule) return x
+		}
+
+		if (typeof x.rule.meta.docs.extendsBaseRule === 'string') {
+			if (x.rule.meta.docs.extendsBaseRule === data.rule.key) return x
+		}
+	} )
+
+	const base = all.find(d => !d.rule.meta.docs.extendsBaseRule)!
+
+	const bundle = {
+		all,
+		base,
+		extend: all.filter(d => d !== base),
+	}
+
+	return processRule(bundle)
 }

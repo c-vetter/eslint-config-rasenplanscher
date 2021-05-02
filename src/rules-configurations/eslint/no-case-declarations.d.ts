@@ -2,6 +2,6 @@ import { RuleConfiguration } from '../../../support/Rule'
 
 type Options = never[]
 
-type Configuration = RuleConfiguration<'no-case-declarations', Options>
+type Configuration = RuleConfiguration<'no-case-declarations', 'eslint', Options>
 
 export default Configuration

@@ -1,7 +1,6 @@
 import Configuration from './semi-style.d'
 
 const configuration:Configuration = {
-	id: 'semi-style',
 	ruleId: 'semi-style',
 	providerId: 'eslint',
 	priority: 'HELPFUL',

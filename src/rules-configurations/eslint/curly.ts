@@ -1,7 +1,6 @@
 import Configuration from './curly.d'
 
 const configuration:Configuration = {
-	id: 'curly',
 	ruleId: 'curly',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',

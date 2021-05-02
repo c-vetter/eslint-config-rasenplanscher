@@ -19,26 +19,35 @@ import { Mutable } from './utility'
 inquirer.registerPrompt('autocomplete', autocomplete)
 
 
-export function processRule (data:RuleData) {
-	if (!data.rule.meta.docs?.url) throw new Error(`No documentation url found for rule ${data.rule.id}`)
-	open(data.rule.meta.docs.url)
+type RuledataBundle = {
+	base: RuleData
+	extend: RuleData[]
+	all: RuleData[]
+}
 
-	return Promise.all([
+
+export function processRule (bundle:RuledataBundle) {
+	return Promise.all(bundle.all.flatMap(item => [
 		(
-			pathExists(data.typingFile)
-			.then(exists => (exists ? null : generateTypes(data)))
+			item.rule.meta.docs?.url
+			? open(item.rule.meta.docs.url) as Promise<unknown>
+			: Promise.reject(`No documentation url found for rule ${item.rule.id}`)
 		),
 		(
-			pathExists(data.configFile)
-			.then(exists => (exists ? null : generateConfig(data)))
-			.then(() => code(data.configFile))
+			pathExists(item.typingFile)
+			.then(exists => (exists ? null : generateTypes(item, bundle)))
 		),
 		(
-			pathExists(data.reasonFile)
-			.then(exists => (exists ? null : generateDoc(data)))
-			.then(() => code(data.reasonFile))
+			pathExists(item.configFile)
+			.then(exists => (exists ? null : generateConfig(item, bundle)))
+			.then(() => code(item.configFile))
 		),
-	])
+		(
+			pathExists(item.reasonFile)
+			.then(exists => (exists ? null : generateDoc(item, bundle)))
+			.then(() => code(item.reasonFile))
+		),
+	]))
 }
 
 
@@ -46,15 +55,22 @@ export function processRule (data:RuleData) {
 
 
 const configToken = 'configuration'
+const extendedConfigToken = 'baseConfiguration'
 const configTypeToken = 'Configuration'
 const baseTypeToken = 'RuleConfiguration'
+const baseTypeTokenExtender = 'RuleConfigurationOverride'
+const extendedTypeToken = 'BaseConfiguration'
 const optionsTypeToken = 'Options'
 
-function generateTypes (data:RuleData) {
+type Unpromise<T> = T extends PromiseLike<infer Q> ? Q : T
+
+function generateTypes (item:RuleData, bundle:RuledataBundle) {
 	return Promise.resolve(
-		data.rule.meta.schema as (
+		item === bundle.base
+		&&
+		item.rule.meta.schema as (
 			Mutable<
-				Exclude<typeof data.rule.meta.schema, undefined>
+				Exclude<typeof item.rule.meta.schema, undefined>
 			>
 		)
 	)
@@ -63,33 +79,57 @@ function generateTypes (data:RuleData) {
 		? wrapped(schema)
 		: schema
 	))
-	.then(schema => parseSchema(schema, { name: optionsTypeToken }))
-	.then(ast => printer.printNodes(ast))
+	.then<false|Unpromise<ReturnType<typeof parseSchema>>>(schema => schema && parseSchema(schema, { name: optionsTypeToken }))
+	.then(ast => ast && printer.printNodes(ast))
 	.then(types => outdent`
-		import { ${baseTypeToken} } from '${
-			importable(support('Rule'), data.typingFile)
+		import { ${types ? baseTypeToken : baseTypeTokenExtender } } from '${
+			importable(support('Rule'), item.typingFile)
 		}'
 
 		${
 			types
-			.replace(/;$/gm, '')
-			.replace(/(?<=(?:^|\n)(    )*)    /g, '\t')
-			.replace(/^export /, '')
-			.replace(/\(\)\[\]$/, 'never[]')
+			? (
+				types
+				.replace(/;$/gm, '')
+				.replace(/(?<=(?:^|\n)(    )*)    /g, '\t')
+				.replace(/^export /, '')
+				.replace(/\(\)\[\]$/, 'never[]')
+			)
+			: outdent`
+				import ${extendedTypeToken} from '${
+					importable(bundle.base.typingFile, item.typingFile)
+				}'
+			`
 		}
 
-		type ${configTypeToken} = ${baseTypeToken}<'${
-			data.rule.id
-		}', ${
-			optionsTypeToken
-		}>
+		type ${configTypeToken} = ${
+			types
+			? outdent`
+				${baseTypeToken}<'${
+					item.rule.id
+				}', ${
+					item.provider.id
+				}', ${
+					optionsTypeToken
+				}>
+			`
+			: outdent`
+				${baseTypeTokenExtender}<${
+					extendedTypeToken
+				}, '${
+					item.rule.id
+				}', '${
+					item.provider.id
+				}'>
+			`
+		}
 
 		export default ${
 			// https://github.com/microsoft/TypeScript/issues/3792#issuecomment-303526468
 			configTypeToken
 		}
 	`)
-	.then(types => outputFile(data.typingFile, types))
+	.then(types => outputFile(item.typingFile, types))
 
 	function wrapped (schema:JSONSchema[]) : JSONSchema {
 		return {
@@ -101,7 +141,25 @@ function generateTypes (data:RuleData) {
 	}
 }
 
-function generateConfig (data:RuleData) {
+function generateConfig (item:RuleData, bundle:RuledataBundle) {
+	if (item !== bundle.base) {
+		return outputFile(
+			item.configFile,
+			outdent`
+				import ${extendedConfigToken} from '${
+					importable(bundle.base.configFile, item.configFile)
+				}'
+				${
+					coreExport({ overrides: extendedConfigToken })
+					.replace(
+						`overrides: '${extendedConfigToken}',`,
+						`overrides: ${extendedConfigToken},`,
+					)
+				}
+			` ,
+		)
+	}
+
 	return inquirer.prompt([
 		{
 			type: 'confirm',
@@ -132,9 +190,9 @@ function generateConfig (data:RuleData) {
 					// some rules lack a meta.type and a meta.docs.category, specifically in plugin react
 					default: HELPFUL,
 				} as const)[
-					data.rule.meta.type
+					item.rule.meta.type
 					|| (
-						data.rule.meta.docs.category as (
+						item.rule.meta.docs.category as (
 							| 'Possible Errors'
 							| 'Best Practices'
 							| 'Stylistic Issues'
@@ -162,20 +220,23 @@ function generateConfig (data:RuleData) {
 	}) as (
 		(data:{ ignore: boolean }) => PromiseLike<RuleConfigurationIgnore|(RuleConfigurationSet&(RuleConfigurationOff|RuleConfigurationOptions))>
 	))
-	.then(config => ({
-		ruleId: data.rule.id,
-		providerId: data.provider.id,
-		...config,
-	}))
-	.then((ruleConfig:RuleConfiguration) => outputFile(
-		data.configFile,
-		outdent`
+	.then((ruleConfig:Omit<RuleConfiguration, 'ruleId'|'providerId'>) => outputFile(
+		item.configFile,
+		coreExport(ruleConfig),
+	))
+
+	function coreExport (data:Record<string,unknown>) {
+		return outdent`
 			import ${configTypeToken} from '${
-				importable(data.typingFile, data.configFile)
+				importable(item.typingFile, item.configFile)
 			}'
 
 			const ${configToken}:${configTypeToken} = ${
-				JSON.stringify(ruleConfig, null, '\t')
+				JSON.stringify({
+					ruleId: item.rule.id,
+					providerId: item.provider.id,
+					...data,
+				}, null, '\t')
 				.replace(/"(\w+)":/g, '$1:')
 				.replace(/'/g, `\\'`)
 				.replace(/"/g, `'`)
@@ -184,17 +245,22 @@ function generateConfig (data:RuleData) {
 
 			export default ${configToken}
 
-		`,
-	))
+		`
+	}
 }
-function generateDoc (data:RuleData) {
-	return Promise.resolve(data.rule.id)
-	.then(id => outdent`
-		${id}
-		${'='.repeat(id.length)}
 
+function generateDoc (item:RuleData, bundle:RuledataBundle) {
+	return Promise.resolve(item === bundle.base)
+	.then(base => outdent`
+		${item.rule.id}
+		${'='.repeat(item.rule.id.length)}
+		${
+			base
+			? ''
+			: `See [${bundle.base.rule.id}](${importable(bundle.base.reasonFile, item.reasonFile)})\n`
+		}
 	`)
-	.then(doc => outputFile(data.reasonFile, doc))
+	.then(doc => outputFile(item.reasonFile, doc))
 }
 
 
@@ -202,7 +268,7 @@ function generateDoc (data:RuleData) {
 
 
 function code (...filepaths:string[]) {
-	return spawn(
+	spawn(
 		'code.cmd',
 		filepaths,
 		{ stdio:'pipe' }

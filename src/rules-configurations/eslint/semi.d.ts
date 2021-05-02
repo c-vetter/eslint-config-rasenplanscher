@@ -6,6 +6,6 @@ type Options = (("never") | {
 	omitLastInOneLineBlock?: boolean
 })[]
 
-type Configuration = RuleConfiguration<'semi', Options>
+type Configuration = RuleConfiguration<'semi', 'eslint', Options>
 
 export default Configuration

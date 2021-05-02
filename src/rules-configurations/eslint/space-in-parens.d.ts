@@ -4,6 +4,6 @@ type Options = (("always" | "never") | {
 	exceptions?: ("{}" | "[]" | "()" | "empty")[]
 })[]
 
-type Configuration = RuleConfiguration<'space-in-parens', Options>
+type Configuration = RuleConfiguration<'space-in-parens', 'eslint', Options>
 
 export default Configuration

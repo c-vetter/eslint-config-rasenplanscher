@@ -34,8 +34,7 @@ laterStuff()
 
 By always adding braces, you guard yourself against this problem. When changing the conditional behavior here, you need not add the braces and will therefore keep focus on your actual task instead of dealing with this kind of syntactic nit-picking.
 
-💡 Pro Tip
----------
+## 💡 Pro Tip
 > ⚠ `dangerzone`
 
 There is one **narrow** use case for skipping the braces. Before adding that, you should have the basic strategy (always add braces) down before attempting this addition.

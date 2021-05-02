@@ -1,0 +1,20 @@
+{
+	"name": "default",
+	"scripts": {
+		"test": "eslint --fix index.ts *>&1 > eslint.log"
+	},
+	"eslintConfig": {
+		"root": true,
+		"extends": "eslint-config-rp/eslintrc.all.dangerzone",
+		"parserOptions": {
+			"ecmaVersion": 2021,
+			"sourceType": "module"
+		}
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.22.0",
+		"@typescript-eslint/parser": "^4.22.0",
+		"eslint": "^7.25.0",
+		"eslint-config-rp": "file:../../.."
+	}
+}

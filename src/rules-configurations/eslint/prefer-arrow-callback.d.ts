@@ -5,6 +5,6 @@ type Options = ({
 	allowUnboundThis?: boolean
 })[]
 
-type Configuration = RuleConfiguration<'prefer-arrow-callback', Options>
+type Configuration = RuleConfiguration<'prefer-arrow-callback', 'eslint', Options>
 
 export default Configuration

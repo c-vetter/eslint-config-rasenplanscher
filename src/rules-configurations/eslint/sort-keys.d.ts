@@ -6,6 +6,6 @@ type Options = (("asc" | "desc") | {
 	minKeys?: number
 })[]
 
-type Configuration = RuleConfiguration<'sort-keys', Options>
+type Configuration = RuleConfiguration<'sort-keys', 'eslint', Options>
 
 export default Configuration

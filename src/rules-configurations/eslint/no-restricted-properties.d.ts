@@ -10,6 +10,6 @@ type Options = ({
 	message?: string
 })[]
 
-type Configuration = RuleConfiguration<'no-restricted-properties', Options>
+type Configuration = RuleConfiguration<'no-restricted-properties', 'eslint', Options>
 
 export default Configuration

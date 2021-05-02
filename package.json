@@ -15,15 +15,15 @@
 		"build:bundle": "rollup -c support/rollup.config.js",
 		"build:cleanup": "eslint --fix eslintrc*.js",
 		"build:fix-ts-indent": "replace-in-files --string='    ' --replacement='\\t' node_modules/typescript/lib/*.js",
-		"build:providers": "ts-node --project support/tsconfig.json support/build-providers.ts",
-		"build:rules-index": "ts-node --project support/tsconfig.json support/make-index.ts rulesConfigurations",
+		"build:providers": "ts-node support/build-providers.ts",
+		"build:rules-index": "ts-node support/make-index.ts rulesConfigurations",
 		"build:transpile": "tsc -p src/tsconfig.json",
 		"edit": "run-s edit:definitions edit:rules-index edit:edit",
-		"edit:definitions": "ts-node --project support/tsconfig.json support/get-definitions.ts",
-		"edit:rules-index": "ts-node --project support/tsconfig.json support/make-index.ts rulesDefinitions",
-		"edit:edit": "ts-node --project support/tsconfig.json support/edit-config.ts",
+		"edit:definitions": "ts-node support/get-definitions.ts",
+		"edit:rules-index": "ts-node support/make-index.ts rulesDefinitions",
+		"edit:edit": "ts-node support/edit-config.ts",
 		"start": "npm run edit && npm run build",
-		"test": "ava"
+		"test": "ava __tests__/tests.ts"
 	},
 	"repository": {
 		"type": "git",
@@ -41,6 +41,7 @@
 	"devDependencies": {
 		"@rollup/plugin-node-resolve": "^11.2.1",
 		"@spec2ts/jsonschema": "^2.0.0-beta.3",
+		"@tsconfig/node12": "^1.0.7",
 		"@types/eslint": "^7.2.10",
 		"@types/estree": "^0.0.47",
 		"@types/fs-extra": "^9.0.11",
@@ -71,7 +72,7 @@
 		"typescript": "^4.2.4"
 	},
 	"peerDependencies": {
-		"eslint": "^7.15.0"
+		"eslint": "^7.25.0"
 	},
 	"eslintConfig": {
 		"root": true,

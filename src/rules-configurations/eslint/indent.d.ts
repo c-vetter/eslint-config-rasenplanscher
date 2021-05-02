@@ -29,6 +29,6 @@ type Options = ((("tab") | number) | {
 	ignoreComments?: boolean
 })[]
 
-type Configuration = RuleConfiguration<'indent', Options>
+type Configuration = RuleConfiguration<'indent', 'eslint', Options>
 
 export default Configuration

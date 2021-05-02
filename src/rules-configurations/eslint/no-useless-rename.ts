@@ -1,7 +1,6 @@
 import Configuration from './no-useless-rename.d'
 
 const configuration:Configuration = {
-	id: 'no-useless-rename',
 	ruleId: 'no-useless-rename',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',

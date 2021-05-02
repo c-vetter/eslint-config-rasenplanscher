@@ -10,6 +10,6 @@ export type Options = ((BasicConfig | {
 	ArrayPattern?: BasicConfig
 }))[]
 
-type Configuration = RuleConfiguration<'array-element-newline', Options>
+type Configuration = RuleConfiguration<'array-element-newline', 'eslint', Options>
 
 export default Configuration

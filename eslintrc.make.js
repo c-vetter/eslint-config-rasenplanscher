@@ -1,7 +1,29 @@
 'use strict'
 
+const configuration$s = {
+	ruleId: 'brace-style',
+	providerId: 'eslint',
+	priority: 'TASTE',
+	activate: true,
+	options: [
+		'1tbs',
+		{
+			allowSingleLine: false,
+		},
+	],
+}
+
+const configuration$r = {
+	ruleId: '@typescript-eslint/brace-style',
+	providerId: '@typescript-eslint/eslint-plugin',
+	base: configuration$s,
+}
+
+const _typescriptEslint_ = [
+	configuration$r
+]
+
 const configuration$q = {
-	id: 'array-element-newline',
 	ruleId: 'array-element-newline',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -9,7 +31,6 @@ const configuration$q = {
 }
 
 const configuration$p = {
-	id: 'camelcase',
 	ruleId: 'camelcase',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -17,7 +38,6 @@ const configuration$p = {
 }
 
 const configuration$o = {
-	id: 'consistent-return',
 	ruleId: 'consistent-return',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -28,7 +48,6 @@ const configuration$o = {
 }
 
 const configuration$n = {
-	id: 'curly',
 	ruleId: 'curly',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -43,14 +62,12 @@ const configuration$n = {
 }
 
 const configuration$m = {
-	id: 'id-match',
 	ruleId: 'id-match',
 	providerId: 'eslint',
 	ignore: true,
 }
 
 const configuration$l = {
-	id: 'indent',
 	ruleId: 'indent',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -87,7 +104,6 @@ const configuration$l = {
 }
 
 const configuration$k = {
-	id: 'lines-between-class-members',
 	ruleId: 'lines-between-class-members',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -96,7 +112,6 @@ const configuration$k = {
 }
 
 const configuration$j = {
-	id: 'new-cap',
 	ruleId: 'new-cap',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -109,7 +124,6 @@ const configuration$j = {
 }
 
 const configuration$i = {
-	id: 'no-case-declarations',
 	ruleId: 'no-case-declarations',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -118,7 +132,6 @@ const configuration$i = {
 }
 
 const configuration$h = {
-	id: 'no-func-assign',
 	ruleId: 'no-func-assign',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -127,7 +140,6 @@ const configuration$h = {
 }
 
 const configuration$g = {
-	id: 'no-label-var',
 	ruleId: 'no-label-var',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -136,7 +148,6 @@ const configuration$g = {
 }
 
 const configuration$f = {
-	id: 'no-mixed-spaces-and-tabs',
 	ruleId: 'no-mixed-spaces-and-tabs',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -145,7 +156,6 @@ const configuration$f = {
 }
 
 const configuration$e = {
-	id: 'no-nonoctal-decimal-escape',
 	ruleId: 'no-nonoctal-decimal-escape',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -154,14 +164,12 @@ const configuration$e = {
 }
 
 const configuration$d = {
-	id: 'no-restricted-properties',
 	ruleId: 'no-restricted-properties',
 	providerId: 'eslint',
 	ignore: true,
 }
 
 const configuration$c = {
-	id: 'no-return-assign',
 	ruleId: 'no-return-assign',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -170,7 +178,6 @@ const configuration$c = {
 }
 
 const configuration$b = {
-	id: 'no-this-before-super',
 	ruleId: 'no-this-before-super',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -179,7 +186,6 @@ const configuration$b = {
 }
 
 const configuration$a = {
-	id: 'no-unexpected-multiline',
 	ruleId: 'no-unexpected-multiline',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -188,7 +194,6 @@ const configuration$a = {
 }
 
 const configuration$9 = {
-	id: 'no-useless-call',
 	ruleId: 'no-useless-call',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -197,7 +202,6 @@ const configuration$9 = {
 }
 
 const configuration$8 = {
-	id: 'no-useless-rename',
 	ruleId: 'no-useless-rename',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -210,7 +214,6 @@ const configuration$8 = {
 }
 
 const configuration$7 = {
-	id: 'prefer-arrow-callback',
 	ruleId: 'prefer-arrow-callback',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -222,7 +225,6 @@ const configuration$7 = {
 }
 
 const configuration$6 = {
-	id: 'prefer-numeric-literals',
 	ruleId: 'prefer-numeric-literals',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -231,7 +233,6 @@ const configuration$6 = {
 }
 
 const configuration$5 = {
-	id: 'prefer-rest-params',
 	ruleId: 'prefer-rest-params',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -240,7 +241,6 @@ const configuration$5 = {
 }
 
 const configuration$4 = {
-	id: 'prefer-spread',
 	ruleId: 'prefer-spread',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -249,7 +249,6 @@ const configuration$4 = {
 }
 
 const configuration$3 = {
-	id: 'semi-style',
 	ruleId: 'semi-style',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -260,7 +259,6 @@ const configuration$3 = {
 }
 
 const configuration$2 = {
-	id: 'semi',
 	ruleId: 'semi',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -274,7 +272,6 @@ const configuration$2 = {
 }
 
 const configuration$1 = {
-	id: 'sort-keys',
 	ruleId: 'sort-keys',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -282,7 +279,6 @@ const configuration$1 = {
 }
 
 const configuration = {
-	id: 'space-in-parens',
 	ruleId: 'space-in-parens',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -292,6 +288,7 @@ const configuration = {
 
 const _eslint_ = [
 	configuration$q,
+	configuration$s,
 	configuration$p,
 	configuration$o,
 	configuration$n,
@@ -321,32 +318,35 @@ const _eslint_ = [
 ]
 
 const rulesConfigurations = [
+	..._typescriptEslint_,
 	..._eslint_
 ]
 
-const providers = {
-	'eslint': canRequire('eslint'),
-	'@typescript-eslint/eslint-plugin': canRequire('@typescript-eslint/eslint-plugin'),
-	'eslint-plugin-import': canRequire('eslint-plugin-import'),
-	'eslint-plugin-jsdoc': canRequire('eslint-plugin-jsdoc'),
-	'eslint-plugin-react': canRequire('eslint-plugin-react'),
-	'eslint-plugin-react-hooks': canRequire('eslint-plugin-react-hooks'),
-	'eslint-plugin-regex': canRequire('eslint-plugin-regex'),
-	'eslint-plugin-typescript-custom-sort-keys': canRequire('eslint-plugin-typescript-custom-sort-keys'),
-	'eslint-plugin-unused-imports': canRequire('eslint-plugin-unused-imports'),
-}
 function canRequire(id) {
 	try {
 		require.resolve(id)
-	}
-	catch (error) {
-		if (typeof error === 'string')
-		{throw new Error(error)}
-		if (error.message.includes('Cannot find module'))
-		{return false}
+	} catch (error) {
+		if (typeof error === 'string') {
+			throw new Error(error)
+		}
+		if (error.message.includes('Cannot find module')) {
+			return false
+		}
 		throw error
 	}
 	return true
+}
+
+const providers = {
+	'eslint': canRequire('eslint') && 'eslint',
+	'@typescript-eslint/eslint-plugin': canRequire('@typescript-eslint/eslint-plugin') && '@typescript-eslint',
+	'eslint-plugin-import': canRequire('eslint-plugin-import') && 'import',
+	'eslint-plugin-jsdoc': canRequire('eslint-plugin-jsdoc') && 'jsdoc',
+	'eslint-plugin-react': canRequire('eslint-plugin-react') && 'react',
+	'eslint-plugin-react-hooks': canRequire('eslint-plugin-react-hooks') && 'react-hooks',
+	'eslint-plugin-regex': canRequire('eslint-plugin-regex') && 'regex',
+	'eslint-plugin-typescript-custom-sort-keys': canRequire('eslint-plugin-typescript-custom-sort-keys') && 'typescript-custom-sort-keys',
+	'eslint-plugin-unused-imports': canRequire('eslint-plugin-unused-imports') && 'unused-imports',
 }
 
 function makeEslintrc(options, ...morePriorities) {
@@ -359,32 +359,55 @@ function makeEslintrc(options, ...morePriorities) {
 		})
 	}
 	const { priorities, dangerzone, overrides, } = options
+	const availableConfigurations = rulesConfigurations.filter(config => providers[config.providerId])
+	const overrideConfigurations = availableConfigurations.filter((c) => Boolean(c.base))
+	const overriddenConfigurations = overrideConfigurations.map(o => o.base)
+	const usableConfigurations = (availableConfigurations
+	.filter((config) => (!overriddenConfigurations.includes(config)))
+	.map((config) => {
+		if (!isOverride(config)) {
+			return config
+		}
+		const { base, ...overrides } = config
+		return {
+			...base,
+			...overrides,
+		}
+	})
+	.filter((config) => {
+		return !Boolean(config.ignore)
+	})
+	.filter(config => priorities.includes(config.priority))
+	.map((config) => ({
+		plugin: providers[config.providerId],
+		rule: { [config.ruleId]: (config.activate
+				? [
+					'error',
+					...(config.optionsDangerzone && (dangerzone === true
+						||
+							(dangerzone || []).includes(config.ruleId))
+						? config.optionsDangerzone
+						: config.options)
+				]
+				: 'off')
+		}
+	}), {}))
 	return {
 		...overrides,
-		rules: {
-			...(rulesConfigurations
-			.filter(excludeIgnored)
-			.filter(config => priorities.includes(config.priority))
-			.filter(config => providers[config.providerId])
-			.reduce((r, config) => ({
-				...r,
-				[config.id]: (config.activate
-					? [
-						'error',
-						...(config.optionsDangerzone && (dangerzone === true
-							||
-								(dangerzone || []).includes(config.id))
-							? config.optionsDangerzone
-							: config.options)
-					]
-					: 'off')
-			}), {})),
-			...overrides?.rules,
-		},
+		...((!overrides?.parser) && canRequire('@typescript-eslint/parser')
+			? { parser: '@typescript-eslint/parser' }
+			: {}),
+		plugins: ([
+			...usableConfigurations
+			.map(c => c.plugin)
+			.filter((p) => p !== 'eslint'),
+			...(overrides?.plugins || []),
+		]),
+		rules: Object.assign({}, ...usableConfigurations.map(c => c.rule), overrides?.rules),
 	}
 }
-function excludeIgnored(config) {
-	return !config.ignore
+function isOverride(config) {
+	return Boolean(config.base)
 }
 
 module.exports = makeEslintrc

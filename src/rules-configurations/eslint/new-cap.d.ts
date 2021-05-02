@@ -10,6 +10,6 @@ type Options = ({
 	properties?: boolean
 })[]
 
-type Configuration = RuleConfiguration<'new-cap', Options>
+type Configuration = RuleConfiguration<'new-cap', 'eslint', Options>
 
 export default Configuration

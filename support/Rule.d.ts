@@ -21,6 +21,7 @@ export type RuleDefinition = DeepReadonly<{
 						| 'warn'
 						| 'true'
 					)
+					extendsBaseRule?: boolean | string
 				}
 			)
 			fixable?: EslintRule.RuleMetaData['fixable'] | null
@@ -41,10 +42,9 @@ export type RuleData = {
 }
 
 
-type RuleConfigurationBase<I extends string = string> = {
-	id: I
-	ruleId: I extends `${string}/${infer R}` ? R : string extends I ? string : I
-	providerId: I extends `${infer P}/${string}` ? P : string extends I ? string : 'eslint'
+type RuleConfigurationBase<R extends string = string, P extends string = string> = {
+	ruleId: R
+	providerId: P
 }
 export type RuleConfigurationIgnore = {
 	ignore: true
@@ -62,23 +62,32 @@ export type RuleConfigurationOptions<O extends unknown[] = unknown[]> = {
 	optionsDangerzone?: O
 }
 
-export type RuleConfigurationIgnored<I extends string = string> = (
-	& RuleConfigurationBase<I>
+export type RuleConfigurationIgnored<R extends string = string, P extends string = string> = (
+	& RuleConfigurationBase<R, P>
 	& RuleConfigurationIgnore
 )
-export type RuleConfigurationInactive<I extends string = string> = (
-	& RuleConfigurationBase<I>
+export type RuleConfigurationInactive<R extends string = string, P extends string = string> = (
+	& RuleConfigurationBase<R, P>
 	& RuleConfigurationSet
 	& RuleConfigurationOff
 )
-export type RuleConfigurationActive<I extends string = string, O extends unknown[] = unknown[]> = (
-	& RuleConfigurationBase<I>
+export type RuleConfigurationActive<R extends string = string, P extends string = string, O extends unknown[] = unknown[]> = (
+	& RuleConfigurationBase<R, P>
 	& RuleConfigurationSet
 	& RuleConfigurationOptions<O>
 )
 
-export type RuleConfiguration<I extends string = string, O extends unknown[] = unknown[]> = (
-	| RuleConfigurationIgnored<I>
-	| RuleConfigurationInactive<I>
-	| RuleConfigurationActive<I, O>
+export type RuleConfiguration<R extends string = string, P extends string = string, O extends unknown[] = unknown[]> = (
+	| RuleConfigurationIgnored<R, P>
+	| RuleConfigurationInactive<R, P>
+	| RuleConfigurationActive<R, P, O>
+)
+
+export type RuleConfigurationOverride<
+	B extends RuleConfiguration = RuleConfiguration,
+	R extends string = string,
+	P extends string = string,
+> = (
+	& RuleConfigurationBase<R, P>
+	& { base: B }
 )

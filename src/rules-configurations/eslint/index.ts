@@ -1,4 +1,5 @@
 import _arrayElementNewline_ from './array-element-newline'
+import _braceStyle_ from './brace-style'
 import _camelcase_ from './camelcase'
 import _consistentReturn_ from './consistent-return'
 import _curly_ from './curly'
@@ -28,6 +29,7 @@ import _spaceInParens_ from './space-in-parens'
 
 export default [
 	_arrayElementNewline_,
+	_braceStyle_,
 	_camelcase_,
 	_consistentReturn_,
 	_curly_,

@@ -6,6 +6,6 @@ type Options = (string | {
 	ignoreDestructuring?: boolean
 })[]
 
-type Configuration = RuleConfiguration<'id-match', Options>
+type Configuration = RuleConfiguration<'id-match', 'eslint', Options>
 
 export default Configuration

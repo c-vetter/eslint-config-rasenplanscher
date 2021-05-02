@@ -6,6 +6,6 @@ type Options = ({
 	ignoreExport?: boolean
 })[]
 
-type Configuration = RuleConfiguration<'no-useless-rename', Options>
+type Configuration = RuleConfiguration<'no-useless-rename', 'eslint', Options>
 
 export default Configuration
