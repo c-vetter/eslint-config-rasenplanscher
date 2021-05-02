@@ -24,5 +24,6 @@ export default [
 	eslintrc(),
 	eslintrc('.important'),
 	eslintrc('.all'),
+	eslintrc('.all.dangerzone'),
 	eslintrc('.make'),
 ]

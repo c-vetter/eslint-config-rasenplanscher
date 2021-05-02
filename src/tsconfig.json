@@ -5,5 +5,10 @@
 		"module": "ESNext",
 		"outDir": "../.transpiled",
 	},
-	"include": [ "eslintrc.ts", "eslintrc.important.ts", "eslintrc.all.ts" ],
+	"include": [
+		"eslintrc.ts",
+		"eslintrc.important.ts",
+		"eslintrc.all.ts",
+		"eslintrc.all.dangerzone.ts",
+	],
 }
