@@ -5,13 +5,13 @@
 	},
 	"eslintConfig": {
 		"root": true,
-		"extends": "eslint-config-rp/eslintrc.all.js",
+		"extends": "rasenplanscher/eslintrc.all.js",
 		"parserOptions": {
 			"ecmaVersion": 2021
 		}
 	},
 	"devDependencies": {
 		"eslint": "^7.25.0",
-		"eslint-config-rp": "file:../../.."
+		"eslint-config-rasenplanscher": "file:../../.."
 	}
 }

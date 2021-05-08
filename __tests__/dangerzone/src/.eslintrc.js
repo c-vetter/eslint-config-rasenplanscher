@@ -1,4 +1,4 @@
-module.exports = require('eslint-config-rp/eslintrc.make')({
+module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 	priorities: [ 'IMPORTANT', 'HELPFUL', 'TASTE' ],
 	dangerzone: [ 'curly' ],
 	overrides: {

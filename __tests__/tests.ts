@@ -5,6 +5,7 @@ import test, { ExecutionContext } from 'ava'
 import { copy, readdir, readFile } from 'fs-extra'
 import ora from 'ora'
 import readdirp from 'readdirp'
+import { root } from '../support/paths'
 
 type Then<T> = T extends PromiseLike<infer U> ? U : T
 
@@ -86,12 +87,13 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 	.then(commonPaths => Promise.all(
 		commonPaths
 		.map(async p => (
-		t.is(
-			(await readFile(control(p))).toString(),
-			(await readFile(result(p))).toString(),
-			`aberration in ${p}`
+			t.is(
+				(await readFile(control(p))).toString(),
+				(await readFile(result(p))).toString().replace(root(), '@project@'),
+				`aberration in ${p}`
+			)
 		))
-	)))
+	))
 	.then(()=>{})
 }
 

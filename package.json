@@ -1,5 +1,5 @@
 {
-	"name": "eslint-config-rp",
+	"name": "eslint-config-rasenplanscher",
 	"version": "1.0.0",
 	"description": "Being a manifest of how eslint should be configured, according to the author's considered opinion. PRs welcome!",
 	"main": "eslintrc.js",
@@ -23,51 +23,54 @@
 		"edit:rules-index": "ts-node support/make-index.ts rulesDefinitions",
 		"edit:edit": "ts-node support/edit-config.ts",
 		"start": "npm run edit && npm run build",
-		"test": "ava __tests__/tests.ts"
+		"test": "ava __tests__/tests.ts",
+		"prepublishOnly": "run-s build test"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/rasenplanscher/eslint-config-rp.git"
+		"url": "git+https://github.com/rasenplanscher/eslint-config-rasenplanscher.git"
 	},
 	"keywords": [
-		"eslint"
+		"eslint",
+		"eslintconfig",
+		"typescript"
 	],
 	"author": "rasenplanscher",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/rasenplanscher/eslint-config-rp/issues"
+		"url": "https://github.com/rasenplanscher/eslint-config-rasenplanscher/issues"
 	},
-	"homepage": "https://github.com/rasenplanscher/eslint-config-rp#readme",
+	"homepage": "https://github.com/rasenplanscher/eslint-config-rasenplanscher#readme",
 	"devDependencies": {
-		"@rollup/plugin-node-resolve": "^11.2.1",
+		"@rollup/plugin-node-resolve": "^13.0.0",
 		"@spec2ts/jsonschema": "^2.0.0-beta.3",
 		"@tsconfig/node12": "^1.0.7",
 		"@types/eslint": "^7.2.10",
 		"@types/estree": "^0.0.47",
 		"@types/fs-extra": "^9.0.11",
 		"@types/inquirer": "^7.3.1",
-		"@typescript-eslint/eslint-plugin": "^4.22.0",
-		"@typescript-eslint/parser": "^4.22.0",
+		"@typescript-eslint/eslint-plugin": "^4.22.1",
+		"@typescript-eslint/parser": "^4.22.1",
 		"ava": "^3.15.0",
 		"case-anything": "^1.1.3",
-		"eslint": "^7.25.0",
 		"eslint-plugin-import": "^2.22.1",
-		"eslint-plugin-jsdoc": "^32.3.4",
+		"eslint-plugin-jsdoc": "^33.1.0",
 		"eslint-plugin-react": "^7.23.2",
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"eslint-plugin-regex": "^1.7.0",
 		"eslint-plugin-typescript-custom-sort-keys": "^1.0.5",
 		"eslint-plugin-unused-imports": "^1.1.1",
+		"eslint": "^7.26.0",
 		"fs-extra": "github:rasenplanscher/node-fs-extra#esm",
 		"inquirer": "^8.0.0",
 		"inquirer-autocomplete-prompt": "^1.3.0",
 		"npm-run-all": "^4.1.5",
-		"open": "^8.0.7",
+		"open": "^8.0.8",
 		"ora": "^5.4.0",
 		"outdent": "^0.8.0",
 		"readdirp": "^3.6.0",
 		"replace-in-files-cli": "^1.0.0",
-		"rollup": "^2.46.0",
+		"rollup": "^2.47.0",
 		"ts-node": "^9.1.1",
 		"typescript": "^4.2.4"
 	},

@@ -5,6 +5,6 @@
 	},
 	"devDependencies": {
 		"eslint": "^7.25.0",
-		"eslint-config-rp": "file:../../.."
+		"eslint-config-rasenplanscher": "file:../../.."
 	}
 }
