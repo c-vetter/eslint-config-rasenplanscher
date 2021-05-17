@@ -69,7 +69,7 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 			fileFilter: [
 				'!package.json',
 				'!package-lock.json',
-				'!.eslintrc.js',
+				'!.eslintrc.*',
 			],
 		}),
 		readdirp.promise(control()),

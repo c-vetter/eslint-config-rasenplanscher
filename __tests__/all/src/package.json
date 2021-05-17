@@ -1,5 +1,5 @@
 {
-	"name": "all",
+	"type": "module",
 	"scripts": {
 		"test": "eslint --fix index.js *>&1 > eslint.log"
 	},
