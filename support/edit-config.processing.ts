@@ -107,7 +107,7 @@ function generateTypes (item:RuleData, bundle:RuledataBundle) {
 			? outdent`
 				${baseTypeToken}<'${
 					item.rule.id
-				}', ${
+				}', '${
 					item.provider.id
 				}', ${
 					optionsTypeToken
