@@ -43,6 +43,7 @@
 	"homepage": "https://github.com/rasenplanscher/eslint-config-rasenplanscher#readme",
 	"devDependencies": {
 		"@rollup/plugin-node-resolve": "^13.0.0",
+		"@spec2ts/core": "^2.0.0-beta.0",
 		"@spec2ts/jsonschema": "^2.0.0-beta.3",
 		"@tsconfig/node12": "^1.0.7",
 		"@types/eslint": "^7.2.10",

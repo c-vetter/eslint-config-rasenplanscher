@@ -1,6 +1,6 @@
 'use strict'
 
-const configuration$s = {
+const configuration$t = {
 	ruleId: 'brace-style',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -13,31 +13,31 @@ const configuration$s = {
 	],
 }
 
-const configuration$r = {
+const configuration$s = {
 	ruleId: '@typescript-eslint/brace-style',
 	providerId: '@typescript-eslint/eslint-plugin',
-	base: configuration$s,
+	base: configuration$t,
 }
 
 const _typescriptEslint_ = [
-	configuration$r
+	configuration$s
 ]
 
-const configuration$q = {
+const configuration$r = {
 	ruleId: 'array-element-newline',
 	providerId: 'eslint',
 	priority: 'TASTE',
 	activate: false,
 }
 
-const configuration$p = {
+const configuration$q = {
 	ruleId: 'camelcase',
 	providerId: 'eslint',
 	priority: 'TASTE',
 	activate: false,
 }
 
-const configuration$o = {
+const configuration$p = {
 	ruleId: 'consistent-return',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -47,7 +47,7 @@ const configuration$o = {
 	}],
 }
 
-const configuration$n = {
+const configuration$o = {
 	ruleId: 'curly',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -61,13 +61,13 @@ const configuration$n = {
 	],
 }
 
-const configuration$m = {
+const configuration$n = {
 	ruleId: 'id-match',
 	providerId: 'eslint',
 	ignore: true,
 }
 
-const configuration$l = {
+const configuration$m = {
 	ruleId: 'indent',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -97,13 +97,14 @@ const configuration$l = {
 			offsetTernaryExpressions: undefined,
 			ignoredNodes: [
 				'ConditionalExpression',
+				'TemplateLiteral > *', // https://stackoverflow.com/a/53094449
 			],
 			ignoreComments: false,
 		},
 	],
 }
 
-const configuration$k = {
+const configuration$l = {
 	ruleId: 'lines-between-class-members',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -111,7 +112,7 @@ const configuration$k = {
 	options: ['always'],
 }
 
-const configuration$j = {
+const configuration$k = {
 	ruleId: 'new-cap',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -123,7 +124,7 @@ const configuration$j = {
 	}],
 }
 
-const configuration$i = {
+const configuration$j = {
 	ruleId: 'no-case-declarations',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -131,7 +132,7 @@ const configuration$i = {
 	options: [],
 }
 
-const configuration$h = {
+const configuration$i = {
 	ruleId: 'no-func-assign',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -139,7 +140,7 @@ const configuration$h = {
 	options: [],
 }
 
-const configuration$g = {
+const configuration$h = {
 	ruleId: 'no-label-var',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -147,7 +148,7 @@ const configuration$g = {
 	options: [],
 }
 
-const configuration$f = {
+const configuration$g = {
 	ruleId: 'no-mixed-spaces-and-tabs',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -155,7 +156,7 @@ const configuration$f = {
 	options: ['smart-tabs'],
 }
 
-const configuration$e = {
+const configuration$f = {
 	ruleId: 'no-nonoctal-decimal-escape',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -163,13 +164,13 @@ const configuration$e = {
 	options: [],
 }
 
-const configuration$d = {
+const configuration$e = {
 	ruleId: 'no-restricted-properties',
 	providerId: 'eslint',
 	ignore: true,
 }
 
-const configuration$c = {
+const configuration$d = {
 	ruleId: 'no-return-assign',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -177,7 +178,7 @@ const configuration$c = {
 	options: ['always'],
 }
 
-const configuration$b = {
+const configuration$c = {
 	ruleId: 'no-this-before-super',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -185,7 +186,7 @@ const configuration$b = {
 	options: [],
 }
 
-const configuration$a = {
+const configuration$b = {
 	ruleId: 'no-unexpected-multiline',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -193,7 +194,7 @@ const configuration$a = {
 	options: [],
 }
 
-const configuration$9 = {
+const configuration$a = {
 	ruleId: 'no-useless-call',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -201,7 +202,7 @@ const configuration$9 = {
 	options: [],
 }
 
-const configuration$8 = {
+const configuration$9 = {
 	ruleId: 'no-useless-rename',
 	providerId: 'eslint',
 	priority: 'IMPORTANT',
@@ -213,7 +214,7 @@ const configuration$8 = {
 	}],
 }
 
-const configuration$7 = {
+const configuration$8 = {
 	ruleId: 'prefer-arrow-callback',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -224,7 +225,7 @@ const configuration$7 = {
 	}],
 }
 
-const configuration$6 = {
+const configuration$7 = {
 	ruleId: 'prefer-numeric-literals',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -232,7 +233,7 @@ const configuration$6 = {
 	options: [],
 }
 
-const configuration$5 = {
+const configuration$6 = {
 	ruleId: 'prefer-rest-params',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -240,7 +241,7 @@ const configuration$5 = {
 	options: [],
 }
 
-const configuration$4 = {
+const configuration$5 = {
 	ruleId: 'prefer-spread',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -248,7 +249,7 @@ const configuration$4 = {
 	options: [],
 }
 
-const configuration$3 = {
+const configuration$4 = {
 	ruleId: 'semi-style',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -258,7 +259,7 @@ const configuration$3 = {
 	],
 }
 
-const configuration$2 = {
+const configuration$3 = {
 	ruleId: 'semi',
 	providerId: 'eslint',
 	priority: 'HELPFUL',
@@ -271,14 +272,14 @@ const configuration$2 = {
 	],
 }
 
-const configuration$1 = {
+const configuration$2 = {
 	ruleId: 'sort-keys',
 	providerId: 'eslint',
 	priority: 'TASTE',
 	activate: false,
 }
 
-const configuration = {
+const configuration$1 = {
 	ruleId: 'space-in-parens',
 	providerId: 'eslint',
 	priority: 'TASTE',
@@ -287,8 +288,9 @@ const configuration = {
 }
 
 const _eslint_ = [
+	configuration$r,
+	configuration$t,
 	configuration$q,
-	configuration$s,
 	configuration$p,
 	configuration$o,
 	configuration$n,
@@ -313,13 +315,30 @@ const _eslint_ = [
 	configuration$4,
 	configuration$3,
 	configuration$2,
-	configuration$1,
+	configuration$1
+]
+
+const configuration = {
+	ruleId: 'import/no-extraneous-dependencies',
+	providerId: 'eslint-plugin-import',
+	priority: 'IMPORTANT',
+	activate: true,
+	options: [{
+		bundledDependencies: true,
+		devDependencies: ['!**/src/**'],
+		optionalDependencies: false,
+		peerDependencies: false,
+	}],
+}
+
+const _import_ = [
 	configuration
 ]
 
 const rulesConfigurations = [
 	..._typescriptEslint_,
-	..._eslint_
+	..._eslint_,
+	..._import_
 ]
 
 function canRequire(id) {
