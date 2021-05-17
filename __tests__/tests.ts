@@ -89,7 +89,12 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 		.map(async p => (
 			t.is(
 				(await readFile(control(p))).toString(),
-				(await readFile(result(p))).toString().replace(root(), '@project@'),
+				(
+					(await readFile(result(p)))
+					.toString()
+					.replace(new RegExp(root().replace(/\\/g, '\\\\'), 'g'), '@project@')
+					.replace(/\\/g, '/')
+				),
 				`aberration in ${p}`
 			)
 		))

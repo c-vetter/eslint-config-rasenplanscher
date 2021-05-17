@@ -1,5 +1,5 @@
 
-@project@\__tests__\plugin\run\index.ts
+@project@/__tests__/plugin/run/index.ts
   3:1  error  Unexpected newline between function and ( of function call  no-unexpected-multiline
 
 Γ£û 1 problem (1 error, 0 warnings)
