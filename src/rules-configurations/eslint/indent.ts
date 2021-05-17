@@ -30,6 +30,7 @@ const configuration:Configuration = {
 			offsetTernaryExpressions: undefined,
 			ignoredNodes: [
 				'ConditionalExpression',
+				'TemplateLiteral > *', // https://stackoverflow.com/a/53094449
 			],
 			ignoreComments: false,
 		},
