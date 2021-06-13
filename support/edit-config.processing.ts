@@ -55,6 +55,7 @@ export function processRule (bundle:RuledataBundle) {
 
 
 const configToken = 'configuration'
+const extendedConfigKey = 'base'
 const extendedConfigToken = 'baseConfiguration'
 const configTypeToken = 'Configuration'
 const baseTypeToken = 'RuleConfiguration'
@@ -150,10 +151,10 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 					importable(bundle.base.configFile, item.configFile)
 				}'
 				${
-					coreExport({ overrides: extendedConfigToken })
+					coreExport({ [extendedConfigKey]: extendedConfigToken })
 					.replace(
-						`overrides: '${extendedConfigToken}',`,
-						`overrides: ${extendedConfigToken},`,
+						`${extendedConfigKey}: '${extendedConfigToken}',`,
+						`${extendedConfigKey}: ${extendedConfigToken},`,
 					)
 				}
 			` ,
