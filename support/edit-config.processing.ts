@@ -190,7 +190,7 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 
 					// some rules lack a meta.type and a meta.docs.category, specifically in plugin react
 					default: HELPFUL,
-				} as const)[
+				} as const)[ // eslint-disable-next-line @typescript-eslint/indent
 					item.rule.meta.type
 					|| (
 						item.rule.meta.docs.category as (

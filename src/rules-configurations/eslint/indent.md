@@ -12,9 +12,9 @@ Paired tokens are:
 + brackets `[`…`]`
 + braces `{`…`}`
 + angles `<`…`>`
-+ HTML tag delimiters `<`…`/>`
-+ HTML comment delimiters `<!--`…`-->`
-+ backticks `` ` ``…`` ` ``
++ JSX tags `<tag>`…`</tag>`
++ JSX tag delimiters `<`…`/>`
++ JSX comment delimiters `<!--`…`-->`
 + block comment delimiters `/*`…`*/` *(unless using [documentation comments](https://jsdoc.app/about-getting-started.html))*
 
 The option settings follow a rather simple strategy: subordinate things are indented one level deeper than their respective “containers”, items at the same structural level are aligned. When in doubt, prefer indentation.
@@ -109,6 +109,7 @@ In any case, indenting member expressions leads to overindentation such that the
 
 ### ternaries, and other operators
 The same reasoning applies here as for member expressions. Unfortunately, the rule cannot presently be configured such that ternaries can be handled according to the rules put forth here.
+
 Also, [as of mid-2020, that's not going to change](https://eslint.org/blog/2020/05/changes-to-rules-policies).
 
 
