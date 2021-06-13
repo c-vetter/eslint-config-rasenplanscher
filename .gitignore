@@ -1,3 +1,4 @@
+*.js
 .transpiled
 .rules-definitions
 .providers.ts
