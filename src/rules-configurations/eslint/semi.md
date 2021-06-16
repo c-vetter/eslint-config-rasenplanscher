@@ -44,3 +44,5 @@ While that is obviously an edge case, it is a reality in some companies, and nui
 In summary, manual semicolons are actually harmful and should only be employed where absolutely necessary. The rule that actually looks out for that is [no-unexpected-multiline](no-unexpected-multiline.md).
 
 Also, see [semi-style](semi-style.md).
+
+For additional detail (and less opinion – 😄 gotcha!), see [An Open Letter to JavaScript Leaders Regarding Semicolons, by Isaac Z. Schlueter](https://blog.izs.me/2010/12/an-open-letter-to-javascript-leaders-regarding)
