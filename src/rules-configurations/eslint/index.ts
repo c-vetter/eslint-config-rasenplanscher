@@ -26,6 +26,7 @@ import _semiStyle_ from './semi-style'
 import _semi_ from './semi'
 import _sortKeys_ from './sort-keys'
 import _spaceInParens_ from './space-in-parens'
+import _wrapIife_ from './wrap-iife'
 
 export default [
 	_arrayElementNewline_,
@@ -55,5 +56,6 @@ export default [
 	_semiStyle_,
 	_semi_,
 	_sortKeys_,
-	_spaceInParens_
+	_spaceInParens_,
+	_wrapIife_
 ]
