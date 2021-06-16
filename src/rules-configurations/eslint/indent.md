@@ -1,5 +1,5 @@
-indent
-=====
+[indent](https://eslint.org/docs/rules/indent)
+==============================================
 The reason for going with tabs is that they are the more appropriate representation of intent. For a detailed explanation, see [Tabs versus Spaces](indent.tabs-vs-spaces.md).
 
 

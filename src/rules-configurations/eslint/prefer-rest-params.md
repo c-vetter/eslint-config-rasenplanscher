@@ -1,5 +1,5 @@
-prefer-rest-params
-==================
+[prefer-rest-params](https://eslint.org/docs/rules/prefer-rest-params)
+======================================================================
 Magic variables are dangerous. Consider this:
 ```js
 const arguments = [ 1, 2, 3 ]

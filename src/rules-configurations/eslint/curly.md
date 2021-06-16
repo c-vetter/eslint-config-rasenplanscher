@@ -1,5 +1,5 @@
-curly
-=====
+[curly](https://eslint.org/docs/rules/curly)
+============================================
 Let's say you start a conditional without parentheses:
 ```js
 if (condition)

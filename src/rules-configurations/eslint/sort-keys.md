@@ -1,5 +1,5 @@
-sort-keys
-=========
+[sort-keys](https://eslint.org/docs/rules/sort-keys)
+====================================================
 The way it works now, this rule produces too many errors for most projects, because there are often implicit hierarchies in objects, that developers reflect in the sort order of object keys.
 
 This is a typical example:

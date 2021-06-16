@@ -1,5 +1,5 @@
-no-return-assign
-================
+[no-return-assign](https://eslint.org/docs/rules/no-return-assign)
+==================================================================
 A return statement should only return and not have any side effects.
 
 Compare these:

@@ -1,5 +1,5 @@
-@typescript-eslint/indent
-=========================
+[@typescript-eslint/indent](https://github.com/typescript-eslint/typescript-eslint/blob/v4.22.1/packages/eslint-plugin/docs/rules/indent.md)
+============================================================================================================================================
 See [indent](../eslint/indent.md)
 
 Unfortunately, this is [known to be broken 😢](https://github.com/typescript-eslint/typescript-eslint/issues/1824).

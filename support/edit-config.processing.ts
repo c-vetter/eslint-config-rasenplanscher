@@ -251,10 +251,18 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 }
 
 function generateDoc (item:RuleData, bundle:RuledataBundle) {
+	if (!item.rule.meta.docs?.url) {
+		return Promise.reject(`No documentation url found for rule ${item.rule.id}`)
+	}
+
 	return Promise.resolve(item === bundle.base)
 	.then(base => outdent`
-		${item.rule.id}
-		${'='.repeat(item.rule.id.length)}
+		[${item.rule.id}](${item.rule.meta.docs.url})
+		${'='.repeat(
+			item.rule.id.length
+			+ item.rule.meta.docs.url!.length // !: checked at the start of `generateDoc`
+			+ 4 // brackets and parentheses
+		)}
 		${
 			base
 			? ''

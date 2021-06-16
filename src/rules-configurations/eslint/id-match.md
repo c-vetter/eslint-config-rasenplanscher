@@ -1,5 +1,5 @@
-id-match
-========
+[id-match](https://eslint.org/docs/rules/id-match)
+==================================================
 **TLDR:** it's just usually not worth enforcing this on lint level.
 
 Generally, variables and properties should be camelCase or PascalCase. But elision variables like `_` should be allowed as well. Numbers are sometimes useful as well. And don't forget those good old ALL_CAPS_CONSTANTS! Now you have a RegEx like this:

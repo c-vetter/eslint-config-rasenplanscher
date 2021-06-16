@@ -1,5 +1,5 @@
-semi
-====
+[semi](https://eslint.org/docs/rules/semi)
+==========================================
 On the surface, the matter of semicolons looks like a matter of taste. Additionally, many proponents of using semicolons to terminate statements claim this practice to guard against hazards of ASI (automatic smeicolon insertion).
 
 Unfortunately, semicolons only help in very specific cases, and consequently generate a false sense of safety. This can best be illustrated with a simple example.

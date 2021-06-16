@@ -1,5 +1,5 @@
-import/no-extraneous-dependencies
-=================================
+[import/no-extraneous-dependencies](https://github.com/benmosher/eslint-plugin-import/blob/v2.22.1/docs/rules/no-extraneous-dependencies.md)
+============================================================================================================================================
 Importing any packages without declaring the intention to do so in `package.json` can (and often will) lead to errors.
 
 

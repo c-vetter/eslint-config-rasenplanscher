@@ -1,5 +1,5 @@
-consistent-return
-=================
+[consistent-return](https://eslint.org/docs/rules/consistent-return)
+====================================================================
 When calling a function, the caller will either care about the return value or not. There is no in-between. They may discard the value if it is `undefined`, but that is a decision based on the value.
 
 If a function is ambivalent on whether it returns a value or not, that can mean an oversight, in which case this rule prevents a mistake from going forward.

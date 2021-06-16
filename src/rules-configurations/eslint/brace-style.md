@@ -1,5 +1,5 @@
-brace-style
-===========
+[brace-style](https://eslint.org/docs/rules/brace-style)
+========================================================
 See [curly](curly.md) for why you should always use braces, this is about how to set them.
 
 `1tbs` has the advantage of clearly linking `if` and `else`, as well as `if`/`else` with their respective bodies.
