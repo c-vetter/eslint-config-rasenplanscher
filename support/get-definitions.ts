@@ -11,14 +11,14 @@ emptyDirSync(rulesDefinitions())
 const eslint = new (CLIEngine)({
 	plugins: plugins.map(({ namespace }) => namespace),
 })
-eslint.executeOnText('') // https://github.com/eslint/eslint/issues/11871#issuecomment-504634145
+eslint.executeOnText(``) // https://github.com/eslint/eslint/issues/11871#issuecomment-504634145
 const rulesMap = eslint.getRules()
 
 Array.from(rulesMap.entries())
 .filter(([,{ meta }]) => meta && !meta.deprecated)
 .map(([id, { meta }]) => ([
 	id,
-	id.includes('/') ? id.split('/')[1] : id,
+	id.includes(`/`) ? id.split(`/`)[1] : id,
 	meta!, // previous filter ensures that this is non-falsy
 	providerFor(id),
 ] as const))
@@ -37,10 +37,10 @@ Array.from(rulesMap.entries())
 .map(([filepath, rule]) => [
 	filepath,
 	`export default ${
-		JSON.stringify(rule, null, '\t')
-		.replace(/"(\w+)":/g, '$1:')
-		.replace(/\\"(.+?)\\"/g, '“$1”')
-		.replace(/("|\s)'(.+?)'(\s|")/g, '$1‘$2’$3')
+		JSON.stringify(rule, null, `\t`)
+		.replace(/"(\w+)":/g, `$1:`)
+		.replace(/\\"(.+?)\\"/g, `“$1”`)
+		.replace(/("|\s)'(.+?)'(\s|")/g, `$1‘$2’$3`)
 		.replace(/'/g, `\\'`)
 		.replace(/"/g, `'`)
 		.replace(/\n}$/, `,\n}`)

@@ -3,19 +3,19 @@ import { readJsonSync } from 'fs-extra'
 
 import { root, transpiled } from './paths'
 
-const rc = (suffix?:string) => `eslintrc${suffix ? `.${suffix}` : ''}.js`
+const rc = (suffix?:string) => `eslintrc${suffix ? `.${suffix}` : ``}.js`
 
-const eslintrc = (suffix='') => ({
+const eslintrc = (suffix=``) => ({
 	input: transpiled(rc(suffix)),
 	output: {
 		file: root(rc(suffix)),
-		format: 'cjs',
-		exports: 'default',
+		format: `cjs`,
+		exports: `default`,
 		preferConst: true,
 	},
 	external: [
-		suffix === 'make' ? null : transpiled(rc('make')),
-		...Object.keys(readJsonSync(root('package.json')).peerDependencies)
+		suffix === `make` ? null : transpiled(rc(`make`)),
+		...Object.keys(readJsonSync(root(`package.json`)).peerDependencies)
 	],
 	plugins: [
 		nodeResolve(),
@@ -24,8 +24,8 @@ const eslintrc = (suffix='') => ({
 
 export default [
 	eslintrc(),
-	eslintrc('important'),
-	eslintrc('all'),
-	eslintrc('all.dangerzone'),
-	eslintrc('make'),
+	eslintrc(`important`),
+	eslintrc(`all`),
+	eslintrc(`all.dangerzone`),
+	eslintrc(`make`),
 ]

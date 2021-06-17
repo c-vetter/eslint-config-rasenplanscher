@@ -19,4 +19,4 @@ type DeepReadonlyObject<T> = {
 	readonly [P in keyof T]: DeepReadonly<T[P]>;
 }
 
-interface DeepReadonlyArray<T> extends ReadonlyArray<DeepReadonly<T>> {}
+type DeepReadonlyArray<T> = ReadonlyArray<DeepReadonly<T>>

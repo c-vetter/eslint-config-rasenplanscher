@@ -26,14 +26,14 @@ function buildIndices(scope:PathBuilder, ...directory:string[]): ReturnType<type
 	.then(() => buildIndex(scope, ...directory))
 }
 
-const indexName = 'index.ts'
+const indexName = `index.ts`
 
 function buildIndex(scope:PathBuilder, ...directory:string[]) {
 	return readdir(scope(...directory), { withFileTypes: true })
 	.then(entries => entries.filter(entry => entry.name !== indexName))
 	.then(entries =>[
 		entries.filter(entry => entry.isDirectory() && pathExistsSync(scope(...directory, entry.name, indexName))),
-		entries.filter(entry => entry.isFile() && entry.name.endsWith('.ts') && !entry.name.endsWith('.d.ts')),
+		entries.filter(entry => entry.isFile() && entry.name.endsWith(`.ts`) && !entry.name.endsWith(`.d.ts`)),
 	])
 	.then(([directories, files]) => ([
 		[
@@ -47,14 +47,14 @@ function buildIndex(scope:PathBuilder, ...directory:string[]) {
 	]))
 	.then(([importsList, exportsList]) =>
 		outputFile(scope(...directory, indexName), `${
-			importsList.join('\n')
+			importsList.join(`\n`)
 		}
 
 		export default [
 			${
-				exportsList.join(',\n\t')
+				exportsList.join(`,\n\t`)
 			}
-		]`.replace(/^\t\t/gm, ''))
+		]`.replace(/^\t\t/gm, ``))
 	)
 }
 

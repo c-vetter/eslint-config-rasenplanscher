@@ -1,16 +1,16 @@
 import Configuration from './curly.d'
 
 const configuration:Configuration = {
-	ruleId: 'curly',
-	providerId: 'eslint',
-	priority: 'IMPORTANT',
+	ruleId: `curly`,
+	providerId: `eslint`,
+	priority: `IMPORTANT`,
 	activate: true,
 	options: [
-		'all',
+		`all`,
 	],
 	optionsDangerzone: [
-		'multi-line',
-		'consistent',
+		`multi-line`,
+		`consistent`,
 	],
 }
 

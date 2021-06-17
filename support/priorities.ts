@@ -1,6 +1,6 @@
-export const IMPORTANT = 'IMPORTANT'
-export const HELPFUL = 'HELPFUL'
-export const TASTE = 'TASTE'
+export const IMPORTANT = `IMPORTANT`
+export const HELPFUL = `HELPFUL`
+export const TASTE = `TASTE`
 
 export default [
 	IMPORTANT,

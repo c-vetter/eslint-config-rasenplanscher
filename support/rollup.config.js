@@ -1,3 +1,3 @@
-require('ts-node').register()
+require(`ts-node`).register()
 // @ts-ignore
-module.exports = require('./rollupConfig.ts')
+module.exports = require(`./rollupConfig.ts`)

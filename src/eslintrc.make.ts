@@ -27,7 +27,7 @@ type Options = {
 export default function makeEslintrc (options:Options) : CLIEngine.Options
 export default function makeEslintrc (...priorities:Priority[]) : CLIEngine.Options
 export default function makeEslintrc (options: Options|Priority, ...morePriorities:Priority[]) : CLIEngine.Options {
-	if (typeof options === 'string') {
+	if (typeof options === `string`) {
 		return makeEslintrc({
 			priorities: [
 				options,
@@ -45,7 +45,7 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 	const availableConfigurations = rulesConfigurations.filter(config => providers[config.providerId])
 	const overrideConfigurations:RuleConfigurationOverride[] = availableConfigurations.filter(
 		(c) : c is RuleConfigurationOverride & Configuration =>
-		Boolean ((c as RuleConfigurationOverride).base)
+			Boolean ((c as RuleConfigurationOverride).base)
 	)
 	const overriddenConfigurations = overrideConfigurations.map(o => o.base)
 	const usableConfigurations = (
@@ -103,7 +103,7 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 				rule: { [config.ruleId]: (
 					config.activate
 					? [
-						'error',
+						`error`,
 						...(
 							config.optionsDangerzone && (
 								dangerzone === true
@@ -114,9 +114,9 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 							: config.options
 						)
 					]
-					: 'off'
+					: `off`
 				)
-			}}),
+				}}),
 			{},
 		)
 	)
@@ -124,14 +124,14 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 	return {
 		...overrides,
 		...(
-			(!overrides?.parser) && canRequire('@typescript-eslint/parser')
-			? { parser: '@typescript-eslint/parser' }
+			(!overrides?.parser) && canRequire(`@typescript-eslint/parser`)
+			? { parser: `@typescript-eslint/parser` }
 			: {}
 		),
 		plugins: ([
 			...usableConfigurations
 			.map(c => c.plugin)
-			.filter((p) : p is Exclude<typeof p, 'eslint'> => p !== 'eslint'),
+			.filter((p) : p is Exclude<typeof p, 'eslint'> => p !== `eslint`),
 			...(overrides?.plugins||[]),
 		]),
 		rules: Object.assign(

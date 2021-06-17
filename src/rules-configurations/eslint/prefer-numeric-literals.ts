@@ -1,9 +1,9 @@
 import Configuration from './prefer-numeric-literals.d'
 
 const configuration:Configuration = {
-	ruleId: 'prefer-numeric-literals',
-	providerId: 'eslint',
-	priority: 'HELPFUL',
+	ruleId: `prefer-numeric-literals`,
+	providerId: `eslint`,
+	priority: `HELPFUL`,
 	activate: true,
 	options: [],
 }

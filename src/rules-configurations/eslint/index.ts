@@ -22,6 +22,7 @@ import _preferArrowCallback_ from './prefer-arrow-callback'
 import _preferNumericLiterals_ from './prefer-numeric-literals'
 import _preferRestParams_ from './prefer-rest-params'
 import _preferSpread_ from './prefer-spread'
+import _quotes_ from './quotes'
 import _semiStyle_ from './semi-style'
 import _semi_ from './semi'
 import _sortKeys_ from './sort-keys'
@@ -54,6 +55,7 @@ export default [
 	_preferNumericLiterals_,
 	_preferRestParams_,
 	_preferSpread_,
+	_quotes_,
 	_semiStyle_,
 	_semi_,
 	_sortKeys_,

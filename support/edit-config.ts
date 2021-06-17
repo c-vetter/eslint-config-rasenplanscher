@@ -5,36 +5,36 @@ import { random, randomIncomplete, randomNew, scoped, scopedNew, select, selectN
 
 inquirer.prompt([
 	{
-		type: 'list',
-		name: 'strategy',
-		message: 'Strategy:',
+		type: `list`,
+		name: `strategy`,
+		message: `Strategy:`,
 		choices: [
 			{
-				name: 'random, new',
+				name: `random, new`,
 				value: randomNew,
 			},
 			{
-				name: 'random, incomplete',
+				name: `random, incomplete`,
 				value: randomIncomplete,
 			},
 			{
-				name: 'random, all',
+				name: `random, all`,
 				value: random,
 			},
 			{
-				name: 'scoped, new',
+				name: `scoped, new`,
 				value: scopedNew,
 			},
 			{
-				name: 'scoped, all',
+				name: `scoped, all`,
 				value: scoped,
 			},
 			{
-				name: 'select, new',
+				name: `select, new`,
 				value: selectNew,
 			},
 			{
-				name: 'select, all',
+				name: `select, all`,
 				value: select,
 			},
 		],
@@ -49,9 +49,9 @@ function proceed (strategy:Function) {
 		.then(() => (
 			inquirer.prompt([
 				{
-					type: 'confirm',
-					name: 'next',
-					message: 'Next?',
+					type: `confirm`,
+					name: `next`,
+					message: `Next?`,
 					default: true,
 				},
 			])

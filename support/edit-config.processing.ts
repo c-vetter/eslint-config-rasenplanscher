@@ -16,7 +16,7 @@ import { RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOff, RuleC
 import { Mutable } from './utility'
 
 
-inquirer.registerPrompt('autocomplete', autocomplete)
+inquirer.registerPrompt(`autocomplete`, autocomplete)
 
 
 type RuledataBundle = {
@@ -54,14 +54,14 @@ export function processRule (bundle:RuledataBundle) {
 //
 
 
-const configToken = 'configuration'
-const extendedConfigKey = 'base'
-const extendedConfigToken = 'baseConfiguration'
-const configTypeToken = 'Configuration'
-const baseTypeToken = 'RuleConfiguration'
-const baseTypeTokenExtender = 'RuleConfigurationOverride'
-const extendedTypeToken = 'BaseConfiguration'
-const optionsTypeToken = 'Options'
+const configToken = `configuration`
+const extendedConfigKey = `base`
+const extendedConfigToken = `baseConfiguration`
+const configTypeToken = `Configuration`
+const baseTypeToken = `RuleConfiguration`
+const baseTypeTokenExtender = `RuleConfigurationOverride`
+const extendedTypeToken = `BaseConfiguration`
+const optionsTypeToken = `Options`
 
 type Unpromise<T> = T extends PromiseLike<infer Q> ? Q : T
 
@@ -84,17 +84,17 @@ function generateTypes (item:RuleData, bundle:RuledataBundle) {
 	.then(ast => ast && printer.printNodes(ast))
 	.then(types => outdent`
 		import { ${types ? baseTypeToken : baseTypeTokenExtender } } from '${
-			importable(support('Rule'), item.typingFile)
+			importable(support(`Rule`), item.typingFile)
 		}'
 
 		${
 			types
 			? (
 				types
-				.replace(/;$/gm, '')
-				.replace(/(?<=(?:^|\n)(    )*)    /g, '\t')
-				.replace(/^export /, '')
-				.replace(/\(\)\[\]$/, 'never[]')
+				.replace(/;$/gm, ``)
+				.replace(/(?<=(?:^|\n)(    )*)    /g, `\t`)
+				.replace(/^export /, ``)
+				.replace(/\(\)\[\]$/, `never[]`)
 			)
 			: outdent`
 				import ${extendedTypeToken} from '${
@@ -134,7 +134,7 @@ function generateTypes (item:RuleData, bundle:RuledataBundle) {
 
 	function wrapped (schema:JSONSchema[]) : JSONSchema {
 		return {
-			type: 'array',
+			type: `array`,
 			items: schema,
 			minItems: 0,
 			maxItems: schema.length,
@@ -163,9 +163,9 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 
 	return inquirer.prompt([
 		{
-			type: 'confirm',
-			name: 'ignore',
-			message: 'Ignore?',
+			type: `confirm`,
+			name: `ignore`,
+			message: `Ignore?`,
 			default: false,
 		},
 	])
@@ -174,9 +174,9 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 
 		return inquirer.prompt([
 			{
-				type: 'list',
-				name: 'priority',
-				message: 'Priority:',
+				type: `list`,
+				name: `priority`,
+				message: `Priority:`,
 				choices: priorities,
 				default: ({
 					problem: IMPORTANT,
@@ -199,13 +199,13 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 							| 'Stylistic Issues'
 						)
 					)
-					|| 'default'
+					|| `default`
 				]
 			},
 			{
-				type: 'confirm',
-				name: 'activate',
-				message: 'Activate?',
+				type: `confirm`,
+				name: `activate`,
+				message: `Activate?`,
 				default: true,
 			},
 		])
@@ -237,8 +237,8 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 					ruleId: item.rule.id,
 					providerId: item.provider.id,
 					...data,
-				}, null, '\t')
-				.replace(/"(\w+)":/g, '$1:')
+				}, null, `\t`)
+				.replace(/"(\w+)":/g, `$1:`)
 				.replace(/'/g, `\\'`)
 				.replace(/"/g, `'`)
 				.replace(/\n}$/, `,\n}`)
@@ -258,14 +258,14 @@ function generateDoc (item:RuleData, bundle:RuledataBundle) {
 	return Promise.resolve(item === bundle.base)
 	.then(base => outdent`
 		[${item.rule.id}](${item.rule.meta.docs.url})
-		${'='.repeat(
+		${`=`.repeat(
 			item.rule.id.length
 			+ item.rule.meta.docs.url!.length // !: checked at the start of `generateDoc`
 			+ 4 // brackets and parentheses
 		)}
 		${
 			base
-			? ''
+			? ``
 			: `See [${bundle.base.rule.id}](${importable(bundle.base.reasonFile, item.reasonFile)})\n`
 		}
 	`)
@@ -278,8 +278,8 @@ function generateDoc (item:RuleData, bundle:RuledataBundle) {
 
 function code (...filepaths:string[]) {
 	spawn(
-		'code.cmd',
+		`code.cmd`,
 		filepaths,
-		{ stdio:'pipe' }
+		{ stdio:`pipe` }
 	)
 }

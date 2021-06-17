@@ -1,12 +1,12 @@
 import Configuration from './brace-style.d'
 
 const configuration:Configuration = {
-	ruleId: 'brace-style',
-	providerId: 'eslint',
-	priority: 'TASTE',
+	ruleId: `brace-style`,
+	providerId: `eslint`,
+	priority: `TASTE`,
 	activate: true,
 	options: [
-		'1tbs',
+		`1tbs`,
 		{
 			allowSingleLine: false,
 		},

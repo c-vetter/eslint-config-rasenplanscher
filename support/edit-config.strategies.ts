@@ -11,7 +11,7 @@ import { RuleData, RuleDefinition } from './Rule'
 import { rulesConfigurations, rulesDefinitions } from './paths'
 
 
-inquirer.registerPrompt('autocomplete', autocomplete)
+inquirer.registerPrompt(`autocomplete`, autocomplete)
 
 const rules = () => allRules.map(ruleData)
 
@@ -63,10 +63,10 @@ function selectProvider () {
 	return (
 		inquirer.prompt([
 			{
-				type: 'autocomplete',
-				name: 'provider',
-				message: 'Provider:',
-				async source(_:{}, input:string='') {
+				type: `autocomplete`,
+				name: `provider`,
+				message: `Provider:`,
+				async source(_:{}, input:string=``) {
 					if(!input) return providerAnswers
 					return providerAnswers.filter(({ name }) => name.includes(input))
 				},
@@ -86,10 +86,10 @@ function selectRule (rules:RuleData[]) {
 	return (
 		inquirer.prompt([
 			{
-				type: 'autocomplete',
-				name: 'rule',
-				message: 'Rule:',
-				async source(_:{}, input:string='') {
+				type: `autocomplete`,
+				name: `rule`,
+				message: `Rule:`,
+				async source(_:{}, input:string=``) {
 					if(!input) return ruleAnswers
 					return ruleAnswers.filter(({ name }) => name.includes(input))
 				},
@@ -193,14 +193,16 @@ function dispatch (data:RuleData) {
 	const all = rules().filter((x) => {
 		if (x.rule.key === data.rule.key) return true
 
-		if (typeof data.rule.meta.docs.extendsBaseRule === 'string') {
-			if (x.rule.key === data.rule.meta.docs.extendsBaseRule) return x
+		if (typeof data.rule.meta.docs.extendsBaseRule === `string`) {
+			if (x.rule.key === data.rule.meta.docs.extendsBaseRule) return true
 		}
 
-		if (typeof x.rule.meta.docs.extendsBaseRule === 'string') {
-			if (x.rule.meta.docs.extendsBaseRule === data.rule.key) return x
+		if (typeof x.rule.meta.docs.extendsBaseRule === `string`) {
+			if (x.rule.meta.docs.extendsBaseRule === data.rule.key) return true
 		}
-	} )
+
+		return false
+	})
 
 	const base = all.find(d => !d.rule.meta.docs.extendsBaseRule)!
 
