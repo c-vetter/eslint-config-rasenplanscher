@@ -6,6 +6,9 @@ import { Priority } from './priorities'
 import { RuleConfiguration, RuleConfigurationBase, RuleConfigurationIgnored, RuleConfigurationOverride } from '../support/Rule'
 import { canRequire } from '../support/canRequire'
 
+import typescript_noUnusedVars from './rules-configurations/@typescript-eslint/no-unused-vars'
+import unusedImports_noUnusedVars from './rules-configurations/unused-imports/no-unused-vars'
+
 type Configuration = typeof rulesConfigurations[number]
 
 type RuleId = (
@@ -43,11 +46,20 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 	} = options
 
 	const availableConfigurations = rulesConfigurations.filter(config => providers[config.providerId])
+	if (
+		availableConfigurations.includes(unusedImports_noUnusedVars)
+		&&
+		availableConfigurations.includes(typescript_noUnusedVars)
+	) {
+		availableConfigurations.splice(availableConfigurations.indexOf(typescript_noUnusedVars), 1)
+	}
+
 	const overrideConfigurations:RuleConfigurationOverride[] = availableConfigurations.filter(
 		(c) : c is RuleConfigurationOverride & Configuration =>
 			Boolean ((c as RuleConfigurationOverride).base)
 	)
 	const overriddenConfigurations = overrideConfigurations.map(o => o.base)
+
 	const usableConfigurations = (
 		availableConfigurations
 		.filter(<

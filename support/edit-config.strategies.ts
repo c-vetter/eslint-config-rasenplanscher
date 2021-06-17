@@ -66,7 +66,7 @@ function selectProvider () {
 				type: `autocomplete`,
 				name: `provider`,
 				message: `Provider:`,
-				async source(_:{}, input:string=``) {
+				async source(_:never, input:string=``) {
 					if(!input) return providerAnswers
 					return providerAnswers.filter(({ name }) => name.includes(input))
 				},
@@ -89,7 +89,7 @@ function selectRule (rules:RuleData[]) {
 				type: `autocomplete`,
 				name: `rule`,
 				message: `Rule:`,
-				async source(_:{}, input:string=``) {
+				async source(_:never, input:string=``) {
 					if(!input) return ruleAnswers
 					return ruleAnswers.filter(({ name }) => name.includes(input))
 				},
@@ -128,7 +128,7 @@ function ruleData (rule:RuleDefinition) : RuleData {
 	const reasonFile = rulesConfigurations(provider.name, `${rule.key}.md`)
 	const definitionFile = rulesDefinitions(provider.name, `${rule.key}.ts`)
 
-	const existance = [
+	const existence = [
 		pathExistsSync(configFile),
 		pathExistsSync(typingFile),
 		pathExistsSync(reasonFile),
@@ -141,53 +141,14 @@ function ruleData (rule:RuleDefinition) : RuleData {
 		typingFile,
 		reasonFile,
 		definitionFile,
-		exists: existance.some(x=>(x===true)),
-		complete: existance.every(x=>(x===true)),
+		exists: existence.some(x=>(x===true)),
+		complete: existence.every(x=>(x===true)),
 	}
 }
 
 
 //
 
-type FilterExtends<
-A,
-> = A extends { meta : { docs: { extendsBaseRule: undefined|never } }} ? A : never
-
-
-type FilterByKey<
-	A extends RuleDefinition,
-	B extends RuleDefinition,
-> = (
-	A extends { key: B['key'] }
-	? A extends { id: B['id'] }
-	? never
-	: B extends { key: A['key'] }
-	? [A['id'] | B['id']]
-	: never
-	: never
-)
-
-
-type FakeNews = {
-	id: 'fake-news',
-	key: 'fake-news',
-	providerId: 'fake-news',
-	meta: {
-		docs: {
-			url: 'fake-news.info',
-		},
-	},
-}
-type NewsFake = {
-	id: 'news-fake',
-	key: 'news-fake',
-	providerId: 'news-fake',
-	meta: {
-		docs: {
-			url: 'news-fake.info',
-		},
-	},
-}
 
 function dispatch (data:RuleData) {
 	const all = rules().filter((x) => {
@@ -204,7 +165,11 @@ function dispatch (data:RuleData) {
 		return false
 	})
 
-	const base = all.find(d => !d.rule.meta.docs.extendsBaseRule)!
+	const base = (
+		all.find(d => !d.rule.meta.docs.extendsBaseRule)
+		||
+		all[0]
+	)
 
 	const bundle = {
 		all,

@@ -12,7 +12,7 @@ import { outdent } from 'outdent'
 
 import { importable, support } from './paths'
 import priorities, { IMPORTANT, HELPFUL, TASTE, Priority } from './priorities'
-import { RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOff, RuleConfigurationOptions, RuleConfigurationSet, RuleData, RuleDefinition } from './Rule'
+import { RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOff, RuleConfigurationOptions, RuleConfigurationSet, RuleData } from './Rule'
 import { Mutable } from './utility'
 
 

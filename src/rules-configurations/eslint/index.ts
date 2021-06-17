@@ -16,6 +16,7 @@ import _noRestrictedProperties_ from './no-restricted-properties'
 import _noReturnAssign_ from './no-return-assign'
 import _noThisBeforeSuper_ from './no-this-before-super'
 import _noUnexpectedMultiline_ from './no-unexpected-multiline'
+import _noUnusedVars_ from './no-unused-vars'
 import _noUselessCall_ from './no-useless-call'
 import _noUselessRename_ from './no-useless-rename'
 import _preferArrowCallback_ from './prefer-arrow-callback'
@@ -49,6 +50,7 @@ export default [
 	_noReturnAssign_,
 	_noThisBeforeSuper_,
 	_noUnexpectedMultiline_,
+	_noUnusedVars_,
 	_noUselessCall_,
 	_noUselessRename_,
 	_preferArrowCallback_,
