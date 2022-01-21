@@ -23,8 +23,8 @@
 		"edit:rules-index": "ts-node support/make-index.ts rulesDefinitions",
 		"edit:edit": "ts-node support/edit-config.ts",
 		"edit:cleanup": "eslint --report-unused-disable-directives --fix src/rules-configurations/**/*.ts",
-		"start": "run-s edit build start:cleanup",
-		"start:cleanup": "eslint --report-unused-disable-directives --fix src/*.ts support/*.ts",
+		"start": "run-s edit build start:cleanup test",
+		"start:cleanup": "eslint --report-unused-disable-directives --fix src/*.ts support/*.ts __tests__/tests.ts",
 		"test": "ava __tests__/tests.ts",
 		"prepublishOnly": "run-s build test"
 	},

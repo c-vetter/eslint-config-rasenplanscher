@@ -14,40 +14,59 @@ type Paths = Then<ReturnType<typeof prepare>>
 const troot = (...s:string[]) => resolve(__dirname, ...s)
 const sroot = (r:string) => (d:string) => (...s:string[]) => troot(r, d, ...s)
 
+//
 
+// Lets AVA know that something is still working, thereby preventing timeout
 const spinner = ora({
 	interval: 1000,
 	isEnabled: true,
-	spinner: 'clock',
-}).start('bootstrapping')
+	spinner: `clock`,
+}).start(`bootstrapping`)
 
+//
 
 readdir(troot(), { withFileTypes: true })
+.then(entries => {
+	spinner.text = `preparing scenarios`
+	return entries
+})
 .then(entries => Promise.all(
 	entries
 	.filter(entry => entry.isDirectory())
-	.map(dir => prepare(dir.name))
+	.map(dir => prepare(dir.name)),
 ))
-.then(scenarios => (spinner.stop(), scenarios))
-.then(scenarios => scenarios.map(s => test(`scenario: ${s.name}`, async t => {
-	await npm(
-		'test',
-		s.result(),
-	)
+.then(scenarios => {
+	spinner.text = `running scenarios`
+	return scenarios
+})
+.then(scenarios => Promise.all(
+	scenarios.map(s => new Promise<void>(
+		(resolve, reject) => test(
+			`scenario: ${s.name}`,
+			async t => {
+				await npm(
+					`test`,
+					s.result(),
+				)
 
-	return checkFiles(t, s)
-})))
+				return checkFiles(t, s).then(resolve, reject)
+			},
+		),
+	)),
+))
+.catch(console.error)
+.finally(() => spinner.info(`done`))
 
 async function prepare (name: string) {
 	const root = sroot(name)
-	const source = root('src')
-	const control = root('ctrl')
-	const result = root('run')
+	const source = root(`src`)
+	const control = root(`ctrl`)
+	const result = root(`run`)
 
 	await copy(source(), result())
 
 	await npm(
-		'install',
+		`install`,
 		result(),
 	)
 
@@ -65,11 +84,11 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 
 	return Promise.all([
 		readdirp.promise(result(), {
-			directoryFilter: ['!node_modules'],
+			directoryFilter: [`!node_modules`],
 			fileFilter: [
-				'!package.json',
-				'!package-lock.json',
-				'!.eslintrc.*',
+				`!package.json`,
+				`!package-lock.json`,
+				`!.eslintrc.*`,
 			],
 		}),
 		readdirp.promise(control()),
@@ -92,12 +111,12 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 				(
 					(await readFile(result(p)))
 					.toString()
-					.replace(new RegExp(root().replace(/\\/g, '\\\\'), 'g'), '@project@')
-					.replace(/\\/g, '/')
+					.replace(new RegExp(root().replace(/\\/g, `\\\\`), `g`), `@project@`)
+					.replace(/\\/g, `/`)
 				),
-				`aberration in ${p}`
+				`aberration in ${p}`,
 			)
-		))
+		)),
 	))
 	.then(()=>{})
 }
@@ -105,14 +124,14 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 function npm (cmd:string, cwd:string) {
 	return new Promise((resolve, reject) => {
 		const runner = spawn(
-			'npm.cmd',
+			`npm.cmd`,
 			[ cmd ],
 			{ cwd },
 		)
 
-		runner.on('error', error => reject(error))
+		runner.on(`error`, error => reject(error))
 
-		runner.on('exit', (code, signal) => resolve({
+		runner.on(`exit`, (code, signal) => resolve({
 			code,
 			signal,
 		}))

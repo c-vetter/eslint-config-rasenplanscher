@@ -1,6 +1,7 @@
 
 @project@/__tests__/default/run/index.js
-  3:1  error  Unexpected newline between function and ( of function call  no-unexpected-multiline
+   3:1   error  Unexpected newline between function and ( of function call  no-unexpected-multiline
+  12:10  error  'tryMe' is defined but never used                           unused-imports/no-unused-vars
 
-Γ£û 1 problem (1 error, 0 warnings)
+Γ£û 2 problems (2 errors, 0 warnings)
 

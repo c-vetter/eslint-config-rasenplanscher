@@ -5,10 +5,8 @@
   13:1  error  'ava' should be listed in the project's dependencies. Run 'npm i -S ava' to add it  import/no-extraneous-dependencies
 
 @project@/__tests__/imports/run/src/index.js
-   1:1  error  'ava' should be listed in the project's dependencies. Run 'npm i -S ava' to add it  import/no-extraneous-dependencies
-   3:1  error  'eslint' should be listed in the project's dependencies, not devDependencies        import/no-extraneous-dependencies
-   4:1  error  'outdent' should be listed in the project's dependencies, not optionalDependencies  import/no-extraneous-dependencies
-  13:1  error  'ava' should be listed in the project's dependencies. Run 'npm i -S ava' to add it  import/no-extraneous-dependencies
+  3:1  error  'eslint' should be listed in the project's dependencies, not devDependencies        import/no-extraneous-dependencies
+  4:1  error  'outdent' should be listed in the project's dependencies, not optionalDependencies  import/no-extraneous-dependencies
 
-Γ£û 7 problems (7 errors, 0 warnings)
+Γ£û 5 problems (5 errors, 0 warnings)
 

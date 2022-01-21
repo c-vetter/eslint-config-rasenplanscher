@@ -10,14 +10,14 @@ const data = { }
 })()
 
 function tryMe (what) {
-	if (what === 'what') {
+	if (what === `what`) {
 		return 1
 	}
-	if (what === 'tahw') {
+	if (what === `tahw`) {
 		return -1
 	}
 
-	if (typeof what === 'string') {
+	if (typeof what === `string`) {
 		return what.length * 10
 	}
 
