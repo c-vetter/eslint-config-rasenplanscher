@@ -5,7 +5,7 @@ import { root, transpiled } from './paths'
 
 const rc = (suffix?:string) => `eslintrc${suffix ? `.${suffix}` : ``}.js`
 
-const eslintrc = (suffix=``) => ({
+const eslintrc = (suffix = ``) => ({
 	input: transpiled(rc(suffix)),
 	output: {
 		file: root(rc(suffix)),
@@ -15,7 +15,7 @@ const eslintrc = (suffix=``) => ({
 	},
 	external: [
 		suffix === `make` ? null : transpiled(rc(`make`)),
-		...Object.keys(readJsonSync(root(`package.json`)).peerDependencies)
+		...Object.keys(readJsonSync(root(`package.json`)).peerDependencies),
 	],
 	plugins: [
 		nodeResolve(),

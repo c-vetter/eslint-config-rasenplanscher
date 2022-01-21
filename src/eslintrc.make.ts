@@ -34,7 +34,7 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 		return makeEslintrc({
 			priorities: [
 				options,
-				...morePriorities
+				...morePriorities,
 			],
 		})
 	}
@@ -56,7 +56,7 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 
 	const overrideConfigurations:RuleConfigurationOverride[] = availableConfigurations.filter(
 		(c) : c is RuleConfigurationOverride & Configuration =>
-			Boolean ((c as RuleConfigurationOverride).base)
+			Boolean((c as RuleConfigurationOverride).base),
 	)
 	const overriddenConfigurations = overrideConfigurations.map(o => o.base)
 
@@ -64,24 +64,24 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 		availableConfigurations
 		.filter(<
 			R extends (typeof availableConfigurations)[number]['ruleId'],
-			P extends (typeof availableConfigurations)[number]['providerId']
+			P extends (typeof availableConfigurations)[number]['providerId'],
 		>(
 			config:(
-				| RuleConfiguration<R,P>
-				| RuleConfigurationOverride<RuleConfiguration,R,P>
-			)
+				| RuleConfiguration<R, P>
+				| RuleConfigurationOverride<RuleConfiguration, R, P>
+			),
 		) => (
-			!overriddenConfigurations.includes(config as RuleConfiguration))
+			!overriddenConfigurations.includes(config as RuleConfiguration)),
 		)
 		.map(<
 			R extends (typeof availableConfigurations)[number]['ruleId'],
-			P extends (typeof availableConfigurations)[number]['providerId']
+			P extends (typeof availableConfigurations)[number]['providerId'],
 		>(
 			config:(
-				| RuleConfiguration<R,P>
-				| RuleConfigurationOverride<RuleConfiguration,R,P>
-			)
-		) : RuleConfiguration<R,P> => {
+				| RuleConfiguration<R, P>
+				| RuleConfigurationOverride<RuleConfiguration, R, P>
+			),
+		) : RuleConfiguration<R, P> => {
 			if (!isOverride(config)) return config
 
 			const {
@@ -96,11 +96,11 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 		})
 		.filter(<
 			R extends (typeof availableConfigurations)[number]['ruleId'],
-			P extends (typeof availableConfigurations)[number]['providerId']
+			P extends (typeof availableConfigurations)[number]['providerId'],
 		>(
-			config:RuleConfiguration<R,P>
+			config:RuleConfiguration<R, P>,
 		) : config is Exclude<
-			RuleConfiguration<R,P>,
+			RuleConfiguration<R, P>,
 			RuleConfigurationIgnored
 		> => {
 			return !Boolean((config as RuleConfigurationIgnored).ignore)
@@ -120,14 +120,14 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 							config.optionsDangerzone && (
 								dangerzone === true
 								||
-								(dangerzone||[]).includes(config.ruleId)
+								(dangerzone || []).includes(config.ruleId)
 							)
 							? config.optionsDangerzone
 							: config.options
-						)
+						),
 					]
 					: `off`
-				)
+				),
 				}}),
 			{},
 		)
@@ -144,7 +144,7 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 			...usableConfigurations
 			.map(c => c.plugin)
 			.filter((p) : p is Exclude<typeof p, 'eslint'> => p !== `eslint`),
-			...(overrides?.plugins||[]),
+			...(overrides?.plugins || []),
 		]),
 		rules: Object.assign(
 			{},

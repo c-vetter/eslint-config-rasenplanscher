@@ -66,8 +66,8 @@ function selectProvider () {
 				type: `autocomplete`,
 				name: `provider`,
 				message: `Provider:`,
-				async source(_:never, input:string=``) {
-					if(!input) return providerAnswers
+				async source (_:never, input:string = ``) {
+					if (!input) return providerAnswers
 					return providerAnswers.filter(({ name }) => name.includes(input))
 				},
 			},
@@ -89,8 +89,8 @@ function selectRule (rules:RuleData[]) {
 				type: `autocomplete`,
 				name: `rule`,
 				message: `Rule:`,
-				async source(_:never, input:string=``) {
-					if(!input) return ruleAnswers
+				async source (_:never, input:string = ``) {
+					if (!input) return ruleAnswers
 					return ruleAnswers.filter(({ name }) => name.includes(input))
 				},
 			},
@@ -141,8 +141,8 @@ function ruleData (rule:RuleDefinition) : RuleData {
 		typingFile,
 		reasonFile,
 		definitionFile,
-		exists: existence.some(x=>(x===true)),
-		complete: existence.every(x=>(x===true)),
+		exists: existence.some(x=>(x === true)),
+		complete: existence.every(x=>(x === true)),
 	}
 }
 

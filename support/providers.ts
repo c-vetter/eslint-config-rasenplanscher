@@ -36,7 +36,7 @@ Object.keys(readJsonSync(root(`package.json`)).devDependencies)
 export const providers: EslintProvider[] = [ eslint, ...plugins ]
 
 
-export function providerFor(ruleId:string) {
+export function providerFor (ruleId:string) {
 	if (!ruleId.includes(`/`)) return eslint
 
 	const namespace = ruleId.split(`/`)[0]

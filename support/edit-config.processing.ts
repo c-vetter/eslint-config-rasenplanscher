@@ -73,7 +73,7 @@ function generateTypes (item:RuleData, bundle:RuledataBundle) {
 			Mutable<
 				Exclude<typeof item.rule.meta.schema, undefined>
 			>
-		)
+		),
 	)
 	.then(schema => (
 		Array.isArray(schema)
@@ -157,7 +157,7 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 						`${extendedConfigKey}: ${extendedConfigToken},`,
 					)
 				}
-			` ,
+			`,
 		)
 	}
 
@@ -200,7 +200,7 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 						)
 					)
 					|| `default`
-				]
+				],
 			},
 			{
 				type: `confirm`,
@@ -226,7 +226,7 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 		coreExport(ruleConfig),
 	))
 
-	function coreExport (data:Record<string,unknown>) {
+	function coreExport (data:Record<string, unknown>) {
 		return outdent`
 			import ${configTypeToken} from '${
 				importable(item.typingFile, item.configFile)
@@ -239,8 +239,8 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 					...data,
 				}, null, `\t`)
 				.replace(/"(\w+)":/g, `$1:`)
-				.replace(/'/g, `\\'`)
-				.replace(/"/g, `'`)
+				.replace(/`/g, `\\\``)
+				.replace(/"/g, `\``)
 				.replace(/\n}$/, `,\n}`)
 			}
 
@@ -261,7 +261,7 @@ function generateDoc (item:RuleData, bundle:RuledataBundle) {
 		${`=`.repeat(
 			item.rule.id.length
 			+ item.rule.meta.docs.url!.length // !: checked at the start of `generateDoc`
-			+ 4 // brackets and parentheses
+			+ 4, // brackets and parentheses
 		)}
 		${
 			base
@@ -280,6 +280,6 @@ function code (...filepaths:string[]) {
 	spawn(
 		`code.cmd`,
 		filepaths,
-		{ stdio:`pipe` }
+		{ stdio:`pipe` },
 	)
 }

@@ -18,5 +18,5 @@ outputFile(
 		export const providers = {
 			${ exportsList.join(`\n\t`) }
 		} as const
-	`
+	`,
 )

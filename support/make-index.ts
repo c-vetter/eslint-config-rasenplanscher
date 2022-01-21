@@ -16,19 +16,19 @@ buildIndices(roots[root])
 	console.error(error)
 })
 
-function buildIndices(scope:PathBuilder, ...directory:string[]): ReturnType<typeof buildIndex> {
+function buildIndices (scope:PathBuilder, ...directory:string[]): ReturnType<typeof buildIndex> {
 	return readdir(scope(...directory), { withFileTypes: true })
 	.then(entries => Promise.all(
 		entries
 		.filter(entry => entry.isDirectory())
-		.map(entry => buildIndices(scope, ...directory, entry.name))
+		.map(entry => buildIndices(scope, ...directory, entry.name)),
 	))
 	.then(() => buildIndex(scope, ...directory))
 }
 
 const indexName = `index.ts`
 
-function buildIndex(scope:PathBuilder, ...directory:string[]) {
+function buildIndex (scope:PathBuilder, ...directory:string[]) {
 	return readdir(scope(...directory), { withFileTypes: true })
 	.then(entries => entries.filter(entry => entry.name !== indexName))
 	.then(entries =>[
@@ -54,13 +54,13 @@ function buildIndex(scope:PathBuilder, ...directory:string[]) {
 			${
 				exportsList.join(`,\n\t`)
 			}
-		]`.replace(/^\t\t/gm, ``))
+		]`.replace(/^\t\t/gm, ``)),
 	)
 }
 
 function varName (entry:Dirent) {
 	return `_${camelCase(clippedName(entry))}_`
 }
-function clippedName(entry:Dirent) {
+function clippedName (entry:Dirent) {
 	return trimTs(entry.name)
 }

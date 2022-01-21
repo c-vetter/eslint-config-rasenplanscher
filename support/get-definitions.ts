@@ -25,7 +25,7 @@ Array.from(rulesMap.entries())
 .map(([id, key, meta, provider]) => ([
 	rulesDefinitions(
 		provider.name,
-		`${key}.ts`
+		`${key}.ts`,
 	),
 	{
 		id,

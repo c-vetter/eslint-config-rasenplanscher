@@ -1,11 +1,11 @@
 import Configuration from './eqeqeq.d'
 
 const configuration:Configuration = {
-	ruleId: 'eqeqeq',
-	providerId: 'eslint',
-	priority: 'IMPORTANT',
+	ruleId: `eqeqeq`,
+	providerId: `eslint`,
+	priority: `IMPORTANT`,
 	activate: true,
-	options: [ 'always' ],
+	options: [ `always` ],
 }
 
 export default configuration

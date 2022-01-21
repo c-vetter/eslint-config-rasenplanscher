@@ -17,6 +17,6 @@ export function importable (source:string, target:string) {
 		relative(dirname(target), source)
 		.replace(/\\/g, `/`)
 		.replace(/^/, `./`)
-		.replace(/^\.\/\./, `.`)
+		.replace(/^\.\/\./, `.`),
 	)
 }
