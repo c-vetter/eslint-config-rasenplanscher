@@ -7,5 +7,5 @@ export default [
 	_noUnusedImportsTs_,
 	_noUnusedImports_,
 	_noUnusedVarsTs_,
-	_noUnusedVars_
+	_noUnusedVars_,
 ]

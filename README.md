@@ -28,7 +28,7 @@ What's in it, how to use it
 ---------------------------
 First, install it (as well as the plugins you want):
 ```sh
-npm install --save-dev eslint-config-rasenplanscher eslint@^7.25.0 @typescript-eslint/eslint-plugin@^4.22.0 @typescript-eslint/parser@^4.22.0 eslint-plugin-import@^2.22.1 eslint-plugin-jsdoc@^32.3.4 eslint-plugin-react@^7.23.2 eslint-plugin-react-hooks@^4.2.0 eslint-plugin-regex@^1.7.0 eslint-plugin-typescript-custom-sort-keys@^1.0.5 eslint-plugin-unused-imports@^1.1.1
+npm install --save-dev eslint-config-rasenplanscher eslint@^8.7.0 @typescript-eslint/eslint-plugin@^5.10.0 @typescript-eslint/parser@^5.10.0 eslint-plugin-import@^2.25.4 eslint-plugin-unused-imports@^2.0.0
 ```
 
 Then either add this to your `package.json`:

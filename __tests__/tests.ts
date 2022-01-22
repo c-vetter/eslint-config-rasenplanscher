@@ -2,17 +2,26 @@ import { resolve } from 'path'
 import { spawn } from 'child_process'
 
 import test, { ExecutionContext } from 'ava'
-import { copy, readdir, readFile } from 'fs-extra'
+import { copy, emptyDir, readdir, readFile, readJson } from 'fs-extra'
 import ora from 'ora'
 import readdirp from 'readdirp'
+
 import { root } from '../support/paths'
 
 type Then<T> = T extends PromiseLike<infer U> ? U : T
 
 type Paths = Then<ReturnType<typeof prepare>>
 
-const troot = (...s:string[]) => resolve(__dirname, ...s)
-const sroot = (r:string) => (d:string) => (...s:string[]) => troot(r, d, ...s)
+// d* = path helper, “directory”
+const dTests = (...segments:Array<string>) => resolve(__dirname, ...segments)
+const dRepo = (...segments:Array<string>) => dTests(`..`, ...segments)
+const dTest = (
+	(root:string) =>
+	(directory:string) => // eslint-disable-line @typescript-eslint/indent
+	(...segments:Array<string>) => // eslint-disable-line @typescript-eslint/indent
+	dTests(root, directory, ...segments) // eslint-disable-line @typescript-eslint/indent
+)
+const dPackage = (...segments: Array<string>): string => resolve(`__pkg__`, ...segments)
 
 //
 
@@ -25,7 +34,20 @@ const spinner = ora({
 
 //
 
-readdir(troot(), { withFileTypes: true })
+emptyDir(dPackage())
+.then(() => readJson(dRepo(`package.json`)))
+.then(({ files }:{ files:Array<string> }) => (
+	Promise.all(
+		[
+			`package.json`,
+			`package-lock.json`,
+			...files,
+		]
+		.map(file => copy(dRepo(file), dPackage(file))),
+	)
+))
+// .then(() => npm(`install`, dPackage(), `--production`))
+.then(() => readdir(dTests(), { withFileTypes: true }))
 .then(entries => {
 	spinner.text = `preparing scenarios`
 	return entries
@@ -58,17 +80,14 @@ readdir(troot(), { withFileTypes: true })
 .finally(() => spinner.info(`done`))
 
 async function prepare (name: string) {
-	const root = sroot(name)
+	const root = dTest(name)
 	const source = root(`src`)
 	const control = root(`ctrl`)
 	const result = root(`run`)
 
+	await emptyDir(result())
 	await copy(source(), result())
-
-	await npm(
-		`install`,
-		result(),
-	)
+	await npm(`install`, result())
 
 	return {
 		name,
@@ -121,11 +140,11 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 	.then(()=>{})
 }
 
-function npm (cmd:string, cwd:string) {
+function npm (cmd:string, cwd:string, ...args:Array<string>) {
 	return new Promise((resolve, reject) => {
 		const runner = spawn(
 			`npm.cmd`,
-			[ cmd ],
+			[ cmd, ...args ],
 			{ cwd },
 		)
 

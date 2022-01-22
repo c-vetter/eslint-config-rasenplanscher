@@ -21,5 +21,5 @@ export default [
 	_noUnusedVars_,
 	_quotes_,
 	_spaceBeforeFunctionParen_,
-	_spaceInfixOps_
+	_spaceInfixOps_,
 ]

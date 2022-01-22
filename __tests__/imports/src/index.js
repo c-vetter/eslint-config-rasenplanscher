@@ -1,15 +1,15 @@
-import ava from 'ava'
 import config from 'eslint-config-rasenplanscher'
 import eslint from 'eslint'
 import outdent from 'outdent'
+import rimraf from 'rimraf'
 
 export default {
-	ava,
+	rimraf,
 	config,
 	eslint,
 	outdent,
 }
 
-import('ava')
-.then(ava => ava)
+import('rimraf')
+.then(rimraf => rimraf)
 .catch(reason => reason)

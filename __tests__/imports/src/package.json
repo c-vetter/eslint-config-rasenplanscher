@@ -12,16 +12,16 @@
 		}
 	},
 	"dependencies": {
-		"eslint-config-rasenplanscher": "file:../../.."
+		"eslint-config-rasenplanscher": "file:../../../__pkg__"
 	},
 	"devDependencies": {
 		"eslint-plugin-import": "^2.22.1",
 		"eslint": "^7.25.0"
 	},
 	"peerDependencies": {
-		"ava": "^3.15.0"
+		"rimraf": "*"
 	},
 	"optionalDependencies": {
-		"outdent": "^0.8.0"
+		"outdent": "*"
 	}
 }

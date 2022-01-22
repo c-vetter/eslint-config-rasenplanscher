@@ -85,5 +85,5 @@ export default [
 	_spaceInParens_,
 	_spaceInfixOps_,
 	_wrapIife_,
-	_yoda_
+	_yoda_,
 ]

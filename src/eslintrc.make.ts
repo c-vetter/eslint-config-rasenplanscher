@@ -1,4 +1,4 @@
-import { CLIEngine } from 'eslint'
+import { Linter } from 'eslint'
 
 import rulesConfigurations from './rules-configurations'
 import { providers } from './.providers'
@@ -17,19 +17,19 @@ type RuleId = (
 	: never
 )
 
-type Dangerzone = RuleId[]|boolean
+type Dangerzone = RuleId[] | boolean
 
 type Options = {
 	dangerzone?:Dangerzone
 	priorities:Priority[]
-	overrides?:CLIEngine.Options
+	overrides?:Linter.Config
 }
 
 //
 
-export default function makeEslintrc (options:Options) : CLIEngine.Options
-export default function makeEslintrc (...priorities:Priority[]) : CLIEngine.Options
-export default function makeEslintrc (options: Options|Priority, ...morePriorities:Priority[]) : CLIEngine.Options {
+export default function makeEslintrc (options:Options) : Linter.Config
+export default function makeEslintrc (...priorities:Priority[]) : Linter.Config
+export default function makeEslintrc (options: Options | Priority, ...morePriorities:Priority[]) : Linter.Config {
 	if (typeof options === `string`) {
 		return makeEslintrc({
 			priorities: [
@@ -154,6 +154,6 @@ export default function makeEslintrc (options: Options|Priority, ...morePrioriti
 	}
 }
 
-function isOverride (config:RuleConfiguration|RuleConfigurationOverride) : config is RuleConfigurationOverride {
+function isOverride (config:RuleConfiguration | RuleConfigurationOverride) : config is RuleConfigurationOverride {
 	return Boolean((config as RuleConfigurationOverride).base)
 }

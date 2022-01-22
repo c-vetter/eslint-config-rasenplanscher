@@ -154,11 +154,11 @@ function dispatch (data:RuleData) {
 	const all = rules().filter((x) => {
 		if (x.rule.key === data.rule.key) return true
 
-		if (typeof data.rule.meta.docs.extendsBaseRule === `string`) {
+		if (typeof data.rule.meta.docs?.extendsBaseRule === `string`) {
 			if (x.rule.key === data.rule.meta.docs.extendsBaseRule) return true
 		}
 
-		if (typeof x.rule.meta.docs.extendsBaseRule === `string`) {
+		if (typeof x.rule.meta.docs?.extendsBaseRule === `string`) {
 			if (x.rule.meta.docs.extendsBaseRule === data.rule.key) return true
 		}
 
@@ -166,7 +166,7 @@ function dispatch (data:RuleData) {
 	})
 
 	const base = (
-		all.find(d => !d.rule.meta.docs.extendsBaseRule)
+		all.find(d => !d.rule.meta.docs?.extendsBaseRule)
 		||
 		all[0]
 	)

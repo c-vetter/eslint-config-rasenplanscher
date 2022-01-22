@@ -1,5 +1,5 @@
 import _noExtraneousDependencies_ from './no-extraneous-dependencies'
 
 export default [
-	_noExtraneousDependencies_
+	_noExtraneousDependencies_,
 ]

@@ -53,7 +53,7 @@ function buildIndex (scope:PathBuilder, ...directory:string[]) {
 		export default [
 			${
 				exportsList.join(`,\n\t`)
-			}
+			},
 		]`.replace(/^\t\t/gm, ``)),
 	)
 }

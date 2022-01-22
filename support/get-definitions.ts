@@ -1,4 +1,4 @@
-import { CLIEngine } from 'eslint'
+import { Linter } from 'eslint'
 import { emptyDirSync, outputFile } from 'fs-extra'
 
 import { rulesDefinitions } from './paths'
@@ -7,14 +7,15 @@ import { plugins, providerFor } from "./providers"
 
 emptyDirSync(rulesDefinitions())
 
+const rulesArray = Array.from((new Linter).getRules().entries())
 
-const eslint = new (CLIEngine)({
-	plugins: plugins.map(({ namespace }) => namespace),
-})
-eslint.executeOnText(``) // https://github.com/eslint/eslint/issues/11871#issuecomment-504634145
-const rulesMap = eslint.getRules()
+plugins.forEach(
+	plugin =>
+		Object.entries(require(plugin.id).rules)
+		.forEach(([key, rule]) => rulesArray.push([plugin.namespace + `/` + key, rule as typeof rulesArray[number][1]])),
+)
 
-Array.from(rulesMap.entries())
+rulesArray
 .filter(([,{ meta }]) => meta && !meta.deprecated)
 .map(([id, { meta }]) => ([
 	id,

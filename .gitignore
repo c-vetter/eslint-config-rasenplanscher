@@ -3,6 +3,7 @@
 .rules-definitions
 .providers.ts
 __tests__/*/run
+__pkg__/
 
 
 ################

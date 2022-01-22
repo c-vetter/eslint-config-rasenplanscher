@@ -7,5 +7,5 @@ export default [
 	..._typescriptEslint_,
 	..._eslint_,
 	..._import_,
-	..._unusedImports_
+	..._unusedImports_,
 ]

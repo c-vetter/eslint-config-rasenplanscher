@@ -10,9 +10,9 @@ export type RuleDefinition = DeepReadonly<{
 	key: string
 	providerId: string
 	meta: (
-		& Omit<EslintRule.RuleMetaData, 'docs'|'fixable'>
+		& Omit<EslintRule.RuleMetaData, 'docs' | 'fixable'>
 		& {
-			docs: (
+			docs?: (
 				& Omit<Exclude<EslintRule.RuleMetaData['docs'], undefined>, 'recommended'>
 				& {
 					recommended?: (

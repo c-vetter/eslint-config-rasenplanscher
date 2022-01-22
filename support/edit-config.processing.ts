@@ -80,7 +80,7 @@ function generateTypes (item:RuleData, bundle:RuledataBundle) {
 		? wrapped(schema)
 		: schema
 	))
-	.then<false|Unpromise<ReturnType<typeof parseSchema>>>(schema => schema && parseSchema(schema, { name: optionsTypeToken }))
+	.then<false | Unpromise<ReturnType<typeof parseSchema>>>(schema => schema && parseSchema(schema, { name: optionsTypeToken }))
 	.then(ast => ast && printer.printNodes(ast))
 	.then(types => outdent`
 		import { ${types ? baseTypeToken : baseTypeTokenExtender } } from '${
@@ -193,7 +193,7 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 				} as const)[ // eslint-disable-next-line @typescript-eslint/indent
 					item.rule.meta.type
 					|| (
-						item.rule.meta.docs.category as (
+						item.rule.meta.docs?.category as (
 							| 'Possible Errors'
 							| 'Best Practices'
 							| 'Stylistic Issues'
@@ -219,9 +219,9 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 			),
 		}))
 	}) as (
-		(data:{ ignore: boolean }) => PromiseLike<RuleConfigurationIgnore|(RuleConfigurationSet&(RuleConfigurationOff|RuleConfigurationOptions))>
+		(data:{ ignore: boolean }) => PromiseLike<RuleConfigurationIgnore | (RuleConfigurationSet & (RuleConfigurationOff | RuleConfigurationOptions))>
 	))
-	.then((ruleConfig:Omit<RuleConfiguration, 'ruleId'|'providerId'>) => outputFile(
+	.then((ruleConfig:Omit<RuleConfiguration, 'ruleId' | 'providerId'>) => outputFile(
 		item.configFile,
 		coreExport(ruleConfig),
 	))
@@ -257,10 +257,12 @@ function generateDoc (item:RuleData, bundle:RuledataBundle) {
 
 	return Promise.resolve(item === bundle.base)
 	.then(base => outdent`
-		[${item.rule.id}](${item.rule.meta.docs.url})
+		[${item.rule.id}](${
+			item.rule.meta.docs!.url // !: checked at the start of `generateDoc`
+		})
 		${`=`.repeat(
 			item.rule.id.length
-			+ item.rule.meta.docs.url!.length // !: checked at the start of `generateDoc`
+			+ item.rule.meta.docs!.url!.length // !: checked at the start of `generateDoc`
 			+ 4, // brackets and parentheses
 		)}
 		${
