@@ -67,7 +67,7 @@ These exit conditions have a specific form: `if (condition) return value`. Skip 
 ### Why is this considered `dangerous`?
 In order to not overuse or abuse the configuration that enables this use case, you need to apply discretion. Specifically, there is nothing technically preventing you from doing either of these:
 ```js
-if (condition1 && condition2 || condition3 && condition4) return condition5 ? data : return false
+if (condition1 && condition2 || condition3 && condition4) return condition5 ? data : false
 if (condition1 && condition2 || condition3 && condition4) condition5 ? action(data) : action(false)
 ```
 While you *can* do that, you *should not*. That kind of thing is very hard to read and therefore very hard to maintain. Rather do something like this:

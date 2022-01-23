@@ -144,7 +144,11 @@ function npm (cmd:string, cwd:string, ...args:Array<string>) {
 	return new Promise((resolve, reject) => {
 		const runner = spawn(
 			`npm.cmd`,
-			[ cmd, ...args ],
+			[
+				cmd,
+				`--dry-run=false`, // `npm publish --dry-run` passes this down…
+				...args,
+			],
 			{ cwd },
 		)
 

@@ -80,3 +80,76 @@ module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 	},
 })
 ```
+
+
+----
+
+
+# Changelog
+
+## [1.1.0]
++	30 new rules
+	+ [comma-dangle](src/rules-configurations/eslint/comma-dangle.md) +
+	  [@typescript-eslint/comma-dangle](src/rules-configurations/@typescript-eslint/comma-dangle.md)
+	+ [comma-spacing](src/rules-configurations/eslint/comma-spacing.md) +
+	  [@typescript-eslint/comma-spacing](src/rules-configurations/@typescript-eslint/comma-spacing.md)
+	+ [comma-style](src/rules-configurations/eslint/comma-style.md)
+	+ [eqeqeq](src/rules-configurations/eslint/eqeqeq.md)
+	+ [func-call-spacing](src/rules-configurations/eslint/func-call-spacing.md) +
+	  [@typescript-eslint/func-call-spacing](src/rules-configurations/@typescript-eslint/func-call-spacing.md)
+	+ [keyword-spacing](src/rules-configurations/eslint/keyword-spacing.md) +
+	  [@typescript-eslint/keyword-spacing](src/rules-configurations/@typescript-eslint/keyword-spacing.md)
+	+ [no-duplicate-case](src/rules-configurations/eslint/no-duplicate-case.md)
+	+ [no-unused-vars](src/rules-configurations/eslint/no-unused-vars.md) +
+	  [@typescript-eslint/no-unused-vars](src/rules-configurations/@typescript-eslint/no-unused-vars.md)
+	+ [one-var-declaration-per-line](src/rules-configurations/eslint/one-var-declaration-per-line.md)
+	+ [one-var](src/rules-configurations/eslint/one-var.md)
+	+ [quotes](src/rules-configurations/eslint/quotes.md) +
+	  [@typescript-eslint/quotes](src/rules-configurations/@typescript-eslint/quotes.md)
+	+ [space-before-function-paren](src/rules-configurations/eslint/space-before-function-paren.md) +
+	  [@typescript-eslint/space-before-function-paren](src/rules-configurations/@typescript-eslint/space-before-function-paren.md)
+	+ [space-infix-ops](src/rules-configurations/eslint/space-infix-ops.md)
+	+ [@typescript-eslint/space-infix-ops](src/rules-configurations/@typescript-eslint/space-infix-ops.md)
+	+ [wrap-iife](src/rules-configurations/eslint/wrap-iife.md)
+	+ [yoda](src/rules-configurations/eslint/yoda.md)
+	+ [@typescript-eslint/consistent-type-definitions](src/rules-configurations/@typescript-eslint/consistent-type-definitions.md)
+	+ [@typescript-eslint/indent](src/rules-configurations/@typescript-eslint/indent.md)
+	+ [import/no-extraneous-dependencies](src/rules-configurations/import/no-extraneous-dependencies.md)
+	+ [unused-imports/no-unused-imports-ts](src/rules-configurations/unused-imports/no-unused-imports-ts.md)
+	+ [unused-imports/no-unused-imports](src/rules-configurations/unused-imports/no-unused-imports.md)
+	+ [unused-imports/no-unused-vars-ts](src/rules-configurations/unused-imports/no-unused-vars-ts.md)
+	+ [unused-imports/no-unused-vars](src/rules-configurations/unused-imports/no-unused-vars.md)
+
+## [1.0.0]
++	Reactiveness
++	4 levels/variants: `default`, `important`, `all`, `all+dangerzone`
++	29 rules:
+	+ [array-element-newline](./src/rules-configurations/eslint/array-element-newline.md)
+	+ [brace-style](./src/rules-configurations/eslint/brace-style.md) +
+	  [@typescript-eslint/brace-style](./src/rules-configurations/@typescript-eslint/brace-style.md)
+	+ [camelcase](./src/rules-configurations/eslint/camelcase.md)
+	+ [consistent-return](./src/rules-configurations/eslint/consistent-return.md)
+	+ [curly](./src/rules-configurations/eslint/curly.md)
+	+ [id-match](./src/rules-configurations/eslint/id-match.md)
+	+ [indent](./src/rules-configurations/eslint/indent.md)
+	+ [lines-between-class-members](./src/rules-configurations/eslint/lines-between-class-members.md)
+	+ [new-cap](./src/rules-configurations/eslint/new-cap.md)
+	+ [no-case-declarations](./src/rules-configurations/eslint/no-case-declarations.md)
+	+ [no-func-assign](./src/rules-configurations/eslint/no-func-assign.md)
+	+ [no-label-var](./src/rules-configurations/eslint/no-label-var.md)
+	+ [no-mixed-spaces-and-tabs](./src/rules-configurations/eslint/no-mixed-spaces-and-tabs.md)
+	+ [no-nonoctal-decimal-escape](./src/rules-configurations/eslint/no-nonoctal-decimal-escape.md)
+	+ [no-restricted-properties](./src/rules-configurations/eslint/no-restricted-properties.md)
+	+ [no-return-assign](./src/rules-configurations/eslint/no-return-assign.md)
+	+ [no-this-before-super](./src/rules-configurations/eslint/no-this-before-super.md)
+	+ [no-unexpected-multiline](./src/rules-configurations/eslint/no-unexpected-multiline.md)
+	+ [no-useless-call](./src/rules-configurations/eslint/no-useless-call.md)
+	+ [no-useless-rename](./src/rules-configurations/eslint/no-useless-rename.md)
+	+ [prefer-arrow-callback](./src/rules-configurations/eslint/prefer-arrow-callback.md)
+	+ [prefer-numeric-literals](./src/rules-configurations/eslint/prefer-numeric-literals.md)
+	+ [prefer-rest-params](./src/rules-configurations/eslint/prefer-rest-params.md)
+	+ [prefer-spread](./src/rules-configurations/eslint/prefer-spread.md)
+	+ [semi-style](./src/rules-configurations/eslint/semi-style.md)
+	+ [semi](./src/rules-configurations/eslint/semi.md)
+	+ [sort-keys](./src/rules-configurations/eslint/sort-keys.md)
+	+ [space-in-parens](./src/rules-configurations/eslint/space-in-parens.md)
