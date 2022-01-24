@@ -1,3 +1,3 @@
-[@typescript-eslint/keyword-spacing](https://github.com/typescript-eslint/typescript-eslint/blob/v4.22.1/packages/eslint-plugin/docs/rules/keyword-spacing.md)
+[@typescript-eslint/keyword-spacing](https://typescript-eslint.io/rules/keyword-spacing)
 ==============================================================================================================================================================
 See [keyword-spacing](../eslint/keyword-spacing.md)

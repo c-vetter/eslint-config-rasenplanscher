@@ -1,3 +1,3 @@
-[@typescript-eslint/space-infix-ops](https://github.com/typescript-eslint/typescript-eslint/blob/v4.22.1/packages/eslint-plugin/docs/rules/space-infix-ops.md)
+[@typescript-eslint/space-infix-ops](https://typescript-eslint.io/rules/space-infix-ops)
 ==============================================================================================================================================================
 See [space-infix-ops](../eslint/space-infix-ops.md)

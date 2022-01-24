@@ -1,4 +1,4 @@
-[@typescript-eslint/consistent-type-definitions](https://github.com/typescript-eslint/typescript-eslint/blob/v4.22.1/packages/eslint-plugin/docs/rules/consistent-type-definitions.md)
+[@typescript-eslint/consistent-type-definitions](https://typescript-eslint.io/rules/consistent-type-definitions)
 ======================================================================================================================================================================================
 > Type aliases and interfaces are very similar, and in many cases you can choose between them freely.
 > Almost all features of an interface are available in type,

@@ -1,4 +1,4 @@
-[@typescript-eslint/indent](https://github.com/typescript-eslint/typescript-eslint/blob/v4.22.1/packages/eslint-plugin/docs/rules/indent.md)
+[@typescript-eslint/indent](https://typescript-eslint.io/rules/indent)
 ============================================================================================================================================
 See [indent](../eslint/indent.md)
 

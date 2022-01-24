@@ -1,3 +1,3 @@
-[@typescript-eslint/comma-spacing](https://github.com/typescript-eslint/typescript-eslint/blob/v4.22.1/packages/eslint-plugin/docs/rules/comma-spacing.md)
+[@typescript-eslint/comma-spacing](https://typescript-eslint.io/rules/comma-spacing)
 ==========================================================================================================================================================
 See [comma-spacing](../eslint/comma-spacing.md)
