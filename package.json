@@ -13,7 +13,7 @@
 	"scripts": {
 		"build": "run-s build:providers build:rules-index build:fix-ts-indent build:transpile build:bundle build:fix-rollup-indent build:cleanup",
 		"build:bundle": "rollup -c support/rollup.config.js",
-		"build:cleanup": "eslint --report-unused-disable-directives --fix eslintrc*.js",
+		"build:cleanup": "eslint --report-unused-disable-directives --config .eslintrc.build-cleanup.js --fix eslintrc*.js",
 		"build:fix-rollup-indent": "replace-in-files --string='    ' --replacement='\\t' eslintrc*.js",
 		"build:fix-ts-indent": "replace-in-files --string='    ' --replacement='\\t' node_modules/typescript/lib/*.js",
 		"build:providers": "ts-node support/build-providers.ts",
@@ -85,6 +85,7 @@
 		"extends": "./eslintrc.all.dangerzone.js",
 		"parserOptions": {
 			"ecmaVersion": 2021,
+			"project": "./tsconfig.json",
 			"sourceType": "module"
 		}
 	},

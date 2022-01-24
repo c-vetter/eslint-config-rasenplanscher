@@ -14,6 +14,7 @@ import _keywordSpacing_ from './keyword-spacing'
 import _linesBetweenClassMembers_ from './lines-between-class-members'
 import _newCap_ from './new-cap'
 import _noCaseDeclarations_ from './no-case-declarations'
+import _noConstantCondition_ from './no-constant-condition'
 import _noDuplicateCase_ from './no-duplicate-case'
 import _noFuncAssign_ from './no-func-assign'
 import _noLabelVar_ from './no-label-var'
@@ -59,6 +60,7 @@ export default [
 	_linesBetweenClassMembers_,
 	_newCap_,
 	_noCaseDeclarations_,
+	_noConstantCondition_,
 	_noDuplicateCase_,
 	_noFuncAssign_,
 	_noLabelVar_,
