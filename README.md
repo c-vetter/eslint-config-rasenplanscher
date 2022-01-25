@@ -101,38 +101,51 @@ module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 
 # Changelog
 
+## [1.2.0]
++	fix `peerDependencies`
++	add note to README about `parserOptions.project` for `@typescript-eslint/eslint-plugin`
++	8 new rules
+	+ [@typescript-eslint/no-unnecessary-boolean-literal-compar](./src/rules-configurations/@typescript-eslint/no-unnecessary-boolean-literal-comparemd)
+	+ [@typescript-eslint/no-unnecessary-condition](./src/rules-configurations/@typescript-eslint/no-unnecessary-condition.md)
+	+ [@typescript-eslint/no-unnecessary-qualifier](./src/rules-configurations/@typescript-eslint/no-unnecessary-qualifier.md)
+	+ [@typescript-eslint/no-unnecessary-type-arguments](./src/rules-configurations/@typescript-eslint/no-unnecessary-type-arguments.md)
+	+ [@typescript-eslint/no-unnecessary-type-assertion](./src/rules-configurations/@typescript-eslint/no-unnecessary-type-assertion.md)
+	+ [@typescript-eslint/no-unnecessary-type-constraint](./src/rules-configurations/@typescript-eslint/no-unnecessary-type-constraint.md)
+	+ [@typescript-eslint/strict-boolean-expressions](./src/rules-configurations/@typescript-eslint/strict-boolean-expressions.md)
+	+ [eslint/no-constant-condition](./src/rules-configurations/eslint/no-constant-condition.md)
+
 ## [1.1.0]
 +	30 new rules
-	+ [comma-dangle](src/rules-configurations/eslint/comma-dangle.md) +
-	  [@typescript-eslint/comma-dangle](src/rules-configurations/@typescript-eslint/comma-dangle.md)
-	+ [comma-spacing](src/rules-configurations/eslint/comma-spacing.md) +
-	  [@typescript-eslint/comma-spacing](src/rules-configurations/@typescript-eslint/comma-spacing.md)
-	+ [comma-style](src/rules-configurations/eslint/comma-style.md)
-	+ [eqeqeq](src/rules-configurations/eslint/eqeqeq.md)
-	+ [func-call-spacing](src/rules-configurations/eslint/func-call-spacing.md) +
-	  [@typescript-eslint/func-call-spacing](src/rules-configurations/@typescript-eslint/func-call-spacing.md)
-	+ [keyword-spacing](src/rules-configurations/eslint/keyword-spacing.md) +
-	  [@typescript-eslint/keyword-spacing](src/rules-configurations/@typescript-eslint/keyword-spacing.md)
-	+ [no-duplicate-case](src/rules-configurations/eslint/no-duplicate-case.md)
-	+ [no-unused-vars](src/rules-configurations/eslint/no-unused-vars.md) +
-	  [@typescript-eslint/no-unused-vars](src/rules-configurations/@typescript-eslint/no-unused-vars.md)
-	+ [one-var-declaration-per-line](src/rules-configurations/eslint/one-var-declaration-per-line.md)
-	+ [one-var](src/rules-configurations/eslint/one-var.md)
-	+ [quotes](src/rules-configurations/eslint/quotes.md) +
-	  [@typescript-eslint/quotes](src/rules-configurations/@typescript-eslint/quotes.md)
-	+ [space-before-function-paren](src/rules-configurations/eslint/space-before-function-paren.md) +
-	  [@typescript-eslint/space-before-function-paren](src/rules-configurations/@typescript-eslint/space-before-function-paren.md)
-	+ [space-infix-ops](src/rules-configurations/eslint/space-infix-ops.md)
-	+ [@typescript-eslint/space-infix-ops](src/rules-configurations/@typescript-eslint/space-infix-ops.md)
-	+ [wrap-iife](src/rules-configurations/eslint/wrap-iife.md)
-	+ [yoda](src/rules-configurations/eslint/yoda.md)
-	+ [@typescript-eslint/consistent-type-definitions](src/rules-configurations/@typescript-eslint/consistent-type-definitions.md)
-	+ [@typescript-eslint/indent](src/rules-configurations/@typescript-eslint/indent.md)
-	+ [import/no-extraneous-dependencies](src/rules-configurations/import/no-extraneous-dependencies.md)
-	+ [unused-imports/no-unused-imports-ts](src/rules-configurations/unused-imports/no-unused-imports-ts.md)
-	+ [unused-imports/no-unused-imports](src/rules-configurations/unused-imports/no-unused-imports.md)
-	+ [unused-imports/no-unused-vars-ts](src/rules-configurations/unused-imports/no-unused-vars-ts.md)
-	+ [unused-imports/no-unused-vars](src/rules-configurations/unused-imports/no-unused-vars.md)
+	+ [comma-dangle](./src/rules-configurations/eslint/comma-dangle.md) +
+	  [@typescript-eslint/comma-dangle](./src/rules-configurations/@typescript-eslint/comma-dangle.md)
+	+ [comma-spacing](./src/rules-configurations/eslint/comma-spacing.md) +
+	  [@typescript-eslint/comma-spacing](./src/rules-configurations/@typescript-eslint/comma-spacing.md)
+	+ [comma-style](./src/rules-configurations/eslint/comma-style.md)
+	+ [eqeqeq](./src/rules-configurations/eslint/eqeqeq.md)
+	+ [func-call-spacing](./src/rules-configurations/eslint/func-call-spacing.md) +
+	  [@typescript-eslint/func-call-spacing](./src/rules-configurations/@typescript-eslint/func-call-spacing.md)
+	+ [keyword-spacing](./src/rules-configurations/eslint/keyword-spacing.md) +
+	  [@typescript-eslint/keyword-spacing](./src/rules-configurations/@typescript-eslint/keyword-spacing.md)
+	+ [no-duplicate-case](./src/rules-configurations/eslint/no-duplicate-case.md)
+	+ [no-unused-vars](./src/rules-configurations/eslint/no-unused-vars.md) +
+	  [@typescript-eslint/no-unused-vars](./src/rules-configurations/@typescript-eslint/no-unused-vars.md)
+	+ [one-var-declaration-per-line](./src/rules-configurations/eslint/one-var-declaration-per-line.md)
+	+ [one-var](./src/rules-configurations/eslint/one-var.md)
+	+ [quotes](./src/rules-configurations/eslint/quotes.md) +
+	  [@typescript-eslint/quotes](./src/rules-configurations/@typescript-eslint/quotes.md)
+	+ [space-before-function-paren](./src/rules-configurations/eslint/space-before-function-paren.md) +
+	  [@typescript-eslint/space-before-function-paren](./src/rules-configurations/@typescript-eslint/space-before-function-paren.md)
+	+ [space-infix-ops](./src/rules-configurations/eslint/space-infix-ops.md)
+	+ [@typescript-eslint/space-infix-ops](./src/rules-configurations/@typescript-eslint/space-infix-ops.md)
+	+ [wrap-iife](./src/rules-configurations/eslint/wrap-iife.md)
+	+ [yoda](./src/rules-configurations/eslint/yoda.md)
+	+ [@typescript-eslint/consistent-type-definitions](./src/rules-configurations/@typescript-eslint/consistent-type-definitions.md)
+	+ [@typescript-eslint/indent](./src/rules-configurations/@typescript-eslint/indent.md)
+	+ [import/no-extraneous-dependencies](./src/rules-configurations/import/no-extraneous-dependencies.md)
+	+ [unused-imports/no-unused-imports-ts](./src/rules-configurations/unused-imports/no-unused-imports-ts.md)
+	+ [unused-imports/no-unused-imports](./src/rules-configurations/unused-imports/no-unused-imports.md)
+	+ [unused-imports/no-unused-vars-ts](./src/rules-configurations/unused-imports/no-unused-vars-ts.md)
+	+ [unused-imports/no-unused-vars](./src/rules-configurations/unused-imports/no-unused-vars.md)
 
 ## [1.0.0]
 +	Reactiveness
