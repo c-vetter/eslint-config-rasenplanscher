@@ -7,11 +7,12 @@
 		"root": true,
 		"extends": "rasenplanscher/eslintrc.all.js",
 		"parserOptions": {
-			"ecmaVersion": 2021
+			"ecmaVersion": 2021,
+			"sourceType": "module"
 		}
 	},
 	"devDependencies": {
-		"eslint": "^7.25.0",
-		"eslint-config-rasenplanscher": "file:../../../__pkg__"
+		"eslint-config-rasenplanscher": "file:./__pkg__",
+		"eslint": "^8.7.0"
 	}
 }

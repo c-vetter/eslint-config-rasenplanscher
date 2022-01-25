@@ -2,26 +2,32 @@ import { resolve } from 'path'
 import { spawn } from 'child_process'
 
 import test, { ExecutionContext } from 'ava'
-import { copy, emptyDir, readdir, readFile, readJson } from 'fs-extra'
+import { copy, emptyDir, pathExists, readdir, readFile, readJson, symlink } from 'fs-extra'
 import ora from 'ora'
 import readdirp from 'readdirp'
-
-import { root } from '../support/paths'
 
 type Then<T> = T extends PromiseLike<infer U> ? U : T
 
 type Paths = Then<ReturnType<typeof prepare>>
 
-// d* = path helper, “directory”
+const tmp = process.env.TMP ?? process.env.TEMP ?? `/tmp`
+const testResults = `__test-results__`
+
+// d* = path helper, “directory”, multiple `d`s for intermediate directory levels
 const dTests = (...segments:Array<string>) => resolve(__dirname, ...segments)
 const dRepo = (...segments:Array<string>) => dTests(`..`, ...segments)
-const dTest = (
-	(root:string) =>
+const dPackage = (...segments: Array<string>): string => dRepo(`__pkg__`, ...segments)
+const dddTest = (
+	(scenario:string) =>
 	(directory:string) => // eslint-disable-line @typescript-eslint/indent
 	(...segments:Array<string>) => // eslint-disable-line @typescript-eslint/indent
-	dTests(root, directory, ...segments) // eslint-disable-line @typescript-eslint/indent
+	dTests(scenario, directory, ...segments) // eslint-disable-line @typescript-eslint/indent
 )
-const dPackage = (...segments: Array<string>): string => resolve(`__pkg__`, ...segments)
+const ddTmp = (
+	(scenario:string) =>
+	(...segments:Array<string>) => // eslint-disable-line @typescript-eslint/indent
+	resolve(tmp, `__eslint-config-rasenplanscher__tests__`, scenario, ...segments) // eslint-disable-line @typescript-eslint/indent
+)
 
 //
 
@@ -59,6 +65,14 @@ emptyDir(dPackage())
 ))
 .then(scenarios => {
 	spinner.text = `running scenarios`
+
+	const resultView = dRepo(testResults)
+	pathExists(resultView).then(exists => {
+		if (exists) return
+
+		symlink(ddTmp(`.`)(), resultView, `junction`)
+	})
+
 	return scenarios
 })
 .then(scenarios => Promise.all(
@@ -68,7 +82,7 @@ emptyDir(dPackage())
 			async t => {
 				await npm(
 					`test`,
-					s.result(),
+					s.dResult(),
 				)
 
 				return checkFiles(t, s).then(resolve, reject)
@@ -79,63 +93,81 @@ emptyDir(dPackage())
 .catch(console.error)
 .finally(() => spinner.info(`done`))
 
-async function prepare (name: string) {
-	const root = dTest(name)
-	const source = root(`src`)
-	const control = root(`ctrl`)
-	const result = root(`run`)
+//
 
-	await emptyDir(result())
-	await copy(source(), result())
-	await npm(`install`, result())
+async function prepare (name: string) {
+	const ddRoot = dddTest(name)
+	const dSource = ddRoot(`src`)
+	const dControl = ddRoot(`ctrl`)
+	const dResult = ddTmp(name)
+
+	await emptyDir(dResult())
+	await copy(dSource(), dResult())
+	// without this, the package does not work as part of the test repo
+	await copy(dPackage(), dResult(`__pkg__`))
+	await npm(`install`, dResult())
 
 	return {
 		name,
-		root,
-		source,
-		control,
-		result,
+		ddRoot,
+		dSource,
+		dControl,
+		dResult,
 	}
 }
 
 function checkFiles (t: ExecutionContext, paths: Paths) {
-	const { control, result } = paths
+	const { dControl, dResult } = paths
 
 	return Promise.all([
-		readdirp.promise(result(), {
-			directoryFilter: [`!node_modules`],
+		readdirp.promise(dResult(), {
+			directoryFilter: [
+				`!__pkg__`,
+				`!node_modules`,
+			],
 			fileFilter: [
 				`!package.json`,
 				`!package-lock.json`,
 				`!.eslintrc.*`,
 			],
 		}),
-		readdirp.promise(control()),
+		readdirp.promise(dControl()),
 	])
 	.then(entries => entries.map(entry => entry.map(({ path }) => path)))
-	.then(([ result, ctrl ]) => {
+	.then(([ result, control ]) => {
 		// all expected files are there
-		ctrl.forEach(p => t.true(result.includes(p), `missing file ${p}`))
+		control.forEach(p => t.true(result.includes(p), `missing file ${p}`))
 
 		// no unexpected files
-		result.forEach(p => t.true(ctrl.includes(p), `unexpected file ${p}`))
+		result.forEach(p => t.true(control.includes(p), `unexpected file ${p}`))
 
 		return result
 	})
 	.then(commonPaths => Promise.all(
 		commonPaths
-		.map(async p => (
-			t.is(
-				(await readFile(control(p))).toString(),
+		.map(p => (
+			Promise.all([
+				readFile(dResult(p)),
+				readFile(dControl(p)),
+			])
+			.then(([result, control]) => t.is(
+				control.toString(),
 				(
-					(await readFile(result(p)))
+					result
 					.toString()
-					.replace(new RegExp(root().replace(/\\/g, `\\\\`), `g`), `@project@`)
+					.replace(
+						new RegExp(
+							ddTmp(`.`)()
+							.replace(/\\/g, `\\\\`),
+						`g`,
+						),
+						testResults,
+					)
 					.replace(/\\/g, `/`)
 				),
 				`aberration in ${p}`,
-			)
-		)),
+			))),
+		),
 	))
 	.then(()=>{})
 }

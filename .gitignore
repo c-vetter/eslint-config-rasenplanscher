@@ -2,7 +2,7 @@
 .transpiled
 .rules-definitions
 .providers.ts
-__tests__/*/run
+__test-results__/
 __pkg__/
 
 

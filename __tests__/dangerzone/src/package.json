@@ -4,7 +4,7 @@
 		"test": "eslint --fix index.js *>&1 > eslint.log"
 	},
 	"devDependencies": {
-		"eslint": "^7.25.0",
-		"eslint-config-rasenplanscher": "file:../../../__pkg__"
+		"eslint-config-rasenplanscher": "file:./__pkg__",
+		"eslint": "^8.7.0"
 	}
 }

@@ -8,13 +8,15 @@
 		"extends": "rasenplanscher/eslintrc.all.dangerzone",
 		"parserOptions": {
 			"ecmaVersion": 2021,
+			"project": "./tsconfig.json",
 			"sourceType": "module"
 		}
 	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^4.22.0",
-		"@typescript-eslint/parser": "^4.22.0",
-		"eslint": "^7.25.0",
-		"eslint-config-rasenplanscher": "file:../../../__pkg__"
+		"@typescript-eslint/eslint-plugin": "^5.10.0",
+		"@typescript-eslint/parser": "^5.10.0",
+		"eslint-config-rasenplanscher": "file:./__pkg__",
+		"eslint": "^8.7.0",
+		"typescript": "4.5.5"
 	}
 }

@@ -54,6 +54,20 @@ Then either add this to your `package.json`:
 }
 ```
 
+When using `@typescript-eslint/eslint-plugin` (you should 😉),
+you need to also add `@typescript-eslint/parser` to your dependencies and set the appropriate typescript configuration:
+```json
+{
+	"root": true,
+	"extends": "rasenplanscher",
+	"parserOptions": {
+		"ecmaVersion": 2021,
+		"project": "./tsconfig.json",
+		"sourceType": "module"
+	}
+}
+```
+
 If you want to relax or strengthen your setup, you can choose from these setups (from smallest to largest):
 +	`rasenplanscher/eslintrc.important`:
 	The really important rules that will actually prevent errors – Never go without these!
