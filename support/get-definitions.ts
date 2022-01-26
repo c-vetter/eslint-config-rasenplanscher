@@ -10,12 +10,13 @@ emptyDirSync(rulesDefinitions())
 const rulesArray = Array.from((new Linter).getRules().entries())
 
 plugins.forEach(
-	plugin =>
+	(plugin) => (
 		Object.entries(
 			// eslint-plugin-unused-imports changes the base rules
 			JSON.parse(JSON.stringify(require(plugin.id).rules)),
 		)
-		.forEach(([key, rule]) => rulesArray.push([plugin.namespace + key, rule as typeof rulesArray[number][1]])),
+		.forEach(([key, rule]) => rulesArray.push([plugin.namespace + key, rule as typeof rulesArray[number][1]]))
+	),
 )
 
 rulesArray

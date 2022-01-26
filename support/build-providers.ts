@@ -5,7 +5,7 @@ import { canRequire } from './canRequire'
 import { importable, src, support } from './paths'
 import { providers } from './providers'
 
-const exportsList = providers.map(p => `'${p.id}': ${canRequire.name}('${p.id}') && '${p.name}',`)
+const exportsList = providers.map((p) => `'${p.id}': ${canRequire.name}('${p.id}') && '${p.name}',`)
 const providersFile = src(`.providers.ts`)
 
 outputFile(

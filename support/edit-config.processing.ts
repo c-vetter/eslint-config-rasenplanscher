@@ -19,7 +19,7 @@ import { Mutable } from './utility'
 inquirer.registerPrompt(`autocomplete`, autocomplete)
 
 export function processRule (bundle:RuleBundle) {
-	return Promise.all(bundle.all.flatMap(item => [
+	return Promise.all(bundle.all.flatMap((item) => [
 		(
 			typeof item.rule.meta.docs?.url === `string`
 			? open(item.rule.meta.docs.url) as Promise<unknown>
@@ -27,16 +27,16 @@ export function processRule (bundle:RuleBundle) {
 		),
 		(
 			pathExists(item.typingFile)
-			.then(exists => (exists ? null : generateTypes(item, bundle)))
+			.then((exists) => (exists ? null : generateTypes(item, bundle)))
 		),
 		(
 			pathExists(item.configFile)
-			.then(exists => (exists ? null : generateConfig(item, bundle)))
+			.then((exists) => (exists ? null : generateConfig(item, bundle)))
 			.then(() => code(item.configFile))
 		),
 		(
 			pathExists(item.reasonFile)
-			.then(exists => (exists ? null : generateDoc(item, bundle)))
+			.then((exists) => (exists ? null : generateDoc(item, bundle)))
 			.then(() => code(item.reasonFile))
 		),
 	]))
@@ -74,7 +74,7 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 	] as const))
 	.then(([isBase, schema]) => (
 		parseSchema(schema, { name: optionsTypeToken })
-		.then(ast => [
+		.then((ast) => [
 			isBase,
 			ast,
 		] as const)
@@ -132,7 +132,7 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 			configTypeToken
 		}
 	`)
-	.then(types => outputFile(
+	.then((types) => outputFile(
 		item.typingFile,
 		types.replace(
 			`\n`.repeat(4),
@@ -265,7 +265,7 @@ function generateDoc (item:RuleData, bundle:RuleBundle) {
 	}
 
 	return Promise.resolve(item === bundle.base)
-	.then(base => outdent`
+	.then((base) => outdent`
 		[${item.rule.id}](${
 			item.rule.meta.docs!.url // !: checked at the start of `generateDoc`
 		})
@@ -280,7 +280,7 @@ function generateDoc (item:RuleData, bundle:RuleBundle) {
 			: `See [${bundle.base.rule.id}](${importable(bundle.base.reasonFile, item.reasonFile)})\n`
 		}
 	`)
-	.then(doc => outputFile(item.reasonFile, doc))
+	.then((doc) => outputFile(item.reasonFile, doc))
 }
 
 

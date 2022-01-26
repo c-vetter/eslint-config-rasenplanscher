@@ -1,12 +1,18 @@
 
+__test-results__/imports/__pkg__/eslintrc.make.js
+  975:24  error  'configuration$1' is already declared in the upper scope on line 923 column 7  no-shadow
+  999:9   error  'priority' is already declared in the upper scope on line 343 column 7         no-shadow
+
 __test-results__/imports/index.js
    3:1  error  'outdent' should be listed in the project's dependencies, not optionalDependencies        import/no-extraneous-dependencies
    4:1  error  'rimraf' should be listed in the project's dependencies. Run 'npm i -S rimraf' to add it  import/no-extraneous-dependencies
   13:1  error  'rimraf' should be listed in the project's dependencies. Run 'npm i -S rimraf' to add it  import/no-extraneous-dependencies
+  14:7  error  'rimraf' is already declared in the upper scope on line 4 column 8                        no-shadow
 
 __test-results__/imports/src/index.js
-  3:1  error  'eslint' should be listed in the project's dependencies, not devDependencies        import/no-extraneous-dependencies
-  4:1  error  'outdent' should be listed in the project's dependencies, not optionalDependencies  import/no-extraneous-dependencies
+   3:1  error  'eslint' should be listed in the project's dependencies, not devDependencies        import/no-extraneous-dependencies
+   4:1  error  'outdent' should be listed in the project's dependencies, not optionalDependencies  import/no-extraneous-dependencies
+  14:7  error  'ava' is already declared in the upper scope on line 1 column 8                     no-shadow
 
-Γ£û 5 problems (5 errors, 0 warnings)
+Γ£û 9 problems (9 errors, 0 warnings)
 

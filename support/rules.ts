@@ -28,8 +28,8 @@ function ruleData (rule:RuleDefinition) : RuleData {
 		typingFile,
 		reasonFile,
 		definitionFile,
-		exists: existence.some(exists=>exists),
-		complete: existence.every(exists=>exists),
+		exists: existence.some((exists)=>exists),
+		complete: existence.every((exists)=>exists),
 	}
 }
 
@@ -49,14 +49,13 @@ export function ruleToBundle (data:RuleData) {
 	})
 
 	const base = (
-		all.find(data => data.provider === eslint)
-		??
-		all[0]
+		all.find(({ provider }) => provider === eslint)
+		?? all[0]
 	)
 
 	return {
 		all,
 		base,
-		extend: all.filter(d => d !== base),
+		extend: all.filter((d) => d !== base),
 	}
 }

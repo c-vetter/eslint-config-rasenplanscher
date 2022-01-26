@@ -1,7 +1,7 @@
 {
 	"name": "default",
 	"scripts": {
-		"test": "eslint --fix index.ts *>&1 > eslint.log"
+		"test": "eslint --fix *.ts *>&1 > eslint.log"
 	},
 	"eslintConfig": {
 		"root": true,

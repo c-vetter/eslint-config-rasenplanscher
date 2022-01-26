@@ -1,8 +1,17 @@
 
+__test-results__/plugin/assertions.ts
+   3:7   error  'foox' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   4:7   error  'fooy' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   5:7   error  'fooz' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   7:7   error  'fooa' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   8:7   error  'foob' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  11:7   error  'bar' is assigned a value but never used   @typescript-eslint/no-unused-vars
+  13:10  error  'foo' is defined but never used            @typescript-eslint/no-unused-vars
+
 __test-results__/plugin/index.ts
    1:16  error  Unexpected whitespace between function name and paren       @typescript-eslint/func-call-spacing
    3:1   error  Unexpected newline between function and ( of function call  no-unexpected-multiline
   12:10  error  'tryMe' is defined but never used                           @typescript-eslint/no-unused-vars
 
-Γ£û 3 problems (3 errors, 0 warnings)
+Γ£û 10 problems (10 errors, 0 warnings)
 

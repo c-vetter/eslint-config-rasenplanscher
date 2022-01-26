@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve as resolvePath } from 'path'
 import { spawn } from 'child_process'
 
 import test, { ExecutionContext } from 'ava'
@@ -14,7 +14,7 @@ const tmp = process.env.TMP ?? process.env.TEMP ?? `/tmp`
 const testResults = `__test-results__`
 
 // d* = path helper, “directory”, multiple `d`s for intermediate directory levels
-const dTests = (...segments:Array<string>) => resolve(__dirname, ...segments)
+const dTests = (...segments:Array<string>) => resolvePath(__dirname, ...segments)
 const dRepo = (...segments:Array<string>) => dTests(`..`, ...segments)
 const dPackage = (...segments: Array<string>): string => dRepo(`__pkg__`, ...segments)
 const dddTest = (
@@ -26,7 +26,7 @@ const dddTest = (
 const ddTmp = (
 	(scenario:string) =>
 	(...segments:Array<string>) => // eslint-disable-line @typescript-eslint/indent
-	resolve(tmp, `__eslint-config-rasenplanscher__tests__`, scenario, ...segments) // eslint-disable-line @typescript-eslint/indent
+	resolvePath(tmp, `__eslint-config-rasenplanscher__tests__`, scenario, ...segments) // eslint-disable-line @typescript-eslint/indent
 )
 
 //
@@ -49,25 +49,25 @@ emptyDir(dPackage())
 			`package-lock.json`,
 			...files,
 		]
-		.map(file => copy(dRepo(file), dPackage(file))),
+		.map((file) => copy(dRepo(file), dPackage(file))),
 	)
 ))
 // .then(() => npm(`install`, dPackage(), `--production`))
 .then(() => readdir(dTests(), { withFileTypes: true }))
-.then(entries => {
+.then((entries) => {
 	spinner.text = `preparing scenarios`
 	return entries
 })
-.then(entries => Promise.all(
+.then((entries) => Promise.all(
 	entries
-	.filter(entry => entry.isDirectory())
-	.map(dir => prepare(dir.name)),
+	.filter((entry) => entry.isDirectory())
+	.map((dir) => prepare(dir.name)),
 ))
-.then(scenarios => {
+.then((scenarios) => {
 	spinner.text = `running scenarios`
 
 	const resultView = dRepo(testResults)
-	pathExists(resultView).then(exists => {
+	pathExists(resultView).then((exists) => {
 		if (exists) return
 
 		symlink(ddTmp(`.`)(), resultView, `junction`)
@@ -75,11 +75,11 @@ emptyDir(dPackage())
 
 	return scenarios
 })
-.then(scenarios => Promise.all(
-	scenarios.map(s => new Promise<void>(
+.then((scenarios) => Promise.all(
+	scenarios.map((s) => new Promise<void>(
 		(resolve, reject) => test(
 			`scenario: ${s.name}`,
-			async t => {
+			async (t) => {
 				await npm(
 					`test`,
 					s.dResult(),
@@ -133,19 +133,19 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 		}),
 		readdirp.promise(dControl()),
 	])
-	.then(entries => entries.map(entry => entry.map(({ path }) => path)))
+	.then((entries) => entries.map((entry) => entry.map(({ path }) => path)))
 	.then(([ result, control ]) => {
 		// all expected files are there
-		control.forEach(p => t.true(result.includes(p), `missing file ${p}`))
+		control.forEach((p) => t.true(result.includes(p), `missing file ${p}`))
 
 		// no unexpected files
-		result.forEach(p => t.true(control.includes(p), `unexpected file ${p}`))
+		result.forEach((p) => t.true(control.includes(p), `unexpected file ${p}`))
 
 		return result
 	})
-	.then(commonPaths => Promise.all(
+	.then((commonPaths) => Promise.all(
 		commonPaths
-		.map(p => (
+		.map((p) => (
 			Promise.all([
 				readFile(dResult(p)),
 				readFile(dControl(p)),
@@ -184,7 +184,7 @@ function npm (cmd:string, cwd:string, ...args:Array<string>) {
 			{ cwd },
 		)
 
-		runner.on(`error`, error => reject(error))
+		runner.on(`error`, (error) => reject(error))
 
 		runner.on(`exit`, (code, signal) => resolve({
 			code,

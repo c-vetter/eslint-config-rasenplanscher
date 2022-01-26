@@ -49,7 +49,7 @@ export function randomNew () {
 
 
 function selectProvider () {
-	const providerAnswers = providers.map(provider => ({
+	const providerAnswers = providers.map((provider) => ({
 		name: provider.name,
 		value: provider,
 	}))
@@ -72,7 +72,7 @@ function selectProvider () {
 }
 function selectRule (filteredRules:RuleData[]) {
 	const ruleAnswers = filteredRules
-	.map(data => ({
+	.map((data) => ({
 		name: data.rule.key,
 		value: data,
 	}))

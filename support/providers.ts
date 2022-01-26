@@ -15,28 +15,29 @@ export type EslintPlugin = {
 }
 export type EslintProvider = Eslint | EslintPlugin
 
-export const plugins: EslintPlugin[] =
-Object.keys(readJsonSync(root(`package.json`)).devDependencies)
-.filter(d => d.includes(`eslint-plugin`))
-.map(id => ({
-	id,
-	name: (
-		/(?:(@[^\/]+)\/)?eslint-plugin(?:-(.+))?/
-		.exec(id)! // previous filter ensures that this is non-null
-		.slice(1)
-		.filter(n=>n)
-		.join(`/`)
-	),
-}))
-.map(p => ({
-	...p,
-	namespace: p.name + `/`,
-}))
+export const plugins: EslintPlugin[] = (
+	Object.keys(readJsonSync(root(`package.json`)).devDependencies)
+	.filter((d) => d.includes(`eslint-plugin`))
+	.map((id) => ({
+		id,
+		name: (
+			/(?:(@[^\/]+)\/)?eslint-plugin(?:-(.+))?/
+			.exec(id)! // previous filter ensures that this is non-null
+			.slice(1)
+			.filter((n)=>n)
+			.join(`/`)
+		),
+	}))
+	.map((p) => ({
+		...p,
+		namespace: p.name + `/`,
+	}))
+)
 
 export const providers: EslintProvider[] = [ eslint, ...plugins ]
 
 export function parse (ruleId:string) {
-	const provider = plugins.find(p => ruleId.startsWith(p.namespace))
+	const provider = plugins.find((p) => ruleId.startsWith(p.namespace))
 
 	if (!provider) {
 		return {

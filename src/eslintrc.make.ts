@@ -27,13 +27,13 @@ type Options = {
 
 //
 
-export default function makeEslintrc (options:Options) : Linter.Config
+export default function makeEslintrc (configuration:Options) : Linter.Config
 export default function makeEslintrc (...priorities:Priority[]) : Linter.Config
-export default function makeEslintrc (options: Options | Priority, ...morePriorities:Priority[]) : Linter.Config {
-	if (typeof options === `string`) {
+export default function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Priority[]) : Linter.Config {
+	if (typeof configuration === `string`) {
 		return makeEslintrc({
 			priorities: [
-				options,
+				configuration,
 				...morePriorities,
 			],
 		})
@@ -43,22 +43,22 @@ export default function makeEslintrc (options: Options | Priority, ...morePriori
 		priorities,
 		dangerzone,
 		overrides,
-	} = options
+	} = configuration
 
-	const availableConfigurations = rulesConfigurations.filter(config => providers[config.providerId])
+	const availableConfigurations = rulesConfigurations.filter((config) => providers[config.providerId])
 	if (
 		availableConfigurations.includes(unusedImports_noUnusedVars)
-		&&
-		availableConfigurations.includes(typescript_noUnusedVars)
+		&& availableConfigurations.includes(typescript_noUnusedVars)
 	) {
 		availableConfigurations.splice(availableConfigurations.indexOf(typescript_noUnusedVars), 1)
 	}
 
 	const overrideConfigurations:RuleConfigurationOverride[] = availableConfigurations.filter(
-		(c) : c is RuleConfigurationOverride & Configuration =>
-			Boolean((c as RuleConfigurationOverride).base),
+		(c) : c is RuleConfigurationOverride & Configuration => (
+			Boolean((c as RuleConfigurationOverride).base)
+		),
 	)
-	const overriddenConfigurations = overrideConfigurations.map(o => o.base)
+	const overriddenConfigurations = overrideConfigurations.map((o) => o.base)
 
 	const usableConfigurations = (
 		availableConfigurations
@@ -160,7 +160,7 @@ export default function makeEslintrc (options: Options | Priority, ...morePriori
 			RuleConfiguration<R, P>,
 			RuleConfigurationIgnored
 		> => !(config as RuleConfigurationIgnored | RuleConfigurationSet).ignore)
-		.filter(config => priorities.includes(config.priority))
+		.filter((config) => priorities.includes(config.priority))
 		.map(
 			(config) => ({
 				plugin: providers[config.providerId] as Exclude<
@@ -174,8 +174,7 @@ export default function makeEslintrc (options: Options | Priority, ...morePriori
 						...(
 							Array.isArray(config.optionsDangerzone) && (
 								dangerzone === true
-								||
-								(Array.isArray(dangerzone) ? dangerzone : []).includes(config.ruleId)
+								|| (Array.isArray(dangerzone) ? dangerzone : []).includes(config.ruleId)
 							)
 							? config.optionsDangerzone
 							: config.options
@@ -192,20 +191,19 @@ export default function makeEslintrc (options: Options | Priority, ...morePriori
 		...overrides,
 		...(
 			overrides?.parser === undefined
-			&&
-			canRequire(`@typescript-eslint/parser`)
+			&& canRequire(`@typescript-eslint/parser`)
 			? { parser: `@typescript-eslint/parser` }
 			: {}
 		),
 		plugins: ([
 			...usableConfigurations
-			.map(c => c.plugin)
+			.map((c) => c.plugin)
 			.filter((p) : p is Exclude<typeof p, 'eslint'> => p !== `eslint`),
 			...(overrides?.plugins || []),
 		]),
 		rules: Object.assign(
 			{},
-			...usableConfigurations.map(c => c.rule),
+			...usableConfigurations.map((c) => c.rule),
 			overrides?.rules,
 		),
 	}

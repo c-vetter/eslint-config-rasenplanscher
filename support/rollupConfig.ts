@@ -3,7 +3,7 @@ import { readJsonSync } from 'fs-extra'
 
 import { root, transpiled } from './paths'
 
-const rc = (suffix?:string) => `eslintrc${suffix ? `.${suffix}` : ``}.js`
+const rc = (suffix:string) => `eslintrc${suffix ? `.${suffix}` : ``}.js`
 
 const eslintrc = (suffix = ``) => ({
 	input: transpiled(rc(suffix)),
