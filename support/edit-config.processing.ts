@@ -12,24 +12,16 @@ import { outdent } from 'outdent'
 
 import { importable, support } from './paths'
 import priorities, { IMPORTANT, HELPFUL, TASTE, Priority } from './priorities'
-import { RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOff, RuleConfigurationOptions, RuleConfigurationSet, RuleData } from './Rule'
+import { RuleBundle, RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOff, RuleConfigurationOptions, RuleConfigurationSet, RuleData } from './Rule'
 import { Mutable } from './utility'
 
 
 inquirer.registerPrompt(`autocomplete`, autocomplete)
 
-
-type RuledataBundle = {
-	base: RuleData
-	extend: RuleData[]
-	all: RuleData[]
-}
-
-
-export function processRule (bundle:RuledataBundle) {
+export function processRule (bundle:RuleBundle) {
 	return Promise.all(bundle.all.flatMap(item => [
 		(
-			item.rule.meta.docs?.url
+			typeof item.rule.meta.docs?.url === `string`
 			? open(item.rule.meta.docs.url) as Promise<unknown>
 			: Promise.reject(`No documentation url found for rule ${item.rule.id}`)
 		),
@@ -63,39 +55,39 @@ const baseTypeTokenExtender = `RuleConfigurationOverride`
 const extendedTypeToken = `BaseConfiguration`
 const optionsTypeToken = `Options`
 
-type Unpromise<T> = T extends PromiseLike<infer Q> ? Q : T
-
-function generateTypes (item:RuleData, bundle:RuledataBundle) {
-	return Promise.resolve(
-		item === bundle.base
-		&&
+export function generateTypes (item:RuleData, bundle:RuleBundle) {
+	return Promise.resolve([
+		item === bundle.base,
 		item.rule.meta.schema as (
 			Mutable<
 				Exclude<typeof item.rule.meta.schema, undefined>
 			>
 		),
-	)
-	.then(schema => (
-		Array.isArray(schema)
-		? wrapped(schema)
-		: schema
+	] as const)
+	.then(([isBase, schema]) => ([
+		isBase,
+		(
+			Array.isArray(schema)
+			? wrapped(schema)
+			: schema
+		),
+	] as const))
+	.then(([isBase, schema]) => (
+		parseSchema(schema, { name: optionsTypeToken })
+		.then(ast => [
+			isBase,
+			ast,
+		] as const)
 	))
-	.then<false | Unpromise<ReturnType<typeof parseSchema>>>(schema => schema && parseSchema(schema, { name: optionsTypeToken }))
-	.then(ast => ast && printer.printNodes(ast))
-	.then(types => outdent`
-		import { ${types ? baseTypeToken : baseTypeTokenExtender } } from '${
+	.then(([isBase, ast]) => [isBase, printer.printNodes(ast)] as const)
+	.then(([isBase, types]) => outdent`
+		import { ${isBase ? baseTypeToken : baseTypeTokenExtender } } from '${
 			importable(support(`Rule`), item.typingFile)
 		}'
 
 		${
-			types
-			? (
-				types
-				.replace(/;$/gm, ``)
-				.replace(/(?<=(?:^|\n)(    )*)    /g, `\t`)
-				.replace(/^export /, ``)
-				.replace(/\(\)\[\]$/, `never[]`)
-			)
+			isBase
+			? ``
 			: outdent`
 				import ${extendedTypeToken} from '${
 					importable(bundle.base.typingFile, item.typingFile)
@@ -103,8 +95,16 @@ function generateTypes (item:RuleData, bundle:RuledataBundle) {
 			`
 		}
 
-		type ${configTypeToken} = ${
+		${
 			types
+			.replace(/;$/gm, ``)
+			.replace(/(?<=(?:^|\n)(    )*)    /g, `\t`)
+			.replace(/^export /, ``)
+			.replace(/\(\)\[\]$/, `never[]`)
+		}
+
+		type ${configTypeToken} = ${
+			isBase
 			? outdent`
 				${baseTypeToken}<'${
 					item.rule.id
@@ -121,7 +121,9 @@ function generateTypes (item:RuleData, bundle:RuledataBundle) {
 					item.rule.id
 				}', '${
 					item.provider.id
-				}'>
+				}', ${
+					optionsTypeToken
+				}>
 			`
 		}
 
@@ -130,7 +132,13 @@ function generateTypes (item:RuleData, bundle:RuledataBundle) {
 			configTypeToken
 		}
 	`)
-	.then(types => outputFile(item.typingFile, types))
+	.then(types => outputFile(
+		item.typingFile,
+		types.replace(
+			`\n`.repeat(4),
+			`\n`.repeat(2),
+		),
+	))
 
 	function wrapped (schema:JSONSchema[]) : JSONSchema {
 		return {
@@ -142,7 +150,7 @@ function generateTypes (item:RuleData, bundle:RuledataBundle) {
 	}
 }
 
-function generateConfig (item:RuleData, bundle:RuledataBundle) {
+function generateConfig (item:RuleData, bundle:RuleBundle) {
 	if (item !== bundle.base) {
 		return outputFile(
 			item.configFile,
@@ -153,7 +161,7 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 				${
 					coreExport({ [extendedConfigKey]: extendedConfigToken })
 					.replace(
-						`${extendedConfigKey}: '${extendedConfigToken}',`,
+						`${extendedConfigKey}: \`${extendedConfigToken}\`,`,
 						`${extendedConfigKey}: ${extendedConfigToken},`,
 					)
 				}
@@ -190,13 +198,14 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 
 					// some rules lack a meta.type and a meta.docs.category, specifically in plugin react
 					default: HELPFUL,
-				} as const)[ // eslint-disable-next-line @typescript-eslint/indent
+				} as const)[ // eslint-disable-next-line @typescript-eslint/indent -- https://github.com/typescript-eslint/typescript-eslint/issues/1824
 					item.rule.meta.type
 					|| (
 						item.rule.meta.docs?.category as (
 							| 'Possible Errors'
 							| 'Best Practices'
 							| 'Stylistic Issues'
+							| undefined
 						)
 					)
 					|| `default`
@@ -250,8 +259,8 @@ function generateConfig (item:RuleData, bundle:RuledataBundle) {
 	}
 }
 
-function generateDoc (item:RuleData, bundle:RuledataBundle) {
-	if (!item.rule.meta.docs?.url) {
+function generateDoc (item:RuleData, bundle:RuleBundle) {
+	if (item.rule.meta.docs?.url === undefined || item.rule.meta.docs.url === ``) {
 		return Promise.reject(`No documentation url found for rule ${item.rule.id}`)
 	}
 

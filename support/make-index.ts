@@ -37,12 +37,12 @@ function buildIndex (scope:PathBuilder, ...directory:string[]) {
 	])
 	.then(([directories, files]) => ([
 		[
-			...directories,
-			...files,
-		].map(entry => `import ${varName(entry)} from './${clippedName(entry)}'`),
+			...directories.map(importStatement(dirName)),
+			...files.map(importStatement(fileName)),
+		],
 		[
-			...directories.map(entry => `...${varName(entry)}`),
-			...files.map(entry => varName(entry)),
+			...directories.map(entry => `...${dirName(entry)}`),
+			...files.map(entry => fileName(entry)),
 		],
 	]))
 	.then(([importsList, exportsList]) =>
@@ -58,7 +58,13 @@ function buildIndex (scope:PathBuilder, ...directory:string[]) {
 	)
 }
 
-function varName (entry:Dirent) {
+function importStatement (varName: (entry: Dirent) => string) {
+	return (entry:Dirent) =>`import ${varName(entry)} from './${clippedName(entry)}'`
+}
+function dirName (entry:Dirent) {
+	return `__${camelCase(clippedName(entry))}__`
+}
+function fileName (entry:Dirent) {
 	return `_${camelCase(clippedName(entry))}_`
 }
 function clippedName (entry:Dirent) {

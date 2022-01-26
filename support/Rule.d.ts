@@ -42,6 +42,13 @@ export type RuleData = {
 }
 
 
+export type RuleBundle = {
+	base: RuleData
+	extend: RuleData[]
+	all: RuleData[]
+}
+
+
 type RuleConfigurationBase<R extends string = string, P extends string = string> = {
 	ruleId: R
 	providerId: P
@@ -87,7 +94,15 @@ export type RuleConfigurationOverride<
 	B extends RuleConfiguration = RuleConfiguration,
 	R extends string = string,
 	P extends string = string,
+	O extends unknown[] = unknown[],
 > = (
 	& RuleConfigurationBase<R, P>
-	& { base: B }
+	& {
+		base: B
+		ignore?: true
+		priority?: Priority
+		activate?: boolean
+		options?: O
+		optionsDangerzone?: O
+	}
 )

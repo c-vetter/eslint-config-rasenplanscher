@@ -26,6 +26,7 @@
 		"edit:cleanup": "eslint --report-unused-disable-directives --fix src/rules-configurations/**/*.ts",
 		"start": "run-s edit build start:cleanup test",
 		"start:cleanup": "eslint --report-unused-disable-directives --fix src/*.ts support/*.ts __tests__/tests.ts",
+		"update-types": "ts-node support/update-types.ts",
 		"test": "ava __tests__/tests.ts",
 		"prepublishOnly": "run-s build test"
 	},

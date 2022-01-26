@@ -2,7 +2,7 @@ import { readJsonSync } from 'fs-extra'
 
 import { root } from './paths'
 
-const eslint = {
+export const eslint = {
 	id: `eslint`,
 	name: `eslint`,
 } as const
@@ -20,7 +20,7 @@ Object.keys(readJsonSync(root(`package.json`)).devDependencies)
 .filter(d => d.includes(`eslint-plugin`))
 .map(id => ({
 	id,
-	namespace: (
+	name: (
 		/(?:(@[^\/]+)\/)?eslint-plugin(?:-(.+))?/
 		.exec(id)! // previous filter ensures that this is non-null
 		.slice(1)
@@ -30,19 +30,27 @@ Object.keys(readJsonSync(root(`package.json`)).devDependencies)
 }))
 .map(p => ({
 	...p,
-	name: p.namespace,
+	namespace: p.name + `/`,
 }))
 
 export const providers: EslintProvider[] = [ eslint, ...plugins ]
 
+export function parse (ruleId:string) {
+	const provider = plugins.find(p => ruleId.startsWith(p.namespace))
 
-export function providerFor (ruleId:string) {
-	if (!ruleId.includes(`/`)) return eslint
+	if (!provider) {
+		return {
+			id: ruleId,
+			key: ruleId,
+			provider: eslint,
+		}
+	}
 
-	const namespace = ruleId.split(`/`)[0]
-	const provider = plugins.find(p => p.namespace === namespace)
+	const key = ruleId.replace(provider.namespace, ``)
 
-	if (!provider) throw new Error(`No provider found for rule ${ruleId}`)
-
-	return provider
+	return {
+		id: ruleId,
+		key,
+		provider,
+	}
 }

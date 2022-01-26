@@ -20,6 +20,9 @@ const configuration:Configuration = {
 				parameters: 1,
 				body: 1,
 			},
+			StaticBlock: {
+				body: 1,
+			},
 			CallExpression: {
 				arguments: 1,
 			},

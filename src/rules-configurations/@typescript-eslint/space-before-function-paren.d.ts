@@ -2,6 +2,12 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/space-before-function-paren.d'
 
-type Configuration = RuleConfigurationOverride<BaseConfiguration, '@typescript-eslint/space-before-function-paren', '@typescript-eslint/eslint-plugin'>
+type Options = ((("always" | "never") | {
+	anonymous?: "always" | "never" | "ignore"
+	named?: "always" | "never" | "ignore"
+	asyncArrow?: "always" | "never" | "ignore"
+}))[]
+
+type Configuration = RuleConfigurationOverride<BaseConfiguration, '@typescript-eslint/space-before-function-paren', '@typescript-eslint/eslint-plugin', Options>
 
 export default Configuration

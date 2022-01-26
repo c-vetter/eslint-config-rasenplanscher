@@ -3,7 +3,7 @@ import { Linter } from 'eslint'
 import rulesConfigurations from './rules-configurations'
 import { providers } from './.providers'
 import { Priority } from './priorities'
-import { RuleConfiguration, RuleConfigurationBase, RuleConfigurationIgnored, RuleConfigurationOverride } from '../support/Rule'
+import { RuleConfiguration, RuleConfigurationBase, RuleConfigurationIgnored, RuleConfigurationOptions, RuleConfigurationOverride, RuleConfigurationSet } from '../support/Rule'
 import { canRequire } from '../support/canRequire'
 
 import typescript_noUnusedVars from './rules-configurations/@typescript-eslint/no-unused-vars'
@@ -86,12 +86,69 @@ export default function makeEslintrc (options: Options | Priority, ...morePriori
 
 			const {
 				base,
-				...overrides
+
+				ruleId,
+				providerId,
+				ignore,
+				activate,
 			} = config
 
+			const priority = config.priority ?? (base as RuleConfigurationSet).priority
+			const options = config.options ?? (base as RuleConfigurationOptions).options
+			const optionsDangerzone = config.optionsDangerzone ?? (base as RuleConfigurationOptions).optionsDangerzone
+
+			if (ignore === true) {
+				return {
+					ruleId,
+					providerId,
+					ignore,
+				}
+			}
+
+			if (activate === false) {
+				return {
+					ruleId,
+					providerId,
+					priority,
+					activate,
+				}
+			}
+
+			if (activate === true) {
+				return {
+					ruleId,
+					providerId,
+					priority,
+					activate,
+					options,
+					optionsDangerzone,
+				}
+			}
+
+			if (base.ignore === true) {
+				return {
+					ruleId,
+					providerId,
+					ignore: base.ignore,
+				}
+			}
+
+			if (!base.activate) {
+				return {
+					ruleId,
+					providerId,
+					priority,
+					activate: base.activate,
+				}
+			}
+
 			return {
-				...base,
-				...overrides,
+				ruleId,
+				providerId,
+				priority,
+				activate: base.activate,
+				options,
+				optionsDangerzone,
 			}
 		})
 		.filter(<
@@ -102,9 +159,7 @@ export default function makeEslintrc (options: Options | Priority, ...morePriori
 		) : config is Exclude<
 			RuleConfiguration<R, P>,
 			RuleConfigurationIgnored
-		> => {
-			return !Boolean((config as RuleConfigurationIgnored).ignore)
-		})
+		> => !(config as RuleConfigurationIgnored | RuleConfigurationSet).ignore)
 		.filter(config => priorities.includes(config.priority))
 		.map(
 			(config) => ({
@@ -117,10 +172,10 @@ export default function makeEslintrc (options: Options | Priority, ...morePriori
 					? [
 						`error`,
 						...(
-							config.optionsDangerzone && (
+							Array.isArray(config.optionsDangerzone) && (
 								dangerzone === true
 								||
-								(dangerzone || []).includes(config.ruleId)
+								(Array.isArray(dangerzone) ? dangerzone : []).includes(config.ruleId)
 							)
 							? config.optionsDangerzone
 							: config.options
@@ -136,7 +191,9 @@ export default function makeEslintrc (options: Options | Priority, ...morePriori
 	return {
 		...overrides,
 		...(
-			(!overrides?.parser) && canRequire(`@typescript-eslint/parser`)
+			overrides?.parser === undefined
+			&&
+			canRequire(`@typescript-eslint/parser`)
 			? { parser: `@typescript-eslint/parser` }
 			: {}
 		),

@@ -5,6 +5,7 @@ import _consistentTypeDefinitions_ from './consistent-type-definitions'
 import _funcCallSpacing_ from './func-call-spacing'
 import _indent_ from './indent'
 import _keywordSpacing_ from './keyword-spacing'
+import _linesBetweenClassMembers_ from './lines-between-class-members'
 import _noUnnecessaryBooleanLiteralCompare_ from './no-unnecessary-boolean-literal-compare'
 import _noUnnecessaryCondition_ from './no-unnecessary-condition'
 import _noUnnecessaryQualifier_ from './no-unnecessary-qualifier'
@@ -25,6 +26,7 @@ export default [
 	_funcCallSpacing_,
 	_indent_,
 	_keywordSpacing_,
+	_linesBetweenClassMembers_,
 	_noUnnecessaryBooleanLiteralCompare_,
 	_noUnnecessaryCondition_,
 	_noUnnecessaryQualifier_,
