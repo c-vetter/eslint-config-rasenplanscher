@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/no-shadow.d'
 
-type Options = ({
+export type Options = ({
 	builtinGlobals?: boolean
 	hoist?: "all" | "functions" | "never"
 	allow?: string[]

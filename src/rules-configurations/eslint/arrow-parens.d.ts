@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("always" | "as-needed") | {
+export type Options = (("always" | "as-needed") | {
 	requireForBlockBody?: boolean
 })[]
 

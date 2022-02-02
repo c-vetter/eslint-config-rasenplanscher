@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/comma-spacing.d'
 
-type Options = ({
+export type Options = ({
 	before?: boolean
 	after?: boolean
 })[]

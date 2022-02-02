@@ -5,6 +5,8 @@
 		"moduleResolution": "node",
 		"strict": true,
 		"outDir": "./.transpiled",
+		"noUncheckedIndexedAccess": true,
+		"noPropertyAccessFromIndexSignature": true,
 	},
 	"include": [ "./" ],
 }

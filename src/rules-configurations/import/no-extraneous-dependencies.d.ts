@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = ({
+export type Options = ({
 	devDependencies?: boolean | any
 	optionalDependencies?: boolean | any
 	peerDependencies?: boolean | any

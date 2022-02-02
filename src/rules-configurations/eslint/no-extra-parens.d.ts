@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("functions"))[] | (("all") | {
+export type Options = (("functions"))[] | (("all") | {
 	conditionalAssign?: boolean
 	nestedBinaryExpressions?: boolean
 	returnAssign?: boolean

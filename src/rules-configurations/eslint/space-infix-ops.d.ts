@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = ({
+export type Options = ({
 	int32Hint?: boolean
 })[]
 

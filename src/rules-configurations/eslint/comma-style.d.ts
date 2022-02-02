@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("first" | "last") | {
+export type Options = (("first" | "last") | {
 	exceptions?: {
 		[key: string]: boolean
 	}

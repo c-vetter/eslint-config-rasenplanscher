@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("1tbs" | "stroustrup" | "allman") | {
+export type Options = (("1tbs" | "stroustrup" | "allman") | {
 	allowSingleLine?: boolean
 })[]
 

@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/indent.d'
 
-type Options = ((("tab") | number) | {
+export type Options = ((("tab") | number) | {
 	SwitchCase?: number
 	VariableDeclarator?: (number | ("first" | "off")) | {
 		"var"?: number | ("first" | "off")

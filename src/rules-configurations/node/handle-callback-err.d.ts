@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (string)[]
+export type Options = (string)[]
 
 type Configuration = RuleConfiguration<'node/handle-callback-err', 'eslint-plugin-node', Options>
 

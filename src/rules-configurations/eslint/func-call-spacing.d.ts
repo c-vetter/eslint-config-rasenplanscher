@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("never"))[] | (("always") | {
+export type Options = (("never"))[] | (("always") | {
 	allowNewlines?: boolean
 })[]
 

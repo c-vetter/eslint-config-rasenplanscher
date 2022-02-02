@@ -15,6 +15,7 @@ export function select () {
 	.then(selectRule)
 	.then(dispatch)
 }
+
 export function selectNew () {
 	return selectProvider()
 	.then(newRules)
@@ -27,6 +28,7 @@ export function scoped () {
 	.then(randomRule)
 	.then(dispatch)
 }
+
 export function scopedNew () {
 	return selectProvider()
 	.then(newRules)
@@ -38,10 +40,12 @@ export function random () {
 	return randomRule()
 	.then(dispatch)
 }
+
 export function randomIncomplete () {
 	return randomRule(incompleteRules(rules))
 	.then(dispatch)
 }
+
 export function randomNew () {
 	return randomRule(newRules(rules))
 	.then(dispatch)
@@ -62,6 +66,7 @@ function selectProvider () {
 				message: `Provider:`,
 				async source (_:never, input:string = ``) {
 					if (!input) return providerAnswers
+
 					return providerAnswers.filter(({ name }) => name.includes(input))
 				},
 			},
@@ -70,6 +75,7 @@ function selectProvider () {
 		.then(rulesForProvider)
 	)
 }
+
 function selectRule (filteredRules:RuleData[]) {
 	const ruleAnswers = filteredRules
 	.map((data) => ({
@@ -85,6 +91,7 @@ function selectRule (filteredRules:RuleData[]) {
 				message: `Rule:`,
 				async source (_:never, input:string = ``) {
 					if (!input) return ruleAnswers
+
 					return ruleAnswers.filter(({ name }) => name.includes(input))
 				},
 			},
@@ -94,7 +101,9 @@ function selectRule (filteredRules:RuleData[]) {
 }
 
 async function randomRule (options = rules) {
-	return options[Math.floor(options.length * Math.random())]
+	if (options.length === 0) throw new Error(`no more rules left`)
+
+	return options[Math.floor(options.length * Math.random())]!
 }
 
 

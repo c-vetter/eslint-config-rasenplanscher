@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/brace-style.d'
 
-type Options = (("1tbs" | "stroustrup" | "allman") | {
+export type Options = (("1tbs" | "stroustrup" | "allman") | {
 	allowSingleLine?: boolean
 })[]
 

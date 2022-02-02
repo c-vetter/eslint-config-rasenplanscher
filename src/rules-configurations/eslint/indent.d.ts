@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = ((("tab") | number) | {
+export type Options = ((("tab") | number) | {
 	SwitchCase?: number
 	VariableDeclarator?: (number | ("first" | "off")) | {
 		"var"?: number | ("first" | "off")

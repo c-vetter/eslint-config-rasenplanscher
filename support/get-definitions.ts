@@ -7,7 +7,7 @@ import { plugins, parse } from "./providers"
 
 emptyDirSync(rulesDefinitions())
 
-const rulesArray = Array.from((new Linter).getRules().entries())
+const rulesArray = Array.from((new Linter()).getRules().entries())
 
 plugins.forEach(
 	(plugin) => (

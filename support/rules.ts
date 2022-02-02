@@ -8,6 +8,7 @@ export const rules = allRules.map(ruleData)
 
 function ruleData (rule:RuleDefinition) : RuleData {
 	const provider = providers.find(({ id }) => id === rule.providerId)
+
 	if (!provider) throw new Error(`No provider found for rule ${rule.id}`)
 
 	const configFile = rulesConfigurations(provider.name, `${rule.key}.ts`)
@@ -51,7 +52,7 @@ export function ruleToBundle (data:RuleData) {
 	const base = (
 		all.find(({ provider }) => provider === eslint)
 		?? all[0]
-	)
+	)! // at least `data` itself will always be in `all`
 
 	return {
 		all,

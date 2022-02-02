@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/no-unused-vars.d'
 
-type Options = ((("all" | "local") | {
+export type Options = ((("all" | "local") | {
 	vars?: "all" | "local"
 	varsIgnorePattern?: string
 	args?: "all" | "after-used" | "none"

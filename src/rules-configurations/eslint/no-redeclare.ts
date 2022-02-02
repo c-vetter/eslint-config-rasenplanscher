@@ -1,6 +1,6 @@
-import Configuration from './no-redeclare.d'
+import Configuration, { Options } from './no-redeclare.d'
 
-export const optionsObject = {
+export const optionsObject : Options[number] = {
 	builtinGlobals: true,
 }
 

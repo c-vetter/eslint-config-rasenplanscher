@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("after" | "before" | "none" | "null") | {
+export type Options = (("after" | "before" | "none" | "null") | {
 	overrides?: {
 		[key: string]: "after" | "before" | "none" | "ignore"
 	}

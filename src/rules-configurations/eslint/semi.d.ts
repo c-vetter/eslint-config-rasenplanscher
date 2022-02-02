@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("never") | {
+export type Options = (("never") | {
 	beforeStatementContinuationChars?: "always" | "any" | "never"
 })[] | (("always") | {
 	omitLastInOneLineBlock?: boolean

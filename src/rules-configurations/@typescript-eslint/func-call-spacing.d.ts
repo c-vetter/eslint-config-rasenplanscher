@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/func-call-spacing.d'
 
-type Options = (("never"))[] | (("always") | {
+export type Options = (("never"))[] | (("always") | {
 	allowNewlines?: boolean
 })[]
 

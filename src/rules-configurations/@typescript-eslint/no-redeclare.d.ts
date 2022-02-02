@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/no-redeclare.d'
 
-type Options = ({
+export type Options = ({
 	builtinGlobals?: boolean
 	ignoreDeclarationMerge?: boolean
 })[]

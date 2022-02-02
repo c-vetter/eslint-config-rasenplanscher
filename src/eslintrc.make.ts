@@ -29,6 +29,7 @@ type Options = {
 
 export default function makeEslintrc (configuration:Options) : Linter.Config
 export default function makeEslintrc (...priorities:Priority[]) : Linter.Config
+
 export default function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Priority[]) : Linter.Config {
 	if (typeof configuration === `string`) {
 		return makeEslintrc({
@@ -46,6 +47,7 @@ export default function makeEslintrc (configuration:(Options | Priority), ...mor
 	} = configuration
 
 	const availableConfigurations = rulesConfigurations.filter((config) => providers[config.providerId])
+
 	if (
 		availableConfigurations.includes(unusedImports_noUnusedVars)
 		&& availableConfigurations.includes(typescript_noUnusedVars)
@@ -58,6 +60,7 @@ export default function makeEslintrc (configuration:(Options | Priority), ...mor
 			Boolean((c as RuleConfigurationOverride).base)
 		),
 	)
+
 	const overriddenConfigurations = overrideConfigurations.map((o) => o.base)
 
 	const usableConfigurations = (

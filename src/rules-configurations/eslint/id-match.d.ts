@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (string | {
+export type Options = (string | {
 	properties?: boolean
 	classFields?: boolean
 	onlyDeclarations?: boolean

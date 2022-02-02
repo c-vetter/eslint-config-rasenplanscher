@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("last" | "first"))[]
+export type Options = (("last" | "first"))[]
 
 type Configuration = RuleConfiguration<'semi-style', 'eslint', Options>
 

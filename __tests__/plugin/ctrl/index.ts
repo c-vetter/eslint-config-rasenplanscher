@@ -2,10 +2,13 @@ const data = { }
 
 (() => {
 	let n = 0
+
 	data.increment = () => ++n
 })()
+
 ;(() => {
 	let n = 0
+
 	data.decrement = () => --n
 })()
 

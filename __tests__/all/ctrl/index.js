@@ -2,10 +2,13 @@ const data = { }
 
 (() => {
 	let n = 0
+
 	data.increment = () => ++n
 })()
+
 ;(() => {
 	let n = 0
+
 	data.decrement = () => --n
 })()
 
@@ -13,6 +16,7 @@ function tryMe (what) {
 	if (what === `what`) {
 		return 1
 	}
+
 	if (what === `tahw`) {
 		return -1
 	}

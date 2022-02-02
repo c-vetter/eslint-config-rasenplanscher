@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("outside" | "inside" | "any") | {
+export type Options = (("outside" | "inside" | "any") | {
 	functionPrototypeMethods?: boolean
 })[]
 

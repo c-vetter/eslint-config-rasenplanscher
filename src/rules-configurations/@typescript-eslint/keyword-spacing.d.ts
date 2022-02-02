@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/keyword-spacing.d'
 
-type Options = ({
+export type Options = ({
 	before?: boolean
 	after?: boolean
 	overrides?: {

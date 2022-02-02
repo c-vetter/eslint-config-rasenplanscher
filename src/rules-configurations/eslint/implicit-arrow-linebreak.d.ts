@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("beside" | "below"))[]
+export type Options = (("beside" | "below"))[]
 
 type Configuration = RuleConfiguration<'implicit-arrow-linebreak', 'eslint', Options>
 

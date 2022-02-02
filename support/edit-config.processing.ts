@@ -98,8 +98,7 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 		${
 			types
 			.replace(/;$/gm, ``)
-			.replace(/(?<=(?:^|\n)(    )*)    /g, `\t`)
-			.replace(/^export /, ``)
+			.replace(/(?<=(?:^|\n)( {4})*) {4}/g, `\t`)
 			.replace(/\(\)\[\]$/, `never[]`)
 		}
 
@@ -291,6 +290,6 @@ function code (...filepaths:string[]) {
 	spawn(
 		`code.cmd`,
 		filepaths,
-		{ stdio:`pipe` },
+		{ stdio: `pipe` },
 	)
 }

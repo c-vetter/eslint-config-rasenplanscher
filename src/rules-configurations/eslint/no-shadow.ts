@@ -1,8 +1,8 @@
-import Configuration from './no-shadow.d'
+import Configuration, { Options } from './no-shadow.d'
 
-export const optionsObject = {
+export const optionsObject : Options[number] = {
 	builtinGlobals: false,
-	hoist: `all` as const,
+	hoist: `all`,
 	// TODO: make this configurable
 	allow: [],
 }

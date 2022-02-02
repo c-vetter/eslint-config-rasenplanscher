@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = ((("all" | "local") | {
+export type Options = ((("all" | "local") | {
 	vars?: "all" | "local"
 	varsIgnorePattern?: string
 	args?: "all" | "after-used" | "none"

@@ -10,19 +10,21 @@ type Then<T> = T extends PromiseLike<infer U> ? U : T
 
 type Paths = Then<ReturnType<typeof prepare>>
 
-const tmp = process.env.TMP ?? process.env.TEMP ?? `/tmp`
+const tmp = process.env[`TMP`] ?? process.env[`TEMP`] ?? `/tmp`
 const testResults = `__test-results__`
 
 // d* = path helper, “directory”, multiple `d`s for intermediate directory levels
 const dTests = (...segments:Array<string>) => resolvePath(__dirname, ...segments)
 const dRepo = (...segments:Array<string>) => dTests(`..`, ...segments)
 const dPackage = (...segments: Array<string>): string => dRepo(`__pkg__`, ...segments)
+
 const dddTest = (
 	(scenario:string) =>
 	(directory:string) => // eslint-disable-line @typescript-eslint/indent
 	(...segments:Array<string>) => // eslint-disable-line @typescript-eslint/indent
 	dTests(scenario, directory, ...segments) // eslint-disable-line @typescript-eslint/indent
 )
+
 const ddTmp = (
 	(scenario:string) =>
 	(...segments:Array<string>) => // eslint-disable-line @typescript-eslint/indent
@@ -56,6 +58,7 @@ emptyDir(dPackage())
 .then(() => readdir(dTests(), { withFileTypes: true }))
 .then((entries) => {
 	spinner.text = `preparing scenarios`
+
 	return entries
 })
 .then((entries) => Promise.all(
@@ -67,6 +70,7 @@ emptyDir(dPackage())
 	spinner.text = `running scenarios`
 
 	const resultView = dRepo(testResults)
+
 	pathExists(resultView).then((exists) => {
 		if (exists) return
 
@@ -133,7 +137,14 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 		}),
 		readdirp.promise(dControl()),
 	])
-	.then((entries) => entries.map((entry) => entry.map(({ path }) => path)))
+	.then(
+		(entries) => (
+			entries.map((entry) => (
+				entry.map(({ path }) => path)
+				// assertion keeps the tuple type as opposed to an array type
+			)) as [Array<string>, Array<string>]
+		),
+	)
 	.then(([ result, control ]) => {
 		// all expected files are there
 		control.forEach((p) => t.true(result.includes(p), `missing file ${p}`))
@@ -169,7 +180,7 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 			))),
 		),
 	))
-	.then(()=>{})
+	.then(()=>{ /* void */ })
 }
 
 function npm (cmd:string, cwd:string, ...args:Array<string>) {

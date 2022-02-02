@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("asc" | "desc") | {
+export type Options = (("asc" | "desc") | {
 	caseSensitive?: boolean
 	natural?: boolean
 	minKeys?: number

@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/space-infix-ops.d'
 
-type Options = ({
+export type Options = ({
 	int32Hint?: boolean
 })[]
 

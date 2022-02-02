@@ -2,11 +2,18 @@ import _braceStyle_ from './brace-style'
 import _commaDangle_ from './comma-dangle'
 import _commaSpacing_ from './comma-spacing'
 import _consistentTypeDefinitions_ from './consistent-type-definitions'
+import _dotNotation_ from './dot-notation'
 import _funcCallSpacing_ from './func-call-spacing'
 import _indent_ from './indent'
 import _keywordSpacing_ from './keyword-spacing'
 import _linesBetweenClassMembers_ from './lines-between-class-members'
+import _noArrayConstructor_ from './no-array-constructor'
+import _noDupeClassMembers_ from './no-dupe-class-members'
+import _noDuplicateImports_ from './no-duplicate-imports'
+import _noEmptyFunction_ from './no-empty-function'
 import _noExtraParens_ from './no-extra-parens'
+import _noExtraSemi_ from './no-extra-semi'
+import _noImpliedEval_ from './no-implied-eval'
 import _noRedeclare_ from './no-redeclare'
 import _noShadow_ from './no-shadow'
 import _noUnnecessaryBooleanLiteralCompare_ from './no-unnecessary-boolean-literal-compare'
@@ -16,6 +23,7 @@ import _noUnnecessaryTypeArguments_ from './no-unnecessary-type-arguments'
 import _noUnnecessaryTypeAssertion_ from './no-unnecessary-type-assertion'
 import _noUnnecessaryTypeConstraint_ from './no-unnecessary-type-constraint'
 import _noUnusedVars_ from './no-unused-vars'
+import _paddingLineBetweenStatements_ from './padding-line-between-statements'
 import _quotes_ from './quotes'
 import _spaceBeforeFunctionParen_ from './space-before-function-paren'
 import _spaceInfixOps_ from './space-infix-ops'
@@ -26,11 +34,18 @@ export default [
 	_commaDangle_,
 	_commaSpacing_,
 	_consistentTypeDefinitions_,
+	_dotNotation_,
 	_funcCallSpacing_,
 	_indent_,
 	_keywordSpacing_,
 	_linesBetweenClassMembers_,
+	_noArrayConstructor_,
+	_noDupeClassMembers_,
+	_noDuplicateImports_,
+	_noEmptyFunction_,
 	_noExtraParens_,
+	_noExtraSemi_,
+	_noImpliedEval_,
 	_noRedeclare_,
 	_noShadow_,
 	_noUnnecessaryBooleanLiteralCompare_,
@@ -40,6 +55,7 @@ export default [
 	_noUnnecessaryTypeAssertion_,
 	_noUnnecessaryTypeConstraint_,
 	_noUnusedVars_,
+	_paddingLineBetweenStatements_,
 	_quotes_,
 	_spaceBeforeFunctionParen_,
 	_spaceInfixOps_,

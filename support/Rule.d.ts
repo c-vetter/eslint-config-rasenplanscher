@@ -53,6 +53,7 @@ type RuleConfigurationBase<R extends string = string, P extends string = string>
 	ruleId: R
 	providerId: P
 }
+
 export type RuleConfigurationIgnore = {
 	ignore: true
 }

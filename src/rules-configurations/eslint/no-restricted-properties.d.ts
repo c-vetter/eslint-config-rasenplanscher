@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = ({
+export type Options = ({
 	"object": string
 	property?: string
 	message?: string

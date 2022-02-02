@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/comma-dangle.d'
 
-type Value = "always-multiline" | "always" | "never" | "only-multiline"
+export type Value = "always-multiline" | "always" | "never" | "only-multiline"
 
 export type ValueWithIgnore = "always-multiline" | "always" | "never" | "only-multiline" | "ignore"
 

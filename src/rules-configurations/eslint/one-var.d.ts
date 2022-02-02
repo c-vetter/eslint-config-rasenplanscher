@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = ((("always" | "never" | "consecutive") | {
+export type Options = ((("always" | "never" | "consecutive") | {
 	separateRequires?: boolean
 	"var"?: "always" | "never" | "consecutive"
 	"let"?: "always" | "never" | "consecutive"

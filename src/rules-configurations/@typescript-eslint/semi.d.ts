@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/semi.d'
 
-type Options = (("never") | {
+export type Options = (("never") | {
 	beforeStatementContinuationChars?: "always" | "any" | "never"
 })[] | (("always") | {
 	omitLastInOneLineBlock?: boolean

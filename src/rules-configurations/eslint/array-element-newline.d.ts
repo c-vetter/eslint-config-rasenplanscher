@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type BasicConfig = ("always" | "never" | "consistent") | {
+export type BasicConfig = ("always" | "never" | "consistent") | {
 	multiline?: boolean
 	minItems?: number | null
 }

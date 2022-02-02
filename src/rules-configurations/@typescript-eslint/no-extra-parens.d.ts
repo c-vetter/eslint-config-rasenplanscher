@@ -2,7 +2,7 @@ import { RuleConfigurationOverride } from '../../../support/Rule'
 
 import BaseConfiguration from '../eslint/no-extra-parens.d'
 
-type Options = (("functions"))[] | (("all") | {
+export type Options = (("functions"))[] | (("all") | {
 	conditionalAssign?: boolean
 	nestedBinaryExpressions?: boolean
 	returnAssign?: boolean
