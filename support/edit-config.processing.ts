@@ -1,4 +1,4 @@
-///<reference path='_inquirer-autocomplete-prompt.d.ts'/>
+/// <reference path='_inquirer-autocomplete-prompt.d.ts'/>
 
 import { spawn } from 'child_process'
 

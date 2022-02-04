@@ -14,6 +14,7 @@ import _noEmptyFunction_ from './no-empty-function'
 import _noExtraParens_ from './no-extra-parens'
 import _noExtraSemi_ from './no-extra-semi'
 import _noImpliedEval_ from './no-implied-eval'
+import _noInvalidThis_ from './no-invalid-this'
 import _noRedeclare_ from './no-redeclare'
 import _noShadow_ from './no-shadow'
 import _noUnnecessaryBooleanLiteralCompare_ from './no-unnecessary-boolean-literal-compare'
@@ -46,6 +47,7 @@ export default [
 	_noExtraParens_,
 	_noExtraSemi_,
 	_noImpliedEval_,
+	_noInvalidThis_,
 	_noRedeclare_,
 	_noShadow_,
 	_noUnnecessaryBooleanLiteralCompare_,

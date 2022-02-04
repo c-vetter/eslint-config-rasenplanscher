@@ -1,4 +1,4 @@
-///<reference path='_inquirer-autocomplete-prompt.d.ts'/>
+/// <reference path='_inquirer-autocomplete-prompt.d.ts'/>
 
 import inquirer from 'inquirer'
 import autocomplete from 'inquirer-autocomplete-prompt'
@@ -67,7 +67,7 @@ function selectProvider () {
 				async source (_:never, input:string = ``) {
 					if (!input) return providerAnswers
 
-					return providerAnswers.filter(({ name }) => name.includes(input))
+					return providerAnswers.filter(({ name }) => name.toLowerCase().includes(input.toLowerCase()))
 				},
 			},
 		])
@@ -92,7 +92,7 @@ function selectRule (filteredRules:RuleData[]) {
 				async source (_:never, input:string = ``) {
 					if (!input) return ruleAnswers
 
-					return ruleAnswers.filter(({ name }) => name.includes(input))
+					return ruleAnswers.filter(({ name }) => name.toLowerCase().includes(input.toLowerCase()))
 				},
 			},
 		])

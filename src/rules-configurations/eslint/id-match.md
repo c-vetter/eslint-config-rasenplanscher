@@ -6,7 +6,7 @@ Generally, variables and properties should be camelCase or PascalCase. But elisi
 ```regexp
 ^(?:__?|[a-z][0-9]*|([A-Z]?[a-z]+)+[0-9]*|[A-Z]+(_[A-Z]+)+)$
 ```
-While that's rather practical constraint, there are often some exceptions that just don't fit. Additionally, most projects do that anyway, and consequently don't profit from this rule.
+While that's a rather practical constraint, there are often some exceptions that just don't fit. Additionally, most projects do that anyway, and consequently don't profit from this rule.
 
 > “There are only two hard things in Computer Science: cache invalidation and naming things.”
 > — Phil Karlton

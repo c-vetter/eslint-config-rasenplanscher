@@ -64,11 +64,18 @@ import _noFuncAssign_ from './no-func-assign'
 import _noGlobalAssign_ from './no-global-assign'
 import _noImpliedEval_ from './no-implied-eval'
 import _noInnerDeclarations_ from './no-inner-declarations'
+import _noInvalidRegexp_ from './no-invalid-regexp'
+import _noInvalidThis_ from './no-invalid-this'
+import _noIrregularWhitespace_ from './no-irregular-whitespace'
+import _noIterator_ from './no-iterator'
 import _noLabelVar_ from './no-label-var'
 import _noLabels_ from './no-labels'
 import _noLoneBlocks_ from './no-lone-blocks'
 import _noLonelyIf_ from './no-lonely-if'
 import _noMixedSpacesAndTabs_ from './no-mixed-spaces-and-tabs'
+import _noMultiAssign_ from './no-multi-assign'
+import _noMultiSpaces_ from './no-multi-spaces'
+import _noMultiStr_ from './no-multi-str'
 import _noMultipleEmptyLines_ from './no-multiple-empty-lines'
 import _noNewFunc_ from './no-new-func'
 import _noNewObject_ from './no-new-object'
@@ -76,10 +83,17 @@ import _noNewSymbol_ from './no-new-symbol'
 import _noNewWrappers_ from './no-new-wrappers'
 import _noNew_ from './no-new'
 import _noNonoctalDecimalEscape_ from './no-nonoctal-decimal-escape'
+import _noObjCalls_ from './no-obj-calls'
+import _noOctalEscape_ from './no-octal-escape'
+import _noOctal_ from './no-octal'
+import _noProto_ from './no-proto'
 import _noRedeclare_ from './no-redeclare'
 import _noRegexSpaces_ from './no-regex-spaces'
 import _noRestrictedProperties_ from './no-restricted-properties'
 import _noReturnAssign_ from './no-return-assign'
+import _noSelfAssign_ from './no-self-assign'
+import _noSelfCompare_ from './no-self-compare'
+import _noSequences_ from './no-sequences'
 import _noShadowRestrictedNames_ from './no-shadow-restricted-names'
 import _noShadow_ from './no-shadow'
 import _noThisBeforeSuper_ from './no-this-before-super'
@@ -91,6 +105,7 @@ import _noUnusedVars_ from './no-unused-vars'
 import _noUselessCall_ from './no-useless-call'
 import _noUselessRename_ from './no-useless-rename'
 import _noVar_ from './no-var'
+import _noWhitespaceBeforeProperty_ from './no-whitespace-before-property'
 import _oneVarDeclarationPerLine_ from './one-var-declaration-per-line'
 import _oneVar_ from './one-var'
 import _operatorLinebreak_ from './operator-linebreak'
@@ -103,9 +118,13 @@ import _quotes_ from './quotes'
 import _semiStyle_ from './semi-style'
 import _semi_ from './semi'
 import _sortKeys_ from './sort-keys'
+import _spaceBeforeBlocks_ from './space-before-blocks'
 import _spaceBeforeFunctionParen_ from './space-before-function-paren'
 import _spaceInParens_ from './space-in-parens'
 import _spaceInfixOps_ from './space-infix-ops'
+import _spaceUnaryOps_ from './space-unary-ops'
+import _spacedComment_ from './spaced-comment'
+import _useIsnan_ from './use-isnan'
 import _wrapIife_ from './wrap-iife'
 import _yoda_ from './yoda'
 
@@ -176,11 +195,18 @@ export default [
 	_noGlobalAssign_,
 	_noImpliedEval_,
 	_noInnerDeclarations_,
+	_noInvalidRegexp_,
+	_noInvalidThis_,
+	_noIrregularWhitespace_,
+	_noIterator_,
 	_noLabelVar_,
 	_noLabels_,
 	_noLoneBlocks_,
 	_noLonelyIf_,
 	_noMixedSpacesAndTabs_,
+	_noMultiAssign_,
+	_noMultiSpaces_,
+	_noMultiStr_,
 	_noMultipleEmptyLines_,
 	_noNewFunc_,
 	_noNewObject_,
@@ -188,10 +214,17 @@ export default [
 	_noNewWrappers_,
 	_noNew_,
 	_noNonoctalDecimalEscape_,
+	_noObjCalls_,
+	_noOctalEscape_,
+	_noOctal_,
+	_noProto_,
 	_noRedeclare_,
 	_noRegexSpaces_,
 	_noRestrictedProperties_,
 	_noReturnAssign_,
+	_noSelfAssign_,
+	_noSelfCompare_,
+	_noSequences_,
 	_noShadowRestrictedNames_,
 	_noShadow_,
 	_noThisBeforeSuper_,
@@ -203,6 +236,7 @@ export default [
 	_noUselessCall_,
 	_noUselessRename_,
 	_noVar_,
+	_noWhitespaceBeforeProperty_,
 	_oneVarDeclarationPerLine_,
 	_oneVar_,
 	_operatorLinebreak_,
@@ -215,9 +249,13 @@ export default [
 	_semiStyle_,
 	_semi_,
 	_sortKeys_,
+	_spaceBeforeBlocks_,
 	_spaceBeforeFunctionParen_,
 	_spaceInParens_,
 	_spaceInfixOps_,
+	_spaceUnaryOps_,
+	_spacedComment_,
+	_useIsnan_,
 	_wrapIife_,
 	_yoda_,
 ]
