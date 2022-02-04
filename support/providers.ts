@@ -21,7 +21,7 @@ export const plugins: EslintPlugin[] = (
 	.map((id) => ({
 		id,
 		name: (
-			/(?:(@[^\/]+)\/)?eslint-plugin(?:-(.+))?/
+			/(?:(@[^/]+)\/)?eslint-plugin(?:-(.+))?/
 			.exec(id)! // previous filter ensures that this is non-null
 			.slice(1)
 			.filter((n)=>n)

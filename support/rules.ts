@@ -1,12 +1,22 @@
 import { pathExistsSync } from 'fs-extra'
-import allRules from './.rules-definitions'
+import rawRules from './.rules-definitions'
 import { rulesConfigurations, rulesDefinitions } from './paths'
 import { eslint, providers } from './providers'
 import { RuleData, RuleDefinition } from './Rule'
 
-export const rules = allRules.map(ruleData)
+type RuleDataRaw = Omit<RuleData, 'exists' | 'complete'>
 
-function ruleData (rule:RuleDefinition) : RuleData {
+const allRules = rawRules.map(ruleData)
+
+let rulesCurrent:RuleData[] = []
+
+export function rules () {
+	rulesCurrent = allRules.map(ruleStatus)
+
+	return rulesCurrent
+}
+
+function ruleData (rule:RuleDefinition) : RuleDataRaw {
 	const provider = providers.find(({ id }) => id === rule.providerId)
 
 	if (!provider) throw new Error(`No provider found for rule ${rule.id}`)
@@ -16,12 +26,6 @@ function ruleData (rule:RuleDefinition) : RuleData {
 	const reasonFile = rulesConfigurations(provider.name, `${rule.key}.md`)
 	const definitionFile = rulesDefinitions(provider.name, `${rule.key}.ts`)
 
-	const existence = [
-		pathExistsSync(configFile),
-		pathExistsSync(typingFile),
-		pathExistsSync(reasonFile),
-	]
-
 	return {
 		rule,
 		provider,
@@ -29,13 +33,25 @@ function ruleData (rule:RuleDefinition) : RuleData {
 		typingFile,
 		reasonFile,
 		definitionFile,
+	}
+}
+
+function ruleStatus (data:RuleDataRaw) : RuleData {
+	const existence = [
+		pathExistsSync(data.configFile),
+		pathExistsSync(data.typingFile),
+		pathExistsSync(data.reasonFile),
+	]
+
+	return {
+		...data,
 		exists: existence.some((exists)=>exists),
 		complete: existence.every((exists)=>exists),
 	}
 }
 
 export function ruleToBundle (data:RuleData) {
-	const all = rules.filter((x) => {
+	const all = rulesCurrent.filter((x) => {
 		if (x.rule.key === data.rule.key) return true
 
 		if (typeof data.rule.meta.docs?.extendsBaseRule === `string`) {

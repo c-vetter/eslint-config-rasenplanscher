@@ -42,12 +42,12 @@ export function random () {
 }
 
 export function randomIncomplete () {
-	return randomRule(incompleteRules(rules))
+	return randomRule(incompleteRules(rules()))
 	.then(dispatch)
 }
 
 export function randomNew () {
-	return randomRule(newRules(rules))
+	return randomRule(newRules(rules()))
 	.then(dispatch)
 }
 
@@ -100,7 +100,7 @@ function selectRule (filteredRules:RuleData[]) {
 	)
 }
 
-async function randomRule (options = rules) {
+async function randomRule (options = rules()) {
 	if (options.length === 0) throw new Error(`no more rules left`)
 
 	return options[Math.floor(options.length * Math.random())]!
@@ -119,7 +119,7 @@ function newRules (filteredRules:RuleData[]) {
 }
 
 function rulesForProvider (provider:EslintProvider) {
-	return rules.filter(({ provider: { id } }) => id === provider.id)
+	return rules().filter(({ provider: { id } }) => id === provider.id)
 }
 
 

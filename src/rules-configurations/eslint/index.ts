@@ -17,10 +17,12 @@ import _dotLocation_ from './dot-location'
 import _dotNotation_ from './dot-notation'
 import _eolLast_ from './eol-last'
 import _eqeqeq_ from './eqeqeq'
+import _forDirection_ from './for-direction'
 import _funcCallSpacing_ from './func-call-spacing'
 import _idMatch_ from './id-match'
 import _implicitArrowLinebreak_ from './implicit-arrow-linebreak'
 import _indent_ from './indent'
+import _initDeclarations_ from './init-declarations'
 import _keySpacing_ from './key-spacing'
 import _keywordSpacing_ from './keyword-spacing'
 import _linesBetweenClassMembers_ from './lines-between-class-members'
@@ -96,16 +98,39 @@ import _noSelfCompare_ from './no-self-compare'
 import _noSequences_ from './no-sequences'
 import _noShadowRestrictedNames_ from './no-shadow-restricted-names'
 import _noShadow_ from './no-shadow'
+import _noSparseArrays_ from './no-sparse-arrays'
+import _noTabs_ from './no-tabs'
+import _noTemplateCurlyInString_ from './no-template-curly-in-string'
 import _noThisBeforeSuper_ from './no-this-before-super'
+import _noThrowLiteral_ from './no-throw-literal'
 import _noTrailingSpaces_ from './no-trailing-spaces'
+import _noUndefInit_ from './no-undef-init'
 import _noUndef_ from './no-undef'
+import _noUndefined_ from './no-undefined'
 import _noUnexpectedMultiline_ from './no-unexpected-multiline'
+import _noUnmodifiedLoopCondition_ from './no-unmodified-loop-condition'
+import _noUnneededTernary_ from './no-unneeded-ternary'
+import _noUnreachableLoop_ from './no-unreachable-loop'
+import _noUnreachable_ from './no-unreachable'
+import _noUnsafeFinally_ from './no-unsafe-finally'
+import _noUnsafeNegation_ from './no-unsafe-negation'
+import _noUnsafeOptionalChaining_ from './no-unsafe-optional-chaining'
 import _noUnusedLabels_ from './no-unused-labels'
 import _noUnusedVars_ from './no-unused-vars'
+import _noUselessBackreference_ from './no-useless-backreference'
 import _noUselessCall_ from './no-useless-call'
+import _noUselessCatch_ from './no-useless-catch'
+import _noUselessComputedKey_ from './no-useless-computed-key'
+import _noUselessConcat_ from './no-useless-concat'
+import _noUselessConstructor_ from './no-useless-constructor'
+import _noUselessEscape_ from './no-useless-escape'
 import _noUselessRename_ from './no-useless-rename'
+import _noUselessReturn_ from './no-useless-return'
 import _noVar_ from './no-var'
+import _noVoid_ from './no-void'
 import _noWhitespaceBeforeProperty_ from './no-whitespace-before-property'
+import _noWith_ from './no-with'
+import _objectPropertyNewline_ from './object-property-newline'
 import _oneVarDeclarationPerLine_ from './one-var-declaration-per-line'
 import _oneVar_ from './one-var'
 import _operatorLinebreak_ from './operator-linebreak'
@@ -148,10 +173,12 @@ export default [
 	_dotNotation_,
 	_eolLast_,
 	_eqeqeq_,
+	_forDirection_,
 	_funcCallSpacing_,
 	_idMatch_,
 	_implicitArrowLinebreak_,
 	_indent_,
+	_initDeclarations_,
 	_keySpacing_,
 	_keywordSpacing_,
 	_linesBetweenClassMembers_,
@@ -227,16 +254,39 @@ export default [
 	_noSequences_,
 	_noShadowRestrictedNames_,
 	_noShadow_,
+	_noSparseArrays_,
+	_noTabs_,
+	_noTemplateCurlyInString_,
 	_noThisBeforeSuper_,
+	_noThrowLiteral_,
 	_noTrailingSpaces_,
+	_noUndefInit_,
 	_noUndef_,
+	_noUndefined_,
 	_noUnexpectedMultiline_,
+	_noUnmodifiedLoopCondition_,
+	_noUnneededTernary_,
+	_noUnreachableLoop_,
+	_noUnreachable_,
+	_noUnsafeFinally_,
+	_noUnsafeNegation_,
+	_noUnsafeOptionalChaining_,
 	_noUnusedLabels_,
 	_noUnusedVars_,
+	_noUselessBackreference_,
 	_noUselessCall_,
+	_noUselessCatch_,
+	_noUselessComputedKey_,
+	_noUselessConcat_,
+	_noUselessConstructor_,
+	_noUselessEscape_,
 	_noUselessRename_,
+	_noUselessReturn_,
 	_noVar_,
+	_noVoid_,
 	_noWhitespaceBeforeProperty_,
+	_noWith_,
+	_objectPropertyNewline_,
 	_oneVarDeclarationPerLine_,
 	_oneVar_,
 	_operatorLinebreak_,
