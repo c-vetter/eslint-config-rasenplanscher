@@ -10,7 +10,7 @@ import autocomplete from 'inquirer-autocomplete-prompt'
 import open from 'open'
 import { outdent } from 'outdent'
 
-import { importable, support } from './paths'
+import { importable, root, support } from './paths'
 import priorities, { IMPORTANT, HELPFUL, TASTE, Priority } from './priorities'
 import { RuleBundle, RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOff, RuleConfigurationOptions, RuleConfigurationSet, RuleData } from './Rule'
 import { Mutable } from './utility'
@@ -258,7 +258,7 @@ function generateConfig (item:RuleData, bundle:RuleBundle) {
 	}
 }
 
-function generateDoc (item:RuleData, bundle:RuleBundle) {
+export function generateDoc (item:RuleData, bundle:RuleBundle) {
 	if (item.rule.meta.docs?.url === undefined || item.rule.meta.docs.url === ``) {
 		return Promise.reject(`No documentation url found for rule ${item.rule.id}`)
 	}
@@ -275,7 +275,16 @@ function generateDoc (item:RuleData, bundle:RuleBundle) {
 		)}
 		${
 			base
-			? ``
+			? outdent`
+				Please [open an issue](https://github.com/rasenplanscher/eslint-config-rasenplanscher/issues/new)
+				or [create a pull request](https://github.com/rasenplanscher/eslint-config-rasenplanscher/edit/main/${
+					importable(
+						item.reasonFile,
+						root(`ಠ_ಠ`), // easier than checking if it's a file ¯\_(ツ)_/¯
+					)
+					.replace(`./`, ``)
+				})
+			`
 			: `See [${bundle.base.rule.id}](${importable(bundle.base.reasonFile, item.reasonFile)})\n`
 		}
 	`)
