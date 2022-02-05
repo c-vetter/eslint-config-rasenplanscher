@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("always" | "never"))[]
+export type Options = (("always" | "never"))[]
 
 type Configuration = RuleConfiguration<'new-parens', 'eslint', Options>
 

@@ -2,6 +2,7 @@ import _braceStyle_ from './brace-style'
 import _commaDangle_ from './comma-dangle'
 import _commaSpacing_ from './comma-spacing'
 import _consistentTypeDefinitions_ from './consistent-type-definitions'
+import _defaultParamLast_ from './default-param-last'
 import _dotNotation_ from './dot-notation'
 import _funcCallSpacing_ from './func-call-spacing'
 import _indent_ from './indent'
@@ -27,6 +28,7 @@ import _noUnnecessaryTypeAssertion_ from './no-unnecessary-type-assertion'
 import _noUnnecessaryTypeConstraint_ from './no-unnecessary-type-constraint'
 import _noUnusedVars_ from './no-unused-vars'
 import _noUselessConstructor_ from './no-useless-constructor'
+import _objectCurlySpacing_ from './object-curly-spacing'
 import _paddingLineBetweenStatements_ from './padding-line-between-statements'
 import _quotes_ from './quotes'
 import _spaceBeforeFunctionParen_ from './space-before-function-paren'
@@ -38,6 +40,7 @@ export default [
 	_commaDangle_,
 	_commaSpacing_,
 	_consistentTypeDefinitions_,
+	_defaultParamLast_,
 	_dotNotation_,
 	_funcCallSpacing_,
 	_indent_,
@@ -63,6 +66,7 @@ export default [
 	_noUnnecessaryTypeConstraint_,
 	_noUnusedVars_,
 	_noUselessConstructor_,
+	_objectCurlySpacing_,
 	_paddingLineBetweenStatements_,
 	_quotes_,
 	_spaceBeforeFunctionParen_,

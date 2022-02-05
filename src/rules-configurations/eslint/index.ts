@@ -1,4 +1,6 @@
 import _accessorPairs_ from './accessor-pairs'
+import _arrayBracketNewline_ from './array-bracket-newline'
+import _arrayBracketSpacing_ from './array-bracket-spacing'
 import _arrayElementNewline_ from './array-element-newline'
 import _arrowParens_ from './arrow-parens'
 import _blockScopedVar_ from './block-scoped-var'
@@ -8,23 +10,28 @@ import _camelcase_ from './camelcase'
 import _commaDangle_ from './comma-dangle'
 import _commaSpacing_ from './comma-spacing'
 import _commaStyle_ from './comma-style'
+import _computedPropertySpacing_ from './computed-property-spacing'
 import _consistentReturn_ from './consistent-return'
 import _constructorSuper_ from './constructor-super'
 import _curly_ from './curly'
 import _defaultCaseLast_ from './default-case-last'
 import _defaultCase_ from './default-case'
+import _defaultParamLast_ from './default-param-last'
 import _dotLocation_ from './dot-location'
 import _dotNotation_ from './dot-notation'
 import _eolLast_ from './eol-last'
 import _eqeqeq_ from './eqeqeq'
 import _forDirection_ from './for-direction'
 import _funcCallSpacing_ from './func-call-spacing'
+import _idDenylist_ from './id-denylist'
+import _idLength_ from './id-length'
 import _idMatch_ from './id-match'
 import _implicitArrowLinebreak_ from './implicit-arrow-linebreak'
 import _indent_ from './indent'
 import _initDeclarations_ from './init-declarations'
 import _keySpacing_ from './key-spacing'
 import _keywordSpacing_ from './keyword-spacing'
+import _linebreakStyle_ from './linebreak-style'
 import _linesBetweenClassMembers_ from './lines-between-class-members'
 import _newCap_ from './new-cap'
 import _newParens_ from './new-parens'
@@ -130,6 +137,7 @@ import _noVar_ from './no-var'
 import _noVoid_ from './no-void'
 import _noWhitespaceBeforeProperty_ from './no-whitespace-before-property'
 import _noWith_ from './no-with'
+import _objectCurlySpacing_ from './object-curly-spacing'
 import _objectPropertyNewline_ from './object-property-newline'
 import _oneVarDeclarationPerLine_ from './one-var-declaration-per-line'
 import _oneVar_ from './one-var'
@@ -152,6 +160,7 @@ import _spaceInParens_ from './space-in-parens'
 import _spaceInfixOps_ from './space-infix-ops'
 import _spaceUnaryOps_ from './space-unary-ops'
 import _spacedComment_ from './spaced-comment'
+import _switchColonSpacing_ from './switch-colon-spacing'
 import _templateCurlySpacing_ from './template-curly-spacing'
 import _useIsnan_ from './use-isnan'
 import _validTypeof_ from './valid-typeof'
@@ -161,6 +170,8 @@ import _yoda_ from './yoda'
 
 export default [
 	_accessorPairs_,
+	_arrayBracketNewline_,
+	_arrayBracketSpacing_,
 	_arrayElementNewline_,
 	_arrowParens_,
 	_blockScopedVar_,
@@ -170,23 +181,28 @@ export default [
 	_commaDangle_,
 	_commaSpacing_,
 	_commaStyle_,
+	_computedPropertySpacing_,
 	_consistentReturn_,
 	_constructorSuper_,
 	_curly_,
 	_defaultCaseLast_,
 	_defaultCase_,
+	_defaultParamLast_,
 	_dotLocation_,
 	_dotNotation_,
 	_eolLast_,
 	_eqeqeq_,
 	_forDirection_,
 	_funcCallSpacing_,
+	_idDenylist_,
+	_idLength_,
 	_idMatch_,
 	_implicitArrowLinebreak_,
 	_indent_,
 	_initDeclarations_,
 	_keySpacing_,
 	_keywordSpacing_,
+	_linebreakStyle_,
 	_linesBetweenClassMembers_,
 	_newCap_,
 	_newParens_,
@@ -292,6 +308,7 @@ export default [
 	_noVoid_,
 	_noWhitespaceBeforeProperty_,
 	_noWith_,
+	_objectCurlySpacing_,
 	_objectPropertyNewline_,
 	_oneVarDeclarationPerLine_,
 	_oneVar_,
@@ -314,6 +331,7 @@ export default [
 	_spaceInfixOps_,
 	_spaceUnaryOps_,
 	_spacedComment_,
+	_switchColonSpacing_,
 	_templateCurlySpacing_,
 	_useIsnan_,
 	_validTypeof_,

@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (({
+export type Options = (({
 	align?: ("colon" | "value") | {
 		mode?: "strict" | "minimum"
 		on?: "colon" | "value"

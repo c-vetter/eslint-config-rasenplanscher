@@ -5,9 +5,12 @@ const configuration:Configuration = {
 	providerId: `eslint`,
 	priority: `TASTE`,
 	activate: true,
-	options: [ {
-		enforceForClassMembers: true
-	} ],
+	options: [
+		`never`,
+		{
+			enforceForClassMembers: true,
+		},
+	],
 }
 
 export default configuration

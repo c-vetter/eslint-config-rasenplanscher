@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = (("always" | "never" | "unix" | "windows"))[]
+export type Options = (("always" | "never" | "unix" | "windows"))[]
 
 type Configuration = RuleConfiguration<'eol-last', 'eslint', Options>
 

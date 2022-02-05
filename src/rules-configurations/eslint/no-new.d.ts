@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule'
 
-type Options = never[]
+export type Options = never[]
 
 type Configuration = RuleConfiguration<'no-new', 'eslint', Options>
 

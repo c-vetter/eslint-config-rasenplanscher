@@ -133,7 +133,7 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 	`)
 	.then((types) => outputFile(
 		item.typingFile,
-		types.replace(
+		`${types}\n`.replace(
 			`\n`.repeat(4),
 			`\n`.repeat(2),
 		),
