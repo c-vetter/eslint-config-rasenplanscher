@@ -1,7 +1,7 @@
-import Configuration from './space-in-parens.d'
+import Configuration from './id-denylist.d'
 
 const configuration:Configuration = {
-	ruleId: `space-in-parens`,
+	ruleId: `id-denylist`,
 	providerId: `eslint`,
 	ignore: true,
 }

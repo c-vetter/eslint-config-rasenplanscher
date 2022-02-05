@@ -82,6 +82,8 @@ function selectProvider () {
 }
 
 function selectRule (filteredRules:RuleData[]) {
+	console.info(`Rules: ${filteredRules.length}`)
+
 	const ruleAnswers = filteredRules
 	.map((data) => ({
 		name: data.rule.key,
@@ -112,7 +114,9 @@ function selectRule (filteredRules:RuleData[]) {
 }
 
 async function randomRule (options = rules()) {
-	if (options.length === 0) throw new Error(`no more rules left`)
+	if (options.length === 0) return Promise.reject(`no more rules left`)
+
+	console.info(`Rules: ${options.length}`)
 
 	return options[Math.floor(options.length * Math.random())]!
 }

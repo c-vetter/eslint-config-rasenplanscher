@@ -6,7 +6,7 @@ A prime example of this mistake is checking for an optional argument:
 ```ts
 function foo(arg?: string|number|boolean) {
 	if (arg) {
-		bar();
+		bar()
 	}
 }
 ```

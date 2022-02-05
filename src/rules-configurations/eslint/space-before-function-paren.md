@@ -5,19 +5,21 @@ Combined with [func-call-spacing](./func-call-spacing.md), this helps distinguis
 const functionExpression = function (...arguments) {
 	// ...
 }
+
 const foo = {
 	bar () {
 		// ...
 	}
-};
+}
 ///
 const functionCallResult = funotion(...arguments)(
 	// ...
 )
+
 if (condition) {
 	doSomething()
 	// ...
-};
+}
 ```
 
 Related to [keyword-spacing](./keyword-spacing.md).

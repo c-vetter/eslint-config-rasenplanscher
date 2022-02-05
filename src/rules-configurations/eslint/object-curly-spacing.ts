@@ -1,7 +1,7 @@
-import Configuration from './space-in-parens.d'
+import Configuration from './object-curly-spacing.d'
 
 const configuration:Configuration = {
-	ruleId: `space-in-parens`,
+	ruleId: `object-curly-spacing`,
 	providerId: `eslint`,
 	ignore: true,
 }

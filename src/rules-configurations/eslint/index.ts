@@ -134,12 +134,15 @@ import _objectPropertyNewline_ from './object-property-newline'
 import _oneVarDeclarationPerLine_ from './one-var-declaration-per-line'
 import _oneVar_ from './one-var'
 import _operatorLinebreak_ from './operator-linebreak'
+import _paddedBlocks_ from './padded-blocks'
 import _paddingLineBetweenStatements_ from './padding-line-between-statements'
 import _preferArrowCallback_ from './prefer-arrow-callback'
 import _preferNumericLiterals_ from './prefer-numeric-literals'
 import _preferRestParams_ from './prefer-rest-params'
 import _preferSpread_ from './prefer-spread'
 import _quotes_ from './quotes'
+import _restSpreadSpacing_ from './rest-spread-spacing'
+import _semiSpacing_ from './semi-spacing'
 import _semiStyle_ from './semi-style'
 import _semi_ from './semi'
 import _sortKeys_ from './sort-keys'
@@ -149,8 +152,11 @@ import _spaceInParens_ from './space-in-parens'
 import _spaceInfixOps_ from './space-infix-ops'
 import _spaceUnaryOps_ from './space-unary-ops'
 import _spacedComment_ from './spaced-comment'
+import _templateCurlySpacing_ from './template-curly-spacing'
 import _useIsnan_ from './use-isnan'
+import _validTypeof_ from './valid-typeof'
 import _wrapIife_ from './wrap-iife'
+import _yieldStarSpacing_ from './yield-star-spacing'
 import _yoda_ from './yoda'
 
 export default [
@@ -290,12 +296,15 @@ export default [
 	_oneVarDeclarationPerLine_,
 	_oneVar_,
 	_operatorLinebreak_,
+	_paddedBlocks_,
 	_paddingLineBetweenStatements_,
 	_preferArrowCallback_,
 	_preferNumericLiterals_,
 	_preferRestParams_,
 	_preferSpread_,
 	_quotes_,
+	_restSpreadSpacing_,
+	_semiSpacing_,
 	_semiStyle_,
 	_semi_,
 	_sortKeys_,
@@ -305,7 +314,10 @@ export default [
 	_spaceInfixOps_,
 	_spaceUnaryOps_,
 	_spacedComment_,
+	_templateCurlySpacing_,
 	_useIsnan_,
+	_validTypeof_,
 	_wrapIife_,
+	_yieldStarSpacing_,
 	_yoda_,
 ]

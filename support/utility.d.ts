@@ -16,7 +16,7 @@ export type DeepReadonly<T> = (
 )
 
 type DeepReadonlyObject<T> = {
-	readonly [P in keyof T]: DeepReadonly<T[P]>;
+	readonly [P in keyof T]: DeepReadonly<T[P]>
 }
 
 type DeepReadonlyArray<T> = ReadonlyArray<DeepReadonly<T>>

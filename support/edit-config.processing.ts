@@ -81,7 +81,7 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 	))
 	.then(([isBase, ast]) => [isBase, printer.printNodes(ast)] as const)
 	.then(([isBase, types]) => outdent`
-		import { ${isBase ? baseTypeToken : baseTypeTokenExtender } } from '${
+		import { ${ isBase ? baseTypeToken : baseTypeTokenExtender } } from '${
 			importable(support(`Rule`), item.typingFile)
 		}'
 

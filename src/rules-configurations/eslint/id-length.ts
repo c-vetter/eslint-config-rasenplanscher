@@ -1,7 +1,7 @@
-import Configuration from './space-in-parens.d'
+import Configuration from './id-length.d'
 
 const configuration:Configuration = {
-	ruleId: `space-in-parens`,
+	ruleId: `id-length`,
 	providerId: `eslint`,
 	ignore: true,
 }

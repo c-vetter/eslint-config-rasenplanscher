@@ -1,7 +1,7 @@
-import Configuration from './space-in-parens.d'
+import Configuration from './array-bracket-spacing.d'
 
 const configuration:Configuration = {
-	ruleId: `space-in-parens`,
+	ruleId: `array-bracket-spacing`,
 	providerId: `eslint`,
 	ignore: true,
 }
