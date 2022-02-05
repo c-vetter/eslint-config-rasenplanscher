@@ -8,6 +8,11 @@ import { processRule } from './edit-config.processing'
 import { RuleData } from './Rule'
 import { rules, ruleToBundle } from './rules'
 
+export const BACK = `👈 BACK`
+export const DONE = `👉 DONE`
+
+type RuleAnswer = RuleData | typeof BACK | typeof DONE
+
 inquirer.registerPrompt(`autocomplete`, autocomplete)
 
 export function select () {
@@ -90,13 +95,19 @@ function selectRule (filteredRules:RuleData[]) {
 				name: `rule`,
 				message: `Rule:`,
 				async source (_:never, input:string = ``) {
-					if (!input) return ruleAnswers
-
-					return ruleAnswers.filter(({ name }) => name.toLowerCase().includes(input.toLowerCase()))
+					return [
+						BACK,
+						...(
+							input === ``
+							? ruleAnswers
+							: ruleAnswers.filter(({ name }) => name.toLowerCase().includes(input.toLowerCase()))
+						),
+						DONE,
+					]
 				},
 			},
 		])
-		.then(({rule}:{rule:RuleData}) => rule)
+		.then(({rule}:{rule:RuleAnswer}) => rule)
 	)
 }
 
@@ -126,6 +137,9 @@ function rulesForProvider (provider:EslintProvider) {
 //
 
 
-function dispatch (data:RuleData) {
+function dispatch (data:RuleAnswer) {
+	if (data === BACK) return Promise.reject(BACK)
+	if (data === DONE) return Promise.reject(DONE)
+
 	return processRule(ruleToBundle(data))
 }

@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 
-import { random, randomIncomplete, randomNew, scoped, scopedNew, select, selectNew } from './edit-config.strategies'
+import { BACK, DONE, random, randomIncomplete, randomNew, scoped, scopedNew, select, selectNew } from './edit-config.strategies'
 
 
 inquirer.prompt([
@@ -40,10 +40,10 @@ inquirer.prompt([
 		],
 	},
 ])
-.then(({ strategy }) => proceed(strategy))
+.then(({ strategy }:{ strategy:() => Promise<never>}) => proceed(strategy))
 
 
-function proceed (strategy:Function) {
+function proceed (strategy:() => Promise<never>) : Promise<boolean> {
 	return (
 		strategy()
 		.then(() => (
@@ -59,5 +59,11 @@ function proceed (strategy:Function) {
 		.then(({ next }:{ next:boolean }) => (
 			next && proceed(strategy)
 		))
+		.catch((error) => {
+			if (error === BACK) return proceed(strategy)
+			if (error === DONE) return true
+
+			return Promise.reject(error)
+		})
 	)
 }
