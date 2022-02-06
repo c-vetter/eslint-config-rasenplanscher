@@ -40,16 +40,15 @@ function fook (x: number | undefined): number {
 const foos = fook(3)
 
 // good
-let vy = 1 as 1
-
+const vy = 1 as 1
 // bad
 const cy = 1 as 1
 
 const cx = 1
 
 // bad
-let z0 = cx as number
+const z0 = cx as number
 // bad, nice to check but not necessary
-let z1 = cx as const
+const z1 = cx as const
 // good
-let z2 = cx as 1
+const z2 = cx as 1

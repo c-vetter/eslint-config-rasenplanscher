@@ -52,7 +52,12 @@ export default function makeEslintrc (configuration:(Options | Priority), ...mor
 		availableConfigurations.includes(unusedImports_noUnusedVars)
 		&& availableConfigurations.includes(typescript_noUnusedVars)
 	) {
-		availableConfigurations.splice(availableConfigurations.indexOf(typescript_noUnusedVars), 1)
+		const singleItem = 1
+
+		availableConfigurations.splice(
+			availableConfigurations.indexOf(typescript_noUnusedVars),
+			singleItem,
+		)
 	}
 
 	const overrideConfigurations:RuleConfigurationOverride[] = availableConfigurations.filter(

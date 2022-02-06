@@ -15,6 +15,8 @@ export type EslintPlugin = {
 }
 export type EslintProvider = Eslint | EslintPlugin
 
+const skipCompleteMatch = 1
+
 export const plugins: EslintPlugin[] = (
 	Object.keys(readJsonSync(root(`package.json`)).devDependencies)
 	.filter((d) => d.includes(`eslint-plugin`))
@@ -23,14 +25,14 @@ export const plugins: EslintPlugin[] = (
 		name: (
 			/(?:(@[^/]+)\/)?eslint-plugin(?:-(.+))?/
 			.exec(id)! // previous filter ensures that this is non-null
-			.slice(1)
+			.slice(skipCompleteMatch)
 			.filter((n)=>n)
 			.join(`/`)
 		),
 	}))
 	.map((p) => ({
 		...p,
-		namespace: p.name + `/`,
+		namespace: `${p.name }/`,
 	}))
 )
 

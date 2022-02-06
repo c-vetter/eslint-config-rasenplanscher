@@ -66,11 +66,7 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 	] as const)
 	.then(([isBase, schema]) => ([
 		isBase,
-		(
-			Array.isArray(schema)
-			? wrapped(schema)
-			: schema
-		),
+		normalizeSchema(schema),
 	] as const))
 	.then(([isBase, schema]) => (
 		parseSchema(schema, { name: optionsTypeToken })
@@ -134,19 +130,54 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 	.then((types) => outputFile(
 		item.typingFile,
 		`${types}\n`.replace(
-			`\n`.repeat(4),
-			`\n`.repeat(2),
+			`\n`.repeat(4), // eslint-disable-line @typescript-eslint/no-magic-numbers
+			`\n`.repeat(2), // eslint-disable-line @typescript-eslint/no-magic-numbers
 		),
 	))
+}
 
-	function wrapped (schema:JSONSchema[]) : JSONSchema {
-		return {
-			type: `array`,
-			items: schema,
-			minItems: 0,
-			maxItems: schema.length,
-		}
+function normalizeSchema (schema:JSONSchema | JSONSchema[]) : JSONSchema {
+	if (Array.isArray(schema)) return wrapSchemaArray(schema)
+	if (Object.prototype.hasOwnProperty.call(schema, `type`)) return schema
+
+	const keys = Object.keys(schema) as Array<keyof typeof schema | number>
+
+	if (keys.every((key) => Number.isNaN(Number.parseInt(key as string)))) return schema
+	if (keys.some((key) => Number.isNaN(Number.parseInt(key as string)))) return fixWeirdWrongButWorkingSchema(schema)
+
+	const schemaArray:JSONSchema[] = []
+
+	;(keys as Array<number>).forEach((key) => {
+		schemaArray[key] = (schema as Array<JSONSchema>)[key]!
+	})
+
+	return wrapSchemaArray(schemaArray)
+}
+
+function wrapSchemaArray (schemas:JSONSchema[]) : JSONSchema {
+	return {
+		type: `array`,
+		items: schemas.map((schema) => normalizeSchema(schema)),
+		minItems: 0,
+		maxItems: schemas.length,
 	}
+}
+
+import weirdSchemaThing from './.rules-definitions/@typescript-eslint/no-magic-numbers'
+
+function fixWeirdWrongButWorkingSchema (schema:JSONSchema) : JSONSchema {
+	// ./.rules-definitions/eslint/no-magic-numbers.ts
+	// Strangely, eslint seems to be fine with that 👆 and handling all parameters…
+	// @see https://github.com/typescript-eslint/typescript-eslint/blob/c8e650f0c124d24b24beaeb376eaf61ee8d9e6fb/packages/eslint-plugin/src/rules/no-magic-numbers.ts#L12
+	const { 0: weird, properties } = schema as unknown as typeof weirdSchemaThing['meta']['schema'][number]
+
+	return JSON.parse(JSON.stringify({
+		...weird,
+		properties: {
+			...weird.properties,
+			...properties,
+		},
+	}))
 }
 
 function generateConfig (item:RuleData, bundle:RuleBundle) {
@@ -197,7 +228,7 @@ function generateConfig (item:RuleData, bundle:RuleBundle) {
 
 					// some rules lack a meta.type and a meta.docs.category, specifically in plugin react
 					default: HELPFUL,
-				} as const)[ // eslint-disable-next-line @typescript-eslint/indent -- https://github.com/typescript-eslint/typescript-eslint/issues/1824
+				} as const)[// eslint-disable-next-line @typescript-eslint/indent -- https://github.com/typescript-eslint/typescript-eslint/issues/1824
 					item.rule.meta.type
 					|| (
 						item.rule.meta.docs?.category as (
@@ -271,6 +302,7 @@ export function generateDoc (item:RuleData, bundle:RuleBundle) {
 		${`=`.repeat(
 			item.rule.id.length
 			+ item.rule.meta.docs!.url!.length // !: checked at the start of `generateDoc`
+			// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 			+ 4, // brackets and parentheses
 		)}
 		${

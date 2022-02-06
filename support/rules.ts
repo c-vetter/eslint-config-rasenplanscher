@@ -65,9 +65,12 @@ export function ruleToBundle (data:RuleData) {
 		return false
 	})
 
+	// i* = index for *
+	const iFirstItem = 0
+
 	const base = (
 		all.find(({ provider }) => provider === eslint)
-		?? all[0]
+		?? all[iFirstItem]
 	)! // at least `data` itself will always be in `all`
 
 	return {

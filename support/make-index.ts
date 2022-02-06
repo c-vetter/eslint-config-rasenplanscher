@@ -10,7 +10,8 @@ const roots = {
 	rulesConfigurations,
 }
 
-const root = process.argv[2] as keyof typeof roots
+const firstArgAfterExeAndScript = 2
+const root = process.argv[firstArgAfterExeAndScript] as keyof typeof roots
 
 buildIndices(roots[root])
 .catch((error) => {

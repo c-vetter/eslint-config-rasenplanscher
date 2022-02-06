@@ -69,7 +69,7 @@ function selectProvider () {
 				type: `autocomplete`,
 				name: `provider`,
 				message: `Provider:`,
-				async source (_:never, input:string = ``) {
+				source (_:never, input:string = ``) {
 					if (!input) return providerAnswers
 
 					return providerAnswers.filter(({ name }) => name.toLowerCase().includes(input.toLowerCase()))
@@ -96,7 +96,7 @@ function selectRule (filteredRules:RuleData[]) {
 				type: `autocomplete`,
 				name: `rule`,
 				message: `Rule:`,
-				async source (_:never, input:string = ``) {
+				source (_:never, input:string = ``) {
 					return [
 						BACK,
 						...(
@@ -114,6 +114,7 @@ function selectRule (filteredRules:RuleData[]) {
 }
 
 async function randomRule (options = rules()) {
+	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
 	if (options.length === 0) return Promise.reject(`no more rules left`)
 
 	console.info(`Rules: ${options.length}`)

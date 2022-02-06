@@ -23,6 +23,7 @@ import _eolLast_ from './eol-last'
 import _eqeqeq_ from './eqeqeq'
 import _forDirection_ from './for-direction'
 import _funcCallSpacing_ from './func-call-spacing'
+import _getterReturn_ from './getter-return'
 import _idDenylist_ from './id-denylist'
 import _idLength_ from './id-length'
 import _idMatch_ from './id-match'
@@ -37,9 +38,11 @@ import _newCap_ from './new-cap'
 import _newParens_ from './new-parens'
 import _noAlert_ from './no-alert'
 import _noArrayConstructor_ from './no-array-constructor'
+import _noAsyncPromiseExecutor_ from './no-async-promise-executor'
 import _noCaller_ from './no-caller'
 import _noCaseDeclarations_ from './no-case-declarations'
 import _noClassAssign_ from './no-class-assign'
+import _noCompareNegZero_ from './no-compare-neg-zero'
 import _noCondAssign_ from './no-cond-assign'
 import _noConfusingArrow_ from './no-confusing-arrow'
 import _noConsole_ from './no-console'
@@ -72,6 +75,7 @@ import _noFloatingDecimal_ from './no-floating-decimal'
 import _noFuncAssign_ from './no-func-assign'
 import _noGlobalAssign_ from './no-global-assign'
 import _noImpliedEval_ from './no-implied-eval'
+import _noImportAssign_ from './no-import-assign'
 import _noInnerDeclarations_ from './no-inner-declarations'
 import _noInvalidRegexp_ from './no-invalid-regexp'
 import _noInvalidThis_ from './no-invalid-this'
@@ -81,6 +85,9 @@ import _noLabelVar_ from './no-label-var'
 import _noLabels_ from './no-labels'
 import _noLoneBlocks_ from './no-lone-blocks'
 import _noLonelyIf_ from './no-lonely-if'
+import _noLossOfPrecision_ from './no-loss-of-precision'
+import _noMagicNumbers_ from './no-magic-numbers'
+import _noMisleadingCharacterClass_ from './no-misleading-character-class'
 import _noMixedSpacesAndTabs_ from './no-mixed-spaces-and-tabs'
 import _noMultiAssign_ from './no-multi-assign'
 import _noMultiSpaces_ from './no-multi-spaces'
@@ -96,6 +103,7 @@ import _noObjCalls_ from './no-obj-calls'
 import _noOctalEscape_ from './no-octal-escape'
 import _noOctal_ from './no-octal'
 import _noProto_ from './no-proto'
+import _noPrototypeBuiltins_ from './no-prototype-builtins'
 import _noRedeclare_ from './no-redeclare'
 import _noRegexSpaces_ from './no-regex-spaces'
 import _noRestrictedProperties_ from './no-restricted-properties'
@@ -103,6 +111,7 @@ import _noReturnAssign_ from './no-return-assign'
 import _noSelfAssign_ from './no-self-assign'
 import _noSelfCompare_ from './no-self-compare'
 import _noSequences_ from './no-sequences'
+import _noSetterReturn_ from './no-setter-return'
 import _noShadowRestrictedNames_ from './no-shadow-restricted-names'
 import _noShadow_ from './no-shadow'
 import _noSparseArrays_ from './no-sparse-arrays'
@@ -122,8 +131,10 @@ import _noUnreachable_ from './no-unreachable'
 import _noUnsafeFinally_ from './no-unsafe-finally'
 import _noUnsafeNegation_ from './no-unsafe-negation'
 import _noUnsafeOptionalChaining_ from './no-unsafe-optional-chaining'
+import _noUnusedExpressions_ from './no-unused-expressions'
 import _noUnusedLabels_ from './no-unused-labels'
 import _noUnusedVars_ from './no-unused-vars'
+import _noUseBeforeDefine_ from './no-use-before-define'
 import _noUselessBackreference_ from './no-useless-backreference'
 import _noUselessCall_ from './no-useless-call'
 import _noUselessCatch_ from './no-useless-catch'
@@ -145,10 +156,19 @@ import _operatorLinebreak_ from './operator-linebreak'
 import _paddedBlocks_ from './padded-blocks'
 import _paddingLineBetweenStatements_ from './padding-line-between-statements'
 import _preferArrowCallback_ from './prefer-arrow-callback'
+import _preferConst_ from './prefer-const'
+import _preferDestructuring_ from './prefer-destructuring'
 import _preferNumericLiterals_ from './prefer-numeric-literals'
+import _preferRegexLiterals_ from './prefer-regex-literals'
 import _preferRestParams_ from './prefer-rest-params'
 import _preferSpread_ from './prefer-spread'
+import _preferTemplate_ from './prefer-template'
 import _quotes_ from './quotes'
+import _radix_ from './radix'
+import _requireAtomicUpdates_ from './require-atomic-updates'
+import _requireAwait_ from './require-await'
+import _requireUnicodeRegexp_ from './require-unicode-regexp'
+import _requireYield_ from './require-yield'
 import _restSpreadSpacing_ from './rest-spread-spacing'
 import _semiSpacing_ from './semi-spacing'
 import _semiStyle_ from './semi-style'
@@ -194,6 +214,7 @@ export default [
 	_eqeqeq_,
 	_forDirection_,
 	_funcCallSpacing_,
+	_getterReturn_,
 	_idDenylist_,
 	_idLength_,
 	_idMatch_,
@@ -208,9 +229,11 @@ export default [
 	_newParens_,
 	_noAlert_,
 	_noArrayConstructor_,
+	_noAsyncPromiseExecutor_,
 	_noCaller_,
 	_noCaseDeclarations_,
 	_noClassAssign_,
+	_noCompareNegZero_,
 	_noCondAssign_,
 	_noConfusingArrow_,
 	_noConsole_,
@@ -243,6 +266,7 @@ export default [
 	_noFuncAssign_,
 	_noGlobalAssign_,
 	_noImpliedEval_,
+	_noImportAssign_,
 	_noInnerDeclarations_,
 	_noInvalidRegexp_,
 	_noInvalidThis_,
@@ -252,6 +276,9 @@ export default [
 	_noLabels_,
 	_noLoneBlocks_,
 	_noLonelyIf_,
+	_noLossOfPrecision_,
+	_noMagicNumbers_,
+	_noMisleadingCharacterClass_,
 	_noMixedSpacesAndTabs_,
 	_noMultiAssign_,
 	_noMultiSpaces_,
@@ -267,6 +294,7 @@ export default [
 	_noOctalEscape_,
 	_noOctal_,
 	_noProto_,
+	_noPrototypeBuiltins_,
 	_noRedeclare_,
 	_noRegexSpaces_,
 	_noRestrictedProperties_,
@@ -274,6 +302,7 @@ export default [
 	_noSelfAssign_,
 	_noSelfCompare_,
 	_noSequences_,
+	_noSetterReturn_,
 	_noShadowRestrictedNames_,
 	_noShadow_,
 	_noSparseArrays_,
@@ -293,8 +322,10 @@ export default [
 	_noUnsafeFinally_,
 	_noUnsafeNegation_,
 	_noUnsafeOptionalChaining_,
+	_noUnusedExpressions_,
 	_noUnusedLabels_,
 	_noUnusedVars_,
+	_noUseBeforeDefine_,
 	_noUselessBackreference_,
 	_noUselessCall_,
 	_noUselessCatch_,
@@ -316,10 +347,19 @@ export default [
 	_paddedBlocks_,
 	_paddingLineBetweenStatements_,
 	_preferArrowCallback_,
+	_preferConst_,
+	_preferDestructuring_,
 	_preferNumericLiterals_,
+	_preferRegexLiterals_,
 	_preferRestParams_,
 	_preferSpread_,
+	_preferTemplate_,
 	_quotes_,
+	_radix_,
+	_requireAtomicUpdates_,
+	_requireAwait_,
+	_requireUnicodeRegexp_,
+	_requireYield_,
 	_restSpreadSpacing_,
 	_semiSpacing_,
 	_semiStyle_,

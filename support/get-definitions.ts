@@ -9,13 +9,19 @@ emptyDirSync(rulesDefinitions())
 
 const rulesArray = Array.from((new Linter()).getRules().entries())
 
+// i* = index for *
+type iEntryValue = 1
+
 plugins.forEach(
 	(plugin) => (
 		Object.entries(
 			// eslint-plugin-unused-imports changes the base rules
 			JSON.parse(JSON.stringify(require(plugin.id).rules)),
 		)
-		.forEach(([key, rule]) => rulesArray.push([plugin.namespace + key, rule as typeof rulesArray[number][1]]))
+		.forEach(([key, rule]) => rulesArray.push([
+			plugin.namespace + key,
+			rule as typeof rulesArray[number][iEntryValue],
+		]))
 	),
 )
 

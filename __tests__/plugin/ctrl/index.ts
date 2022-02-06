@@ -22,3 +22,17 @@ function tryMe (what) {
 
 	return typeof what
 }
+
+
+export type EarlyTypeDefinition = StringOrNumber | boolean
+
+export const earlyTypeAnnotation: StringOrNumber = 17
+
+type StringOrNumber = string | number
+
+export const PossiblyEarlyUse = (): Enum => Enum.enum
+export const InnocuousDangerousEarlyUse = PossiblyEarlyUse()
+
+enum Enum {
+	enum = `true`,
+}

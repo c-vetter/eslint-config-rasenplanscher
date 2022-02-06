@@ -1,5 +1,5 @@
 export type Mutable<R> = (
-	R extends DeepReadonlyArray<infer T> ? Array<T> :
+	R extends DeepReadonlyArray<infer T> ? Array<Mutable<T>> :
 	R extends DeepReadonlyObject<infer T> ? T :
 	R extends DeepReadonly<infer T> ? T :
 	R extends Readonly<infer T> ? T :

@@ -17,6 +17,8 @@ import _noExtraParens_ from './no-extra-parens'
 import _noExtraSemi_ from './no-extra-semi'
 import _noImpliedEval_ from './no-implied-eval'
 import _noInvalidThis_ from './no-invalid-this'
+import _noLossOfPrecision_ from './no-loss-of-precision'
+import _noMagicNumbers_ from './no-magic-numbers'
 import _noRedeclare_ from './no-redeclare'
 import _noShadow_ from './no-shadow'
 import _noThrowLiteral_ from './no-throw-literal'
@@ -26,11 +28,14 @@ import _noUnnecessaryQualifier_ from './no-unnecessary-qualifier'
 import _noUnnecessaryTypeArguments_ from './no-unnecessary-type-arguments'
 import _noUnnecessaryTypeAssertion_ from './no-unnecessary-type-assertion'
 import _noUnnecessaryTypeConstraint_ from './no-unnecessary-type-constraint'
+import _noUnusedExpressions_ from './no-unused-expressions'
 import _noUnusedVars_ from './no-unused-vars'
+import _noUseBeforeDefine_ from './no-use-before-define'
 import _noUselessConstructor_ from './no-useless-constructor'
 import _objectCurlySpacing_ from './object-curly-spacing'
 import _paddingLineBetweenStatements_ from './padding-line-between-statements'
 import _quotes_ from './quotes'
+import _requireAwait_ from './require-await'
 import _spaceBeforeFunctionParen_ from './space-before-function-paren'
 import _spaceInfixOps_ from './space-infix-ops'
 import _strictBooleanExpressions_ from './strict-boolean-expressions'
@@ -55,6 +60,8 @@ export default [
 	_noExtraSemi_,
 	_noImpliedEval_,
 	_noInvalidThis_,
+	_noLossOfPrecision_,
+	_noMagicNumbers_,
 	_noRedeclare_,
 	_noShadow_,
 	_noThrowLiteral_,
@@ -64,11 +71,14 @@ export default [
 	_noUnnecessaryTypeArguments_,
 	_noUnnecessaryTypeAssertion_,
 	_noUnnecessaryTypeConstraint_,
+	_noUnusedExpressions_,
 	_noUnusedVars_,
+	_noUseBeforeDefine_,
 	_noUselessConstructor_,
 	_objectCurlySpacing_,
 	_paddingLineBetweenStatements_,
 	_quotes_,
+	_requireAwait_,
 	_spaceBeforeFunctionParen_,
 	_spaceInfixOps_,
 	_strictBooleanExpressions_,
