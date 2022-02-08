@@ -42,6 +42,9 @@ const spinner = ora({
 
 //
 
+const skipArgsForExeAndScript = 2
+const scenariosOnly = process.argv.slice(skipArgsForExeAndScript)
+
 emptyDir(dPackage())
 .then(() => readJson(dRepo(`package.json`)))
 .then(({ files }:{ files:Array<string> }) => (
@@ -64,6 +67,8 @@ emptyDir(dPackage())
 .then((entries) => Promise.all(
 	entries
 	.filter((entry) => entry.isDirectory())
+	// eslint-disable-next-line @typescript-eslint/no-magic-numbers
+	.filter((dir) => scenariosOnly.length === 0 || scenariosOnly.includes(dir.name))
 	.map((dir) => prepare(dir.name)),
 ))
 .then((scenarios) => {
