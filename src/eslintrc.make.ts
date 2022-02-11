@@ -250,7 +250,7 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 				rule: { [config.ruleId]: (
 					config.activate
 					? [
-						`error`,
+						config.priority === `TASTE` ? `warn` : `error`,
 						...(
 							Array.isArray(config.optionsDangerzone) && (
 								dangerzone === true

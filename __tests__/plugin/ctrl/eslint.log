@@ -32,7 +32,7 @@ __test-results__/plugin/assertions.ts
 	54:18	error	No magic number: 1	@typescript-eslint/no-magic-numbers
 
 __test-results__/plugin/index.ts
-	1:16	error	Unexpected whitespace between function name and paren	@typescript-eslint/func-call-spacing
+	1:16	warning	Unexpected whitespace between function name and paren	@typescript-eslint/func-call-spacing
 	3:1	error	Unexpected newline between function and ( of function call	no-unexpected-multiline
 	15:10	error	'tryMe' is defined but never used	@typescript-eslint/no-unused-vars
 	16:30	error	No magic number: 1	@typescript-eslint/no-magic-numbers
@@ -41,5 +41,5 @@ __test-results__/plugin/index.ts
 	33:45	error	'Enum' was used before it was defined	@typescript-eslint/no-use-before-define
 	34:43	error	A function with a name starting with an uppercase letter should only be used as a constructor	new-cap
 
-Γ£û 38 problems (38 errors, 0 warnings)
+Γ£û 38 problems (37 errors, 1 warning)
 
