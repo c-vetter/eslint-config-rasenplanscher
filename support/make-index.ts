@@ -58,7 +58,7 @@ function buildIndex (scope:PathBuilder, ...directory:string[]) {
 				${
 					exportsList.join(`,\n\t`)
 				},
-			]
+			]\n
 		`,
 	))
 }

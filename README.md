@@ -72,6 +72,7 @@ you need to also add `@typescript-eslint/parser` to your dependencies and set th
 	}
 }
 ```
+If your project is a multi-package monorepo, see [`@typescript-eslint`'s docs on configuring a monorepo](https://typescript-eslint.io/docs/linting/monorepo).
 
 If you want to relax or strengthen your setup, you can choose from these setups (from smallest to largest):
 +	`rasenplanscher/eslintrc.important`:

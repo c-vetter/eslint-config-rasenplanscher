@@ -62,14 +62,37 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 		deactivateRule(availableConfigurations, typescript_noUnusedVars)
 	}
 
-	const parserOptions = ensureRecord(overrides?.parserOptions)
-
 	if (availableConfigurations.includes(simpleImportSort_imports)) {
 		deactivateRule(availableConfigurations, import_order)
 	}
 
 	// TODO: ensure only available configs will be added to this
 	const extend = ensureArray(overrides?.extends)
+	const parserOptions = ensureRecord(overrides?.parserOptions)
+
+	let parser : Linter.Config[`parser`] = overrides?.parser
+
+	const parserTs = `@typescript-eslint/parser`
+	const parserVue = `vue-eslint-parser`
+
+	if (parser === undefined) {
+		if (canRequire(parserTs)) {
+			parser = parserTs
+		}
+	}
+
+	if (
+		typeof providers[`eslint-plugin-vue`] === `string`
+		&& parser !== parserVue
+		&& parserOptions[`parser`] === undefined
+	) {
+		parserOptions[`parser`] = parser
+		parser = parserVue
+
+		parserOptions[`extraFileExtensions`] = [
+			`.vue`,
+		]
+	}
 
 	if (typeof providers[`eslint-plugin-import`] === `string`) {
 		if (parserOptions.sourceType === `script`) {
@@ -248,14 +271,14 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 		...overrides,
 
 		extends: extend,
-		...(
-			overrides?.parser === undefined
-			&& canRequire(`@typescript-eslint/parser`)
-			? { parser: `@typescript-eslint/parser` }
-			: {}
-		),
+		parser,
 		parserOptions,
 		plugins: ([
+			...(
+				typeof providers[`eslint-plugin-vue`] === `string`
+				? [`vue`]
+				: []
+			),
 			...usableConfigurations
 			.map((c) => c.plugin)
 			.filter((p) : p is Exclude<typeof p, 'eslint'> => p !== `eslint`),

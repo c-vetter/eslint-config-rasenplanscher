@@ -3,7 +3,7 @@ import { resolve as resolvePath } from 'path'
 
 // https://github.com/import-js/eslint-plugin-import/issues/2132
 import test, { ExecutionContext } from 'ava' // eslint-disable-line import/no-unresolved
-import { copy, emptyDir, pathExists, readdir, readFile, readJson, symlink } from 'fs-extra'
+import { copy, emptyDir, pathExists, readdir, readFile, readJson, symlink, writeJson } from 'fs-extra'
 import ora from 'ora'
 import readdirp from 'readdirp'
 
@@ -48,14 +48,22 @@ const scenariosOnly = process.argv.slice(skipArgsForExeAndScript)
 
 emptyDir(dPackage())
 .then(() => readJson(dRepo(`package.json`)))
-.then(({ files }:{ files:Array<string> }) => (
+.then((data:{ files:Array<string> }) => (
 	Promise.all(
 		[
-			`package.json`,
-			`package-lock.json`,
-			...files,
-		]
-		.map((file) => copy(dRepo(file), dPackage(file))),
+			writeJson(dPackage(`package.json`), {
+				...data,
+				// WTF! those get installed in the test directories otherwise (╯°□°）╯︵ ┻━┻)
+				devDependencies: {},
+			}),
+			...(
+				[
+					`package-lock.json`,
+					...data.files,
+				]
+				.map((file) => copy(dRepo(file), dPackage(file)))
+			),
+		],
 	)
 ))
 // .then(() => npm(`install`, dPackage(), `--production`))
