@@ -13,8 +13,9 @@ export type RuleDefinition = DeepReadonly<{
 		& Omit<EslintRule.RuleMetaData, 'docs' | 'fixable'>
 		& {
 			docs?: (
-				& Omit<Exclude<EslintRule.RuleMetaData['docs'], undefined>, 'recommended'>
+				& Omit<Exclude<EslintRule.RuleMetaData['docs'], undefined>, 'category'|'recommended'>
 				& {
+					category?: string | null // eslint-plugin-vue
 					recommended?: (
 						| Exclude<EslintRule.RuleMetaData['docs'], undefined>['recommended']
 						| 'error'
