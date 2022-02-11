@@ -1,4 +1,5 @@
 import { priority } from '../eslint/no-unused-vars'
+
 import Configuration from './no-unused-imports-ts.d'
 
 const configuration:Configuration = {

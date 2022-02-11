@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/keyword-spacing'
+
 import Configuration from './keyword-spacing.d'
 
 const configuration:Configuration = {

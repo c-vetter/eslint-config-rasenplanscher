@@ -1,7 +1,8 @@
-import { resolve as resolvePath } from 'path'
 import { spawn } from 'child_process'
+import { resolve as resolvePath } from 'path'
 
-import test, { ExecutionContext } from 'ava'
+// https://github.com/import-js/eslint-plugin-import/issues/2132
+import test, { ExecutionContext } from 'ava' // eslint-disable-line import/no-unresolved
 import { copy, emptyDir, pathExists, readdir, readFile, readJson, symlink } from 'fs-extra'
 import ora from 'ora'
 import readdirp from 'readdirp'
@@ -180,6 +181,10 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 						testResults,
 					)
 					.replace(/\\/g, `/`)
+					.replace(
+						p.endsWith(`eslint.log`) ? /[ ]{2,}/g : `\t`,
+						`\t`,
+					)
 				),
 				`aberration in ${p}`,
 			))),

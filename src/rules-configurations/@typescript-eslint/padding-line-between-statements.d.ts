@@ -1,5 +1,4 @@
-import { RuleConfigurationOverride } from '../../../support/Rule'
-
+import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/padding-line-between-statements.d'
 
 export type PaddingType = "any" | "never" | "always"

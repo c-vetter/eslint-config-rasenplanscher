@@ -3,7 +3,7 @@
 import { spawn } from 'child_process'
 
 import { printer } from '@spec2ts/core'
-import { parseSchema, JSONSchema } from '@spec2ts/jsonschema'
+import { JSONSchema, parseSchema } from '@spec2ts/jsonschema'
 import { outputFile, pathExists } from 'fs-extra'
 import inquirer from 'inquirer'
 import autocomplete from 'inquirer-autocomplete-prompt'
@@ -11,9 +11,9 @@ import open from 'open'
 import { outdent } from 'outdent'
 
 import { importable, root, support } from './paths'
-import priorities, { IMPORTANT, HELPFUL, TASTE, Priority } from './priorities'
-import { RuleBundle, RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOff, RuleConfigurationOptions, RuleConfigurationSet, RuleData } from './Rule'
-import { Mutable } from './utility'
+import priorities, { HELPFUL, IMPORTANT, Priority, TASTE } from './priorities'
+import { RuleBundle, RuleConfiguration, RuleConfigurationIgnore, RuleConfigurationOff, RuleConfigurationOptions, RuleConfigurationSet, RuleData } from './Rule.d'
+import { Mutable } from './utility.d'
 
 
 inquirer.registerPrompt(`autocomplete`, autocomplete)
@@ -78,7 +78,7 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 	.then(([isBase, ast]) => [isBase, printer.printNodes(ast)] as const)
 	.then(([isBase, types]) => outdent`
 		import { ${ isBase ? baseTypeToken : baseTypeTokenExtender } } from '${
-			importable(support(`Rule`), item.typingFile)
+			importable(support(`Rule.d`), item.typingFile)
 		}'
 
 		${

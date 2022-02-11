@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/no-array-constructor'
+
 import Configuration from './no-array-constructor.d'
 
 const configuration:Configuration = {

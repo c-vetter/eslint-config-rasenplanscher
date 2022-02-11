@@ -1,7 +1,7 @@
 import { outputFile } from 'fs-extra'
 import { outdent } from 'outdent'
-import { canRequire } from './canRequire'
 
+import { canRequire } from './canRequire'
 import { importable, src, support } from './paths'
 import { providers } from './providers'
 

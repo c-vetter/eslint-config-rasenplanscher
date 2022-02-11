@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/default-param-last'
+
 import Configuration from './default-param-last.d'
 
 const configuration:Configuration = {

@@ -1,4 +1,5 @@
 import baseConfiguration, { optionsObject } from '../eslint/no-use-before-define'
+
 import Configuration from './no-use-before-define.d'
 
 const configuration:Configuration = {

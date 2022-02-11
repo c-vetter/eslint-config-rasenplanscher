@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/indent'
+
 import Configuration from './indent.d'
 
 const configuration:Configuration = {

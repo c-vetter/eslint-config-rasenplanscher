@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/no-throw-literal'
+
 import Configuration from './no-throw-literal.d'
 
 const configuration:Configuration = {

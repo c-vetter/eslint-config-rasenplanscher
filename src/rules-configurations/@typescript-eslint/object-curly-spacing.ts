@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/object-curly-spacing'
+
 import Configuration from './object-curly-spacing.d'
 
 const configuration:Configuration = {

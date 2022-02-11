@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/no-invalid-this'
+
 import Configuration from './no-invalid-this.d'
 
 const configuration:Configuration = {

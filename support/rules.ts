@@ -1,8 +1,9 @@
 import { pathExistsSync } from 'fs-extra'
+
 import rawRules from './.rules-definitions'
 import { rulesConfigurations, rulesDefinitions } from './paths'
 import { eslint, providers } from './providers'
-import { RuleData, RuleDefinition } from './Rule'
+import { RuleData, RuleDefinition } from './Rule.d'
 
 type RuleDataRaw = Omit<RuleData, 'exists' | 'complete'>
 

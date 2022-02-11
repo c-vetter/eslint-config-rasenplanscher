@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/comma-spacing'
+
 import Configuration from './comma-spacing.d'
 
 const configuration:Configuration = {

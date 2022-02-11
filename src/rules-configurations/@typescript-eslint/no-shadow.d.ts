@@ -1,5 +1,4 @@
-import { RuleConfigurationOverride } from '../../../support/Rule'
-
+import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/no-shadow.d'
 
 export type Options = ({

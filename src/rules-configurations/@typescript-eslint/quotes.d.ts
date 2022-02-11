@@ -1,5 +1,4 @@
-import { RuleConfigurationOverride } from '../../../support/Rule'
-
+import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/quotes.d'
 
 export type Options = (("single" | "double" | "backtick") | (("avoid-escape") | {

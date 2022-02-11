@@ -1,5 +1,4 @@
-import { RuleConfigurationOverride } from '../../../support/Rule'
-
+import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/require-await.d'
 
 export type Options = never[]

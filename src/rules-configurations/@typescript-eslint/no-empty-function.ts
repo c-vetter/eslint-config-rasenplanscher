@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/no-empty-function'
+
 import Configuration from './no-empty-function.d'
 
 const configuration:Configuration = {

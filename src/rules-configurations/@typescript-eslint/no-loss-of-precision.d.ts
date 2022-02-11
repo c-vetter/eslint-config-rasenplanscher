@@ -1,5 +1,4 @@
-import { RuleConfigurationOverride } from '../../../support/Rule'
-
+import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/no-loss-of-precision.d'
 
 export type Options = never[]

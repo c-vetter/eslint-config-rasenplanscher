@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/quotes'
+
 import Configuration from './quotes.d'
 
 const configuration:Configuration = {

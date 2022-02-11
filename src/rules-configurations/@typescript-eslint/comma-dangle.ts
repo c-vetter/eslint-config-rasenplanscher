@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/comma-dangle'
+
 import Configuration from './comma-dangle.d'
 
 const configuration:Configuration = {

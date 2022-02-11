@@ -3,9 +3,9 @@
 import inquirer from 'inquirer'
 import autocomplete from 'inquirer-autocomplete-prompt'
 
-import { EslintProvider, providers } from './providers'
 import { processRule } from './edit-config.processing'
-import { RuleData } from './Rule'
+import { EslintProvider, providers } from './providers'
+import { RuleData } from './Rule.d'
 import { rules, ruleToBundle } from './rules'
 
 export const BACK = `👈 BACK`

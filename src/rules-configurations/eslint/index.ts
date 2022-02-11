@@ -106,6 +106,7 @@ import _noProto_ from './no-proto'
 import _noPrototypeBuiltins_ from './no-prototype-builtins'
 import _noRedeclare_ from './no-redeclare'
 import _noRegexSpaces_ from './no-regex-spaces'
+import _noRestrictedImports_ from './no-restricted-imports'
 import _noRestrictedProperties_ from './no-restricted-properties'
 import _noReturnAssign_ from './no-return-assign'
 import _noSelfAssign_ from './no-self-assign'
@@ -173,6 +174,7 @@ import _restSpreadSpacing_ from './rest-spread-spacing'
 import _semiSpacing_ from './semi-spacing'
 import _semiStyle_ from './semi-style'
 import _semi_ from './semi'
+import _sortImports_ from './sort-imports'
 import _sortKeys_ from './sort-keys'
 import _spaceBeforeBlocks_ from './space-before-blocks'
 import _spaceBeforeFunctionParen_ from './space-before-function-paren'
@@ -297,6 +299,7 @@ export default [
 	_noPrototypeBuiltins_,
 	_noRedeclare_,
 	_noRegexSpaces_,
+	_noRestrictedImports_,
 	_noRestrictedProperties_,
 	_noReturnAssign_,
 	_noSelfAssign_,
@@ -364,6 +367,7 @@ export default [
 	_semiSpacing_,
 	_semiStyle_,
 	_semi_,
+	_sortImports_,
 	_sortKeys_,
 	_spaceBeforeBlocks_,
 	_spaceBeforeFunctionParen_,

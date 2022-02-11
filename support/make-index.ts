@@ -2,7 +2,7 @@ import { camelCase } from "case-anything"
 import { Dirent, outputFile, pathExistsSync, readdir } from 'fs-extra'
 import { outdent } from "outdent"
 
-import { rulesDefinitions, rulesConfigurations, PathBuilder, trimTs } from './paths'
+import { PathBuilder, rulesConfigurations, rulesDefinitions, trimTs } from './paths'
 
 
 const roots = {

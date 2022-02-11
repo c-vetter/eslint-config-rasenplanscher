@@ -1,4 +1,4 @@
-import { RuleConfiguration } from '../../../support/Rule'
+import { RuleConfiguration } from '../../../support/Rule.d'
 
 export type PaddingType = "any" | "never" | "always"
 

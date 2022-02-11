@@ -1,5 +1,5 @@
-import { ruleToBundle, rules } from './rules'
 import { generateTypes } from './edit-config.processing'
+import { rules, ruleToBundle } from './rules'
 
 rules()
 .filter((rule) => rule.exists)

@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/func-call-spacing'
+
 import Configuration from './func-call-spacing.d'
 
 const configuration:Configuration = {

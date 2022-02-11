@@ -1,5 +1,4 @@
-import { RuleConfigurationOverride } from '../../../support/Rule'
-
+import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/comma-dangle.d'
 
 export type Value = "always-multiline" | "always" | "never" | "only-multiline"

@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/lines-between-class-members'
+
 import Configuration from './lines-between-class-members.d'
 
 const configuration:Configuration = {

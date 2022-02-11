@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/no-extra-parens'
+
 import Configuration from './no-extra-parens.d'
 
 const configuration:Configuration = {

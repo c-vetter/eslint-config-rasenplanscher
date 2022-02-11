@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/require-await'
+
 import Configuration from './require-await.d'
 
 const configuration:Configuration = {

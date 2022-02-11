@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/no-loss-of-precision'
+
 import Configuration from './no-loss-of-precision.d'
 
 const configuration:Configuration = {

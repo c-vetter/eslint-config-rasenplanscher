@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/init-declarations'
+
 import Configuration from './init-declarations.d'
 
 const configuration:Configuration = {

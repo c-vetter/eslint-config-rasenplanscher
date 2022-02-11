@@ -1,4 +1,5 @@
 import baseConfiguration, { optionsObject } from '../eslint/dot-notation'
+
 import Configuration from './dot-notation.d'
 
 const configuration:Configuration = {

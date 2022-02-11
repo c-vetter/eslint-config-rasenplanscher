@@ -1,7 +1,7 @@
-import ava from 'ava'
-import config from 'eslint-config-rasenplanscher'
-import eslint from 'eslint'
 import outdent from 'outdent'
+import config from 'eslint-config-rasenplanscher'
+import ava from 'ava'
+import eslint from 'eslint'
 
 export default {
 	ava,

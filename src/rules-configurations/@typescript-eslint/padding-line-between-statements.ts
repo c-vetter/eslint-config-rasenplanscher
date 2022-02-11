@@ -1,5 +1,6 @@
 import baseConfiguration, { optionsList as optionsListBase } from '../eslint/padding-line-between-statements'
 import { StatementType as StatementTypeBase } from '../eslint/padding-line-between-statements.d'
+
 import Configuration, { Options, StatementType } from './padding-line-between-statements.d'
 
 

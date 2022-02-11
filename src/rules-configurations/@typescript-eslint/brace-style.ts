@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/brace-style'
+
 import Configuration from './brace-style.d'
 
 const configuration:Configuration = {

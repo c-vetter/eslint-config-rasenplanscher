@@ -1,4 +1,4 @@
-import { RuleConfiguration } from '../../../support/Rule'
+import { RuleConfiguration } from '../../../support/Rule.d'
 
 export type Options = ((("always" | "never") | {
 	keywords?: "always" | "never" | "off"

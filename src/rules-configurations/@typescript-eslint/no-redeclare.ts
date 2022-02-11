@@ -1,4 +1,5 @@
 import baseConfiguration, { optionsObject } from '../eslint/no-redeclare'
+
 import Configuration from './no-redeclare.d'
 
 const configuration:Configuration = {

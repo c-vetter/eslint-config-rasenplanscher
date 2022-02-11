@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/no-unused-vars'
+
 import Configuration from './no-unused-vars.d'
 
 const configuration:Configuration = {

@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/no-extra-semi'
+
 import Configuration from './no-extra-semi.d'
 
 const configuration:Configuration = {

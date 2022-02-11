@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/no-useless-constructor'
+
 import Configuration from './no-useless-constructor.d'
 
 const configuration:Configuration = {

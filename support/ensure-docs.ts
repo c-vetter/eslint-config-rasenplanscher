@@ -1,6 +1,7 @@
-import { ruleToBundle, rules } from './rules'
-import { generateDoc } from './edit-config.processing'
 import { pathExistsSync } from 'fs-extra'
+
+import { generateDoc } from './edit-config.processing'
+import { rules, ruleToBundle } from './rules'
 
 rules()
 .filter((rule) => rule.exists)

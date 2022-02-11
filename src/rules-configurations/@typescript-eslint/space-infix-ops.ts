@@ -1,4 +1,5 @@
 import baseConfiguration from '../eslint/space-infix-ops'
+
 import Configuration from './space-infix-ops.d'
 
 const configuration:Configuration = {

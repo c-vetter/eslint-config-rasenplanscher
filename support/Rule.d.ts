@@ -1,8 +1,8 @@
 import { Rule as EslintRule } from 'eslint'
 
-import { DeepReadonly } from './utility'
 import { Priority } from './priorities'
 import { EslintProvider } from './providers'
+import { DeepReadonly } from './utility.d'
 
 
 export type RuleDefinition = DeepReadonly<{
@@ -49,7 +49,7 @@ export type RuleBundle = {
 }
 
 
-type RuleConfigurationBase<R extends string = string, P extends string = string> = {
+export type RuleConfigurationBase<R extends string = string, P extends string = string> = {
 	ruleId: R
 	providerId: P
 }

@@ -20,6 +20,7 @@ import _noInvalidThis_ from './no-invalid-this'
 import _noLossOfPrecision_ from './no-loss-of-precision'
 import _noMagicNumbers_ from './no-magic-numbers'
 import _noRedeclare_ from './no-redeclare'
+import _noRestrictedImports_ from './no-restricted-imports'
 import _noShadow_ from './no-shadow'
 import _noThrowLiteral_ from './no-throw-literal'
 import _noUnnecessaryBooleanLiteralCompare_ from './no-unnecessary-boolean-literal-compare'
@@ -63,6 +64,7 @@ export default [
 	_noLossOfPrecision_,
 	_noMagicNumbers_,
 	_noRedeclare_,
+	_noRestrictedImports_,
 	_noShadow_,
 	_noThrowLiteral_,
 	_noUnnecessaryBooleanLiteralCompare_,

@@ -1,12 +1,17 @@
 import { Linter } from 'eslint'
 
-import rulesConfigurations from './rules-configurations'
+import { canRequire } from '../support/canRequire'
+import { RuleConfiguration, RuleConfigurationBase, RuleConfigurationIgnored, RuleConfigurationInactive, RuleConfigurationOptions, RuleConfigurationOverride, RuleConfigurationSet } from '../support/Rule.d'
+
 import { providers } from './.providers'
 import { Priority } from './priorities'
-import { RuleConfiguration, RuleConfigurationBase, RuleConfigurationIgnored, RuleConfigurationOptions, RuleConfigurationOverride, RuleConfigurationSet } from '../support/Rule'
-import { canRequire } from '../support/canRequire'
-
+import rulesConfigurations from './rules-configurations'
+import typescript_noDuplicateImports from './rules-configurations/@typescript-eslint/no-duplicate-imports'
 import typescript_noUnusedVars from './rules-configurations/@typescript-eslint/no-unused-vars'
+import eslint_noDuplicateImports from './rules-configurations/eslint/no-duplicate-imports'
+import import_noDuplicates from './rules-configurations/import/no-duplicates'
+import import_order from './rules-configurations/import/order'
+import simpleImportSort_imports from './rules-configurations/simple-import-sort/imports'
 import unusedImports_noUnusedVars from './rules-configurations/unused-imports/no-unused-vars'
 
 type Configuration = typeof rulesConfigurations[number]
@@ -27,10 +32,12 @@ type Options = {
 
 //
 
-export default function makeEslintrc (configuration:Options) : Linter.Config
-export default function makeEslintrc (...priorities:Priority[]) : Linter.Config
+export default makeEslintrc
 
-export default function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Priority[]) : Linter.Config {
+function makeEslintrc (configuration:Options) : Linter.Config
+function makeEslintrc (...priorities:Priority[]) : Linter.Config
+
+function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Priority[]) : Linter.Config {
 	if (typeof configuration === `string`) {
 		return makeEslintrc({
 			priorities: [
@@ -58,6 +65,44 @@ export default function makeEslintrc (configuration:(Options | Priority), ...mor
 			availableConfigurations.indexOf(typescript_noUnusedVars),
 			singleItem,
 		)
+	}
+
+	const parserOptions : Linter.ParserOptions = {...(overrides?.parserOptions ?? {})}
+
+	// TODO: ensure only available configs will be added to this
+	const extend : Array<string> = [...(overrides?.extends ?? [])]
+
+	if (typeof providers[`eslint-plugin-import`] === `string`) {
+		if (parserOptions.sourceType === `script`) {
+			throw new Error(
+				// no outdent in order to not have dependencies for a config
+				`Cannot use \`eslint-plugin-import\` with source type script.`
+				+ `See https://github.com/import-js/eslint-plugin-import/blob/68cea3e6b6fe5fd61e5cf2e2c7c0be9e8dc597cb/config/recommended.js#L22`,
+			)
+		}
+
+		parserOptions.sourceType = `module`
+
+		const minEcmaVersion = 2018
+
+		if (
+			parserOptions.ecmaVersion !== undefined
+			&& parserOptions.ecmaVersion !== `latest`
+			&& parserOptions.ecmaVersion < minEcmaVersion
+		) {
+			throw new Error(
+				// no outdent in order to not have dependencies for a config
+				`Cannot use \`eslint-plugin-import\` with ecma version less than 2018`
+				+ `See https://github.com/import-js/eslint-plugin-import/blob/68cea3e6b6fe5fd61e5cf2e2c7c0be9e8dc597cb/config/recommended.js#L22`,
+			)
+		}
+
+		parserOptions.ecmaVersion = parserOptions.ecmaVersion ?? minEcmaVersion
+
+		if (typeof providers[`@typescript-eslint/eslint-plugin`] === `string`) {
+			// TODO: ensure only available configs will be added to this
+			extend.push(`plugin:import/typescript`)
+		}
 	}
 
 	const overrideConfigurations:RuleConfigurationOverride[] = availableConfigurations.filter(
@@ -203,6 +248,8 @@ export default function makeEslintrc (configuration:(Options | Priority), ...mor
 			? { parser: `@typescript-eslint/parser` }
 			: {}
 		),
+		parserOptions,
+		extends: extend,
 		plugins: ([
 			...usableConfigurations
 			.map((c) => c.plugin)

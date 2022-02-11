@@ -1,4 +1,5 @@
 import baseConfiguration, { optionsObject } from '../eslint/no-magic-numbers'
+
 import Configuration from './no-magic-numbers.d'
 
 const configuration:Configuration = {
