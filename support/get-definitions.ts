@@ -2,7 +2,7 @@ import { Linter } from 'eslint'
 import { emptyDirSync, outputFile } from 'fs-extra'
 
 import { rulesDefinitions } from './paths'
-import { parse, plugins } from "./providers"
+import { parse, plugins } from './providers'
 
 
 emptyDirSync(rulesDefinitions())

@@ -1,6 +1,6 @@
-import { camelCase } from "case-anything"
+import { camelCase } from 'case-anything'
 import { Dirent, outputFile, pathExistsSync, readdir } from 'fs-extra'
-import { outdent } from "outdent"
+import { outdent } from 'outdent'
 
 import { PathBuilder, rulesConfigurations, rulesDefinitions, trimTs } from './paths'
 

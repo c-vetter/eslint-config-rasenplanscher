@@ -62,14 +62,14 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 		deactivateRule(availableConfigurations, typescript_noUnusedVars)
 	}
 
-	const parserOptions : Linter.ParserOptions = {...(overrides?.parserOptions ?? {})}
+	const parserOptions = ensureRecord(overrides?.parserOptions)
 
 	if (availableConfigurations.includes(simpleImportSort_imports)) {
 		deactivateRule(availableConfigurations, import_order)
 	}
 
 	// TODO: ensure only available configs will be added to this
-	const extend : Array<string> = [...(overrides?.extends ?? [])]
+	const extend = ensureArray(overrides?.extends)
 
 	if (typeof providers[`eslint-plugin-import`] === `string`) {
 		if (parserOptions.sourceType === `script`) {
@@ -246,6 +246,8 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 
 	return {
 		...overrides,
+
+		extends: extend,
 		...(
 			overrides?.parser === undefined
 			&& canRequire(`@typescript-eslint/parser`)
@@ -253,7 +255,6 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 			: {}
 		),
 		parserOptions,
-		extends: extend,
 		plugins: ([
 			...usableConfigurations
 			.map((c) => c.plugin)
@@ -268,9 +269,30 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 	}
 }
 
+
+//
+
+
 function isOverride (config:RuleConfiguration | RuleConfigurationOverride) : config is RuleConfigurationOverride {
 	return Boolean((config as RuleConfigurationOverride).base)
 }
+
+function ensureArray<T> (data?:(Array<T> | T)) : Array<T> {
+	if (data === undefined) return []
+	if (Array.isArray(data)) return [...data]
+
+	return [data]
+}
+
+function ensureRecord<T extends Record<string, unknown> = Record<string, unknown>> (data?:T) : Partial<T> {
+	if (data === undefined) return {}
+
+	return {...data}
+}
+
+
+//
+
 
 function deactivateRule (array:Array<RuleConfiguration | RuleConfigurationOverride>, item: Configuration) : void {
 	if (!array.includes(item)) return
