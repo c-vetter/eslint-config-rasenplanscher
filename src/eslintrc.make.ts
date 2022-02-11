@@ -1,3 +1,5 @@
+/// <reference path='../support/_Object.d.ts'/>
+
 import { Linter } from 'eslint'
 
 import { canRequire } from '../support/canRequire'
@@ -14,7 +16,8 @@ import import_order from './rules-configurations/import/order'
 import simpleImportSort_imports from './rules-configurations/simple-import-sort/imports'
 import unusedImports_noUnusedVars from './rules-configurations/unused-imports/no-unused-vars'
 
-type Configuration = typeof rulesConfigurations[number]
+type Configurations = typeof rulesConfigurations
+type Configuration = Configurations[number]
 
 type RuleId = (
 	Configuration extends RuleConfigurationBase<infer I>
@@ -55,19 +58,15 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 
 	const availableConfigurations = rulesConfigurations.filter((config) => providers[config.providerId])
 
-	if (
-		availableConfigurations.includes(unusedImports_noUnusedVars)
-		&& availableConfigurations.includes(typescript_noUnusedVars)
-	) {
-		const singleItem = 1
-
-		availableConfigurations.splice(
-			availableConfigurations.indexOf(typescript_noUnusedVars),
-			singleItem,
-		)
+	if (availableConfigurations.includes(unusedImports_noUnusedVars)) {
+		deactivateRule(availableConfigurations, typescript_noUnusedVars)
 	}
 
 	const parserOptions : Linter.ParserOptions = {...(overrides?.parserOptions ?? {})}
+
+	if (availableConfigurations.includes(simpleImportSort_imports)) {
+		deactivateRule(availableConfigurations, import_order)
+	}
 
 	// TODO: ensure only available configs will be added to this
 	const extend : Array<string> = [...(overrides?.extends ?? [])]
@@ -98,6 +97,11 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 		}
 
 		parserOptions.ecmaVersion = parserOptions.ecmaVersion ?? minEcmaVersion
+
+		if (availableConfigurations.includes(import_noDuplicates)) {
+			deactivateRule(availableConfigurations, eslint_noDuplicateImports)
+			deactivateRule(availableConfigurations, typescript_noDuplicateImports)
+		}
 
 		if (typeof providers[`@typescript-eslint/eslint-plugin`] === `string`) {
 			// TODO: ensure only available configs will be added to this
@@ -266,4 +270,47 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 
 function isOverride (config:RuleConfiguration | RuleConfigurationOverride) : config is RuleConfigurationOverride {
 	return Boolean((config as RuleConfigurationOverride).base)
+}
+
+function deactivateRule (array:Array<RuleConfiguration | RuleConfigurationOverride>, item: Configuration) : void {
+	if (!array.includes(item)) return
+
+	const singleItem = 1
+
+	array.splice(
+		array.indexOf(item),
+		singleItem,
+		deactivated(item),
+	)
+}
+
+function deactivated<
+	R extends string = string,
+	P extends string = string,
+	O extends unknown[] = unknown[],
+> (
+	configuration:RuleConfiguration<R, P, O> | RuleConfigurationOverride<RuleConfiguration, R, P, O>,
+) : (
+	| RuleConfigurationIgnored<R, P>
+	| RuleConfigurationInactive<R, P>
+	| RuleConfigurationOverride<RuleConfiguration, R, P, O>
+) {
+	if (isIgnored(configuration)) {
+		return configuration
+	}
+
+	return {
+		...Object.fromEntries(
+			Object.entries(configuration)
+			.filter(([key]) => !key.startsWith(`options`)),
+		),
+
+		activate: false as const,
+
+		// need to assert because the chain entries→filter→fromEntries is unable to preserve the exact type association between key and value
+	} as RuleConfigurationInactive<R, P>
+}
+
+function isIgnored (configuration:RuleConfiguration | RuleConfigurationOverride) : configuration is RuleConfigurationIgnored {
+	return configuration.ignore ?? false
 }
