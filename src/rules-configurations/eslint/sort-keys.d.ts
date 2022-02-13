@@ -1,10 +1,10 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (("asc" | "desc") | {
+export type Options = Array<("asc" | "desc") | {
 	caseSensitive?: boolean
 	natural?: boolean
 	minKeys?: number
-})[]
+}>
 
 type Configuration = RuleConfiguration<'sort-keys', 'eslint', Options>
 

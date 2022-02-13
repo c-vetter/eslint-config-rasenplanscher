@@ -85,10 +85,10 @@ emptyDir(dPackage())
 
 	const resultView = dRepo(testResults)
 
-	pathExists(resultView).then((exists) => {
+	void pathExists(resultView).then((exists) => {
 		if (exists) return
 
-		symlink(ddTmp(`.`)(), resultView, `junction`)
+		void symlink(ddTmp(`.`)(), resultView, `junction`)
 	})
 
 	return scenarios

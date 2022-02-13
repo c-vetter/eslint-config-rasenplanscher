@@ -5,10 +5,10 @@ export type BasicConfig = ("always" | "never" | "consistent") | {
 	minItems?: number | null
 }
 
-export type Options = ((BasicConfig | {
+export type Options = Array<BasicConfig | {
 	ArrayExpression?: BasicConfig
 	ArrayPattern?: BasicConfig
-}))[]
+}>
 
 type Configuration = RuleConfiguration<'array-element-newline', 'eslint', Options>
 

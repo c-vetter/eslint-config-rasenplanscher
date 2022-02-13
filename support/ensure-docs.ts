@@ -6,4 +6,4 @@ import { rules, ruleToBundle } from './rules'
 rules()
 .filter((rule) => rule.exists)
 .filter((rule) => !pathExistsSync(rule.reasonFile))
-.forEach((rule) => generateDoc(rule, ruleToBundle(rule)))
+.forEach((rule) => void generateDoc(rule, ruleToBundle(rule)))

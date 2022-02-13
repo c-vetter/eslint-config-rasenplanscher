@@ -8,7 +8,7 @@ import { providers } from './providers'
 const exportsList = providers.map((p) => `'${p.id}': ${canRequire.name}('${p.id}') && '${p.name}',`)
 const providersFile = src(`.providers.ts`)
 
-outputFile(
+void outputFile(
 	providersFile,
 	outdent`
 		import { ${canRequire.name} } from '${

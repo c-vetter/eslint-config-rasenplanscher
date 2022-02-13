@@ -1,7 +1,7 @@
 import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/no-extra-parens.d'
 
-export type Options = (("functions"))[] | (("all") | {
+export type Options = Array<"functions"> | Array<("all") | {
 	conditionalAssign?: boolean
 	nestedBinaryExpressions?: boolean
 	returnAssign?: boolean
@@ -10,7 +10,7 @@ export type Options = (("functions"))[] | (("all") | {
 	enforceForSequenceExpressions?: boolean
 	enforceForNewInMemberExpressions?: boolean
 	enforceForFunctionPrototypeMethods?: boolean
-})[]
+}>
 
 type Configuration = RuleConfigurationOverride<BaseConfiguration, '@typescript-eslint/no-extra-parens', '@typescript-eslint/eslint-plugin', Options>
 

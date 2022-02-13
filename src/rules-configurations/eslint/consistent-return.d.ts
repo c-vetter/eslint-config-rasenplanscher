@@ -1,8 +1,8 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	treatUndefinedAsUnspecified?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'consistent-return', 'eslint', Options>
 

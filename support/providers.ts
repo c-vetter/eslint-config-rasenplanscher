@@ -17,12 +17,14 @@ export type EslintProvider = Eslint | EslintPlugin
 
 const skipCompleteMatch = 1
 
-export const plugins: EslintPlugin[] = (
+export const plugins: Array<EslintPlugin> = (
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
 	Object.keys(readJsonSync(root(`package.json`)).devDependencies)
 	.filter((d) => d.includes(`eslint-plugin`))
 	.map((id) => ({
 		id,
 		name: (
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			/(?:(@[^/]+)\/)?eslint-plugin(?:-(.+))?/
 			.exec(id)! // previous filter ensures that this is non-null
 			.slice(skipCompleteMatch)
@@ -36,7 +38,7 @@ export const plugins: EslintPlugin[] = (
 	}))
 )
 
-export const providers: EslintProvider[] = [ eslint, ...plugins ]
+export const providers: Array<EslintProvider> = [ eslint, ...plugins ]
 
 export function parse (ruleId:string) {
 	const provider = plugins.find((p) => ruleId.startsWith(p.namespace))

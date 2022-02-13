@@ -1,12 +1,12 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (("always" | "ignorePackages" | "never"))[] | (("always" | "ignorePackages" | "never") | {
+export type Options = Array<"always" | "ignorePackages" | "never"> | Array<("always" | "ignorePackages" | "never") | {
 	pattern?: object
 	ignorePackages?: boolean
-})[] | ({
+}> | Array<{
 	pattern?: object
 	ignorePackages?: boolean
-})[] | (object)[] | (("always" | "ignorePackages" | "never") | object)[]
+}> | Array<object> | Array<("always" | "ignorePackages" | "never") | object>
 
 type Configuration = RuleConfiguration<'import/extensions', 'eslint-plugin-import', Options>
 

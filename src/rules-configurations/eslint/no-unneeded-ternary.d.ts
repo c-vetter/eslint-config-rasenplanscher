@@ -1,8 +1,8 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	defaultAssignment?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'no-unneeded-ternary', 'eslint', Options>
 

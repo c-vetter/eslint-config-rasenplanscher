@@ -9,7 +9,7 @@ type RuleDataRaw = Omit<RuleData, 'exists' | 'complete'>
 
 const allRules = rawRules.map(ruleData)
 
-let rulesCurrent:RuleData[] = []
+let rulesCurrent:Array<RuleData> = []
 
 export function rules () {
 	rulesCurrent = allRules.map(ruleStatus)
@@ -66,13 +66,7 @@ export function ruleToBundle (data:RuleData) {
 		return false
 	})
 
-	// i* = index for *
-	const iFirstItem = 0
-
-	const base = (
-		all.find(({ provider }) => provider === eslint)
-		?? all[iFirstItem]
-	)! // at least `data` itself will always be in `all`
+	const base = all.find(({ provider }) => provider === eslint) ?? data
 
 	return {
 		all,

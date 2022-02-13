@@ -1,14 +1,14 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	newIsCap?: boolean
 	capIsNew?: boolean
-	newIsCapExceptions?: string[]
+	newIsCapExceptions?: Array<string>
 	newIsCapExceptionPattern?: string
-	capIsNewExceptions?: string[]
+	capIsNewExceptions?: Array<string>
 	capIsNewExceptionPattern?: string
 	properties?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'new-cap', 'eslint', Options>
 

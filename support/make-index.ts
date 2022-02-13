@@ -18,7 +18,7 @@ buildIndices(roots[root])
 	console.error(error)
 })
 
-function buildIndices (scope:PathBuilder, ...directory:string[]): ReturnType<typeof buildIndex> {
+function buildIndices (scope:PathBuilder, ...directory:Array<string>): ReturnType<typeof buildIndex> {
 	return readdir(scope(...directory), { withFileTypes: true })
 	.then((entries) => Promise.all(
 		entries
@@ -30,7 +30,7 @@ function buildIndices (scope:PathBuilder, ...directory:string[]): ReturnType<typ
 
 const indexName = `index.ts`
 
-function buildIndex (scope:PathBuilder, ...directory:string[]) {
+function buildIndex (scope:PathBuilder, ...directory:Array<string>) {
 	return readdir(scope(...directory), { withFileTypes: true })
 	.then((entries) => entries.filter((entry) => entry.name !== indexName))
 	.then((entries) => [

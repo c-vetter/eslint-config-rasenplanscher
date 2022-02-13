@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (("unix" | "windows"))[]
+export type Options = Array<"unix" | "windows">
 
 type Configuration = RuleConfiguration<'linebreak-style', 'eslint', Options>
 

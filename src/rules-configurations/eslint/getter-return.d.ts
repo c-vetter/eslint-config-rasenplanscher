@@ -1,8 +1,8 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	allowImplicit?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'getter-return', 'eslint', Options>
 

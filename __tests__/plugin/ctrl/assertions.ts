@@ -1,14 +1,14 @@
 type Foo = 3
 
 // bad
-const foox: Foo = 3 as 3
+const foox: Foo = 3 as const
 // bad
 const fooy = 3 as Foo
 // bad ‑ probably a different rule since this is an annotation, not an assertion
 const fooz: Foo = 3
 
 // bad
-const fooa = <3>3
+const fooa = <const>3
 // bad
 const foob = <Foo>3
 
@@ -40,9 +40,9 @@ function fook (x: number | undefined): number {
 const foos = fook(3)
 
 // good
-const vy = 1 as 1
+const vy = 1 as const
 // bad
-const cy = 1 as 1
+const cy = 1 as const
 
 const cx = 1
 

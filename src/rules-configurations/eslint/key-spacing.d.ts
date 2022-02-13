@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (({
+export type Options = Array<{
 	align?: ("colon" | "value") | {
 		mode?: "strict" | "minimum"
 		on?: "colon" | "value"
@@ -44,7 +44,7 @@ export type Options = (({
 		beforeColon?: boolean
 		afterColon?: boolean
 	}
-}))[]
+}>
 
 type Configuration = RuleConfiguration<'key-spacing', 'eslint', Options>
 

@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (("all"))[] | (("multi" | "multi-line" | "multi-or-nest") | ("consistent"))[]
+export type Options = Array<"all"> | Array<("multi" | "multi-line" | "multi-or-nest") | ("consistent")>
 
 type Configuration = RuleConfiguration<'curly', 'eslint', Options>
 

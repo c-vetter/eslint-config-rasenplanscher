@@ -3,7 +3,7 @@ import inquirer from 'inquirer'
 import { BACK, DONE, random, randomIncomplete, randomNew, scoped, scopedNew, select, selectNew } from './edit-config.strategies'
 
 
-inquirer.prompt([
+void inquirer.prompt([
 	{
 		type: `list`,
 		name: `strategy`,

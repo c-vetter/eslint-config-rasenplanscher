@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (("always" | "as-needed"))[]
+export type Options = Array<"always" | "as-needed">
 
 type Configuration = RuleConfiguration<'radix', 'eslint', Options>
 

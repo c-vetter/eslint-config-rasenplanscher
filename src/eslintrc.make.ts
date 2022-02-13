@@ -1,16 +1,16 @@
-/// <reference path='../support/_Object.d.ts'/>
-
 import { Linter } from 'eslint'
 
 import { canRequire } from '../support/canRequire'
-import { RuleConfiguration, RuleConfigurationBase, RuleConfigurationIgnored, RuleConfigurationInactive, RuleConfigurationOptions, RuleConfigurationOverride, RuleConfigurationSet } from '../support/Rule.d'
+import { RuleConfiguration, RuleConfigurationActive, RuleConfigurationBase, RuleConfigurationIgnored, RuleConfigurationInactive, RuleConfigurationOptions, RuleConfigurationOverride, RuleConfigurationSet } from '../support/Rule.d'
 
 import { providers } from './.providers'
 import { Priority } from './priorities'
 import rulesConfigurations from './rules-configurations'
 import typescript_noDuplicateImports from './rules-configurations/@typescript-eslint/no-duplicate-imports'
+import typescript_noMeaninglessVoidOperator from './rules-configurations/@typescript-eslint/no-meaningless-void-operator'
 import typescript_noUnusedVars from './rules-configurations/@typescript-eslint/no-unused-vars'
 import eslint_noDuplicateImports from './rules-configurations/eslint/no-duplicate-imports'
+import eslint_noVoid from './rules-configurations/eslint/no-void'
 import import_noDuplicates from './rules-configurations/import/no-duplicates'
 import import_order from './rules-configurations/import/order'
 import simpleImportSort_imports from './rules-configurations/simple-import-sort/imports'
@@ -25,11 +25,11 @@ type RuleId = (
 	: never
 )
 
-type Dangerzone = RuleId[] | boolean
+type Dangerzone = Array<RuleId> | boolean
 
 type Options = {
 	dangerzone?:Dangerzone
-	priorities:Priority[]
+	priorities:Array<Priority>
 	overrides?:Linter.Config
 }
 
@@ -38,9 +38,9 @@ type Options = {
 export default makeEslintrc
 
 function makeEslintrc (configuration:Options) : Linter.Config
-function makeEslintrc (...priorities:Priority[]) : Linter.Config
+function makeEslintrc (...priorities:Array<Priority>) : Linter.Config
 
-function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Priority[]) : Linter.Config {
+function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Array<Priority>) : Linter.Config {
 	if (typeof configuration === `string`) {
 		return makeEslintrc({
 			priorities: [
@@ -58,12 +58,19 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 
 	const availableConfigurations = rulesConfigurations.filter((config) => providers[config.providerId])
 
+	// TODO: make this available as an advanced config setting and react to activation instead of availability
+	if (availableConfigurations.includes(simpleImportSort_imports)) {
+		deactivateRule(availableConfigurations, import_order)
+	}
+
+	// TODO: make this available as an advanced config setting and react to activation instead of availability
 	if (availableConfigurations.includes(unusedImports_noUnusedVars)) {
 		deactivateRule(availableConfigurations, typescript_noUnusedVars)
 	}
 
-	if (availableConfigurations.includes(simpleImportSort_imports)) {
-		deactivateRule(availableConfigurations, import_order)
+	// TODO: make this available as an advanced config setting and react to activation instead of availability
+	if (availableConfigurations.includes(typescript_noMeaninglessVoidOperator)) {
+		deactivateRule(availableConfigurations, eslint_noVoid)
 	}
 
 	// TODO: ensure only available configs will be added to this
@@ -121,6 +128,7 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 
 		parserOptions.ecmaVersion = parserOptions.ecmaVersion ?? minEcmaVersion
 
+		// TODO: make this available as an advanced config setting and react to activation instead of availability
 		if (availableConfigurations.includes(import_noDuplicates)) {
 			deactivateRule(availableConfigurations, eslint_noDuplicateImports)
 			deactivateRule(availableConfigurations, typescript_noDuplicateImports)
@@ -132,7 +140,7 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 		}
 	}
 
-	const overrideConfigurations:RuleConfigurationOverride[] = availableConfigurations.filter(
+	const overrideConfigurations:Array<RuleConfigurationOverride> = availableConfigurations.filter(
 		(c) : c is RuleConfigurationOverride & Configuration => (
 			Boolean((c as RuleConfigurationOverride).base)
 		),
@@ -142,17 +150,15 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 
 	const usableConfigurations = (
 		availableConfigurations
-		.filter(<
-			R extends (typeof availableConfigurations)[number]['ruleId'],
-			P extends (typeof availableConfigurations)[number]['providerId'],
-		>(
-			config:(
-				| RuleConfiguration<R, P>
-				| RuleConfigurationOverride<RuleConfiguration, R, P>
-			),
+		.filter((
+			config,
 		) => (
 			!overriddenConfigurations.includes(config as RuleConfiguration)),
 		)
+	)
+
+	const squashedConfigurations = (
+		usableConfigurations
 		.map(<
 			R extends (typeof availableConfigurations)[number]['ruleId'],
 			P extends (typeof availableConfigurations)[number]['providerId'],
@@ -231,6 +237,10 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 				optionsDangerzone,
 			}
 		})
+	)
+
+	const setConfigurations = (
+		squashedConfigurations
 		.filter(<
 			R extends (typeof availableConfigurations)[number]['ruleId'],
 			P extends (typeof availableConfigurations)[number]['providerId'],
@@ -241,16 +251,27 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 			RuleConfigurationIgnored
 		> => !(config as RuleConfigurationIgnored | RuleConfigurationSet).ignore)
 		.filter((config) => priorities.includes(config.priority))
+	)
+
+	const enum Level {
+		error = `error`,
+		warning = `warn`,
+		off = `off`,
+	}
+
+	const settings = (
+		setConfigurations
 		.map(
 			(config) => ({
 				plugin: providers[config.providerId] as Exclude<
 					typeof providers[typeof config['providerId']],
 					false // this has been implicitly excluded by selecting `config` based on the provider name being truthy
 				>,
-				rule: { [config.ruleId]: (
+				rule: config.ruleId,
+				setting: (
 					config.activate
 					? [
-						config.priority === `TASTE` ? `warn` : `error`,
+						config.priority === `TASTE` ? Level.warning : Level.error,
 						...(
 							Array.isArray(config.optionsDangerzone) && (
 								dangerzone === true
@@ -259,13 +280,26 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 							? config.optionsDangerzone
 							: config.options
 						),
+					] as [
+						Level,
+						...Array<(Extract<Configuration, RuleConfigurationActive>)['options'][number]>,
 					]
-					: `off`
+					: Level.off
 				),
-				}}),
-			{},
+			}),
 		)
 	)
+
+	const plugins = new Set<Exclude<typeof providers[keyof typeof providers], false>>()
+	const rules : Partial<Linter.RulesRecord> = {}
+
+	settings.forEach(({ plugin, rule, setting }) => {
+		if (plugin !== `eslint`) plugins.add(plugin)
+
+		rules[rule] = setting
+	})
+
+	if (typeof providers[`eslint-plugin-vue`] === `string`) plugins.add(`vue`)
 
 	return {
 		...overrides,
@@ -274,21 +308,13 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Pri
 		parser,
 		parserOptions,
 		plugins: ([
-			...(
-				typeof providers[`eslint-plugin-vue`] === `string`
-				? [`vue`]
-				: []
-			),
-			...usableConfigurations
-			.map((c) => c.plugin)
-			.filter((p) : p is Exclude<typeof p, 'eslint'> => p !== `eslint`),
-			...(overrides?.plugins || []),
+			...plugins,
+			...(overrides?.plugins ?? []),
 		]),
-		rules: Object.assign(
-			{},
-			...usableConfigurations.map((c) => c.rule),
-			overrides?.rules,
-		),
+		rules: {
+			...rules,
+			...overrides?.rules,
+		},
 	}
 }
 
@@ -332,7 +358,7 @@ function deactivateRule (array:Array<RuleConfiguration | RuleConfigurationOverri
 function deactivated<
 	R extends string = string,
 	P extends string = string,
-	O extends unknown[] = unknown[],
+	O extends Array<unknown> = Array<unknown>,
 > (
 	configuration:RuleConfiguration<R, P, O> | RuleConfigurationOverride<RuleConfiguration, R, P, O>,
 ) : (

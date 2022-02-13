@@ -1,7 +1,7 @@
 import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/indent.d'
 
-export type Options = ((("tab") | number) | {
+export type Options = Array<(("tab") | number) | {
 	SwitchCase?: number
 	VariableDeclarator?: (number | ("first" | "off")) | {
 		"var"?: number | ("first" | "off")
@@ -29,9 +29,9 @@ export type Options = ((("tab") | number) | {
 	ImportDeclaration?: number | ("first" | "off")
 	flatTernaryExpressions?: boolean
 	offsetTernaryExpressions?: boolean
-	ignoredNodes?: string[]
+	ignoredNodes?: Array<string>
 	ignoreComments?: boolean
-})[]
+}>
 
 type Configuration = RuleConfigurationOverride<BaseConfiguration, '@typescript-eslint/indent', '@typescript-eslint/eslint-plugin', Options>
 

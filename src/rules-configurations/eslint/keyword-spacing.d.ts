@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	before?: boolean
 	after?: boolean
 	overrides?: {
@@ -277,7 +277,7 @@ export type Options = ({
 			after?: boolean
 		}
 	}
-})[]
+}>
 
 type Configuration = RuleConfiguration<'keyword-spacing', 'eslint', Options>
 

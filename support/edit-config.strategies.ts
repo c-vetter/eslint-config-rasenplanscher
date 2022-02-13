@@ -1,5 +1,3 @@
-/// <reference path='_inquirer-autocomplete-prompt.d.ts'/>
-
 import inquirer from 'inquirer'
 import autocomplete from 'inquirer-autocomplete-prompt'
 
@@ -13,7 +11,8 @@ export const DONE = `👉 DONE`
 
 type RuleAnswer = RuleData | typeof BACK | typeof DONE
 
-inquirer.registerPrompt(`autocomplete`, autocomplete)
+// autocomplete is missing types, see https://github.com/mokkabonna/inquirer-autocomplete-prompt/issues/107
+inquirer.registerPrompt(`autocomplete`, autocomplete as inquirer.prompts.PromptConstructor)
 
 export function select () {
 	return selectProvider()
@@ -69,7 +68,7 @@ function selectProvider () {
 				type: `autocomplete`,
 				name: `provider`,
 				message: `Provider:`,
-				source (_:never, input:string = ``) {
+				source (_:never, input = ``) {
 					if (!input) return providerAnswers
 
 					return providerAnswers.filter(({ name }) => name.toLowerCase().includes(input.toLowerCase()))
@@ -81,7 +80,7 @@ function selectProvider () {
 	)
 }
 
-function selectRule (filteredRules:RuleData[]) {
+function selectRule (filteredRules:Array<RuleData>) {
 	console.info(`Rules: ${filteredRules.length}`)
 
 	const ruleAnswers = filteredRules
@@ -96,7 +95,7 @@ function selectRule (filteredRules:RuleData[]) {
 				type: `autocomplete`,
 				name: `rule`,
 				message: `Rule:`,
-				source (_:never, input:string = ``) {
+				source (_:never, input = ``) {
 					return [
 						BACK,
 						...(
@@ -119,18 +118,19 @@ async function randomRule (options = rules()) {
 
 	console.info(`Rules: ${options.length}`)
 
-	return options[Math.floor(options.length * Math.random())]!
+	// assertion ensured by checking `options.length` and returning for 0
+	return options[Math.floor(options.length * Math.random())] as RuleData
 }
 
 
 //
 
 
-function incompleteRules (filteredRules:RuleData[]) {
+function incompleteRules (filteredRules:Array<RuleData>) {
 	return filteredRules.filter(({ exists }) => exists).filter(({ complete }) => !complete)
 }
 
-function newRules (filteredRules:RuleData[]) {
+function newRules (filteredRules:Array<RuleData>) {
 	return filteredRules.filter(({ exists }) => !exists)
 }
 

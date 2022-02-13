@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (({
+export type Options = Array<({
 	VariableDeclarator?: {
 		array?: boolean
 		"object"?: boolean
@@ -14,7 +14,7 @@ export type Options = (({
 	"object"?: boolean
 }) | {
 	enforceForRenamedProperties?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'prefer-destructuring', 'eslint', Options>
 

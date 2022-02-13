@@ -1,10 +1,10 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	builtinGlobals?: boolean
 	hoist?: "all" | "functions" | "never"
-	allow?: string[]
-})[]
+	allow?: Array<string>
+}>
 
 type Configuration = RuleConfiguration<'no-shadow', 'eslint', Options>
 

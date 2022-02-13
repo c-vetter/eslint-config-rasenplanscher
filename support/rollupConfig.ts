@@ -15,6 +15,7 @@ const eslintrc = (suffix = ``) => ({
 	},
 	external: [
 		suffix === `make` ? null : transpiled(rc(`make`)),
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
 		...Object.keys(readJsonSync(root(`package.json`)).peerDependencies),
 	],
 	plugins: [

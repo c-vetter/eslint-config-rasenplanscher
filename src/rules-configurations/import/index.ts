@@ -6,8 +6,9 @@ import _namespace_ from './namespace'
 import _noAbsolutePath_ from './no-absolute-path'
 import _noDuplicates_ from './no-duplicates'
 import _noExtraneousDependencies_ from './no-extraneous-dependencies'
-import _noNamedAsDefault_ from './no-named-as-default'
 import _noNamedAsDefaultMember_ from './no-named-as-default-member'
+import _noNamedAsDefault_ from './no-named-as-default'
+import _noNamespace_ from './no-namespace'
 import _noUnresolved_ from './no-unresolved'
 import _order_ from './order'
 import _unambiguous_ from './unambiguous'
@@ -23,6 +24,7 @@ export default [
 	_noExtraneousDependencies_,
 	_noNamedAsDefaultMember_,
 	_noNamedAsDefault_,
+	_noNamespace_,
 	_noUnresolved_,
 	_order_,
 	_unambiguous_,

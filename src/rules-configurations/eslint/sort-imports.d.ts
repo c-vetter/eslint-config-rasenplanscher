@@ -1,12 +1,12 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	ignoreCase?: boolean
-	memberSyntaxSortOrder?: ("none" | "all" | "multiple" | "single")[]
+	memberSyntaxSortOrder?: Array<"none" | "all" | "multiple" | "single">
 	ignoreDeclarationSort?: boolean
 	ignoreMemberSort?: boolean
 	allowSeparatedGroups?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'sort-imports', 'eslint', Options>
 

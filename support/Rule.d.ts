@@ -13,7 +13,7 @@ export type RuleDefinition = DeepReadonly<{
 		& Omit<EslintRule.RuleMetaData, 'docs' | 'fixable'>
 		& {
 			docs?: (
-				& Omit<Exclude<EslintRule.RuleMetaData['docs'], undefined>, 'category'|'recommended'>
+				& Omit<Exclude<EslintRule.RuleMetaData['docs'], undefined>, 'category' | 'recommended'>
 				& {
 					category?: string | null // eslint-plugin-vue
 					recommended?: (
@@ -45,8 +45,8 @@ export type RuleData = {
 
 export type RuleBundle = {
 	base: RuleData
-	extend: RuleData[]
-	all: RuleData[]
+	extend: Array<RuleData>
+	all: Array<RuleData>
 }
 
 
@@ -65,7 +65,7 @@ export type RuleConfigurationSet = {
 export type RuleConfigurationOff = {
 	activate: false
 }
-export type RuleConfigurationOptions<O extends unknown[] = unknown[]> = {
+export type RuleConfigurationOptions<O extends Array<unknown> = Array<unknown>> = {
 	activate: true
 	options: O
 	optionsDangerzone?: O
@@ -80,13 +80,13 @@ export type RuleConfigurationInactive<R extends string = string, P extends strin
 	& RuleConfigurationSet
 	& RuleConfigurationOff
 )
-export type RuleConfigurationActive<R extends string = string, P extends string = string, O extends unknown[] = unknown[]> = (
+export type RuleConfigurationActive<R extends string = string, P extends string = string, O extends Array<unknown> = Array<unknown>> = (
 	& RuleConfigurationBase<R, P>
 	& RuleConfigurationSet
 	& RuleConfigurationOptions<O>
 )
 
-export type RuleConfiguration<R extends string = string, P extends string = string, O extends unknown[] = unknown[]> = (
+export type RuleConfiguration<R extends string = string, P extends string = string, O extends Array<unknown> = Array<unknown>> = (
 	| RuleConfigurationIgnored<R, P>
 	| RuleConfigurationInactive<R, P>
 	| RuleConfigurationActive<R, P, O>
@@ -96,7 +96,7 @@ export type RuleConfigurationOverride<
 	B extends RuleConfiguration = RuleConfiguration,
 	R extends string = string,
 	P extends string = string,
-	O extends unknown[] = unknown[],
+	O extends Array<unknown> = Array<unknown>,
 > = (
 	& RuleConfigurationBase<R, P>
 	& {

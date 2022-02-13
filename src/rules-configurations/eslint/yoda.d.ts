@@ -1,9 +1,9 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (("always" | "never") | {
+export type Options = Array<("always" | "never") | {
 	exceptRange?: boolean
 	onlyEquality?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'yoda', 'eslint', Options>
 

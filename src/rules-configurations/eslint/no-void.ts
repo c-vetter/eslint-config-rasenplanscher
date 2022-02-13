@@ -5,7 +5,12 @@ const configuration:Configuration = {
 	providerId: `eslint`,
 	priority: `IMPORTANT`,
 	activate: true,
-	options: [],
+	options: [ {
+		allowAsStatement: false,
+	} ],
+	optionsDangerzone: [ {
+		allowAsStatement: true, // for @typescript-eslint/no-floating-promises
+	} ],
 }
 
 export default configuration

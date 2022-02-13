@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (("functions"))[] | (("all") | {
+export type Options = Array<"functions"> | Array<("all") | {
 	conditionalAssign?: boolean
 	nestedBinaryExpressions?: boolean
 	returnAssign?: boolean
@@ -9,7 +9,7 @@ export type Options = (("functions"))[] | (("all") | {
 	enforceForSequenceExpressions?: boolean
 	enforceForNewInMemberExpressions?: boolean
 	enforceForFunctionPrototypeMethods?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'no-extra-parens', 'eslint', Options>
 

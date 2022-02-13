@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (("always" | "never"))[]
+export type Options = Array<"always" | "never">
 
 type Configuration = RuleConfiguration<'rest-spread-spacing', 'eslint', Options>
 

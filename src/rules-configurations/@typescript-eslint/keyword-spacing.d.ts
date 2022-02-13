@@ -1,7 +1,7 @@
 import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/keyword-spacing.d'
 
-export type Options = ({
+export type Options = Array<{
 	before?: boolean
 	after?: boolean
 	overrides?: {
@@ -278,7 +278,7 @@ export type Options = ({
 			after?: boolean
 		}
 	}
-})[]
+}>
 
 type Configuration = RuleConfigurationOverride<BaseConfiguration, '@typescript-eslint/keyword-spacing', '@typescript-eslint/eslint-plugin', Options>
 

@@ -1,12 +1,12 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	ignoreDestructuring?: boolean
 	ignoreImports?: boolean
 	ignoreGlobals?: boolean
 	properties?: "always" | "never"
-	allow?: (string)[]
-})[]
+	allow?: Array<string>
+}>
 
 type Configuration = RuleConfiguration<'camelcase', 'eslint', Options>
 

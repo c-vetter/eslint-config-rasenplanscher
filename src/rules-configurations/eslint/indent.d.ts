@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ((("tab") | number) | {
+export type Options = Array<(("tab") | number) | {
 	SwitchCase?: number
 	VariableDeclarator?: (number | ("first" | "off")) | {
 		"var"?: number | ("first" | "off")
@@ -28,9 +28,9 @@ export type Options = ((("tab") | number) | {
 	ImportDeclaration?: number | ("first" | "off")
 	flatTernaryExpressions?: boolean
 	offsetTernaryExpressions?: boolean
-	ignoredNodes?: string[]
+	ignoredNodes?: Array<string>
 	ignoreComments?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'indent', 'eslint', Options>
 

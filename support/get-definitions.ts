@@ -1,4 +1,4 @@
-import { Linter } from 'eslint'
+import { Linter, Rule } from 'eslint'
 import { emptyDirSync, outputFile } from 'fs-extra'
 
 import { rulesDefinitions } from './paths'
@@ -16,7 +16,8 @@ plugins.forEach(
 	(plugin) => (
 		Object.entries(
 			// eslint-plugin-unused-imports changes the base rules
-			JSON.parse(JSON.stringify(require(plugin.id).rules)),
+			// eslint-disable-next-line @typescript-eslint/no-var-requires
+			JSON.parse(JSON.stringify((require(plugin.id) as Linter.HasRules).rules)) as Record<string, unknown>,
 		)
 		.forEach(([key, rule]) => rulesArray.push([
 			plugin.namespace + key,
@@ -29,7 +30,7 @@ rulesArray
 .filter(([,{ meta }]) => meta && meta.deprecated !== true)
 .map(([id, { meta }]) => ([
 	parse(id),
-	meta!, // previous filter ensures that this is non-falsy
+	meta as Rule.RuleMetaData, // previous filter ensures that this is non-falsy
 ] as const))
 .map(([{id, key, provider}, meta]) => ([
 	rulesDefinitions(
@@ -43,7 +44,7 @@ rulesArray
 		providerId: provider.id,
 	},
 ] as const))
-.forEach(([filepath, rule]) => outputFile(
+.forEach(([filepath, rule]) => void outputFile(
 	filepath,
 	`export default ${
 		JSON.stringify(rule, null, `\t`)

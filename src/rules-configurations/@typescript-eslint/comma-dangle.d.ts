@@ -5,7 +5,7 @@ export type Value = "always-multiline" | "always" | "never" | "only-multiline"
 
 export type ValueWithIgnore = "always-multiline" | "always" | "never" | "only-multiline" | "ignore"
 
-export type Options = ((Value | {
+export type Options = Array<Value | {
 	arrays?: ValueWithIgnore
 	objects?: ValueWithIgnore
 	imports?: ValueWithIgnore
@@ -14,7 +14,7 @@ export type Options = ((Value | {
 	enums?: ValueWithIgnore
 	generics?: ValueWithIgnore
 	tuples?: ValueWithIgnore
-}))[]
+}>
 
 type Configuration = RuleConfigurationOverride<BaseConfiguration, '@typescript-eslint/comma-dangle', '@typescript-eslint/eslint-plugin', Options>
 

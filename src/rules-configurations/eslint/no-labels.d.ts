@@ -1,9 +1,9 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	allowLoop?: boolean
 	allowSwitch?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'no-labels', 'eslint', Options>
 

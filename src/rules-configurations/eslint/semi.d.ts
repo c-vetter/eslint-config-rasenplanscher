@@ -1,10 +1,10 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = (("never") | {
+export type Options = Array<("never") | {
 	beforeStatementContinuationChars?: "always" | "any" | "never"
-})[] | (("always") | {
+}> | Array<("always") | {
 	omitLastInOneLineBlock?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'semi', 'eslint', Options>
 

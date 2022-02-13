@@ -1,9 +1,9 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	enforceForSwitchCase?: boolean
 	enforceForIndexOf?: boolean
-})[]
+}>
 
 type Configuration = RuleConfiguration<'use-isnan', 'eslint', Options>
 

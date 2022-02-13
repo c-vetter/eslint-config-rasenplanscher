@@ -1,8 +1,8 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
-	groups?: string[][]
-})[]
+export type Options = Array<{
+	groups?: Array<Array<string>>
+}>
 
 type Configuration = RuleConfiguration<'simple-import-sort/imports', 'eslint-plugin-simple-import-sort', Options>
 

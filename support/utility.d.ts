@@ -9,8 +9,8 @@ export type Mutable<R> = (
 // https://stackoverflow.com/a/49670389
 
 export type DeepReadonly<T> = (
-	T extends (infer R)[] ? DeepReadonlyArray<R> :
-	T extends Function ? T :
+	T extends Array<infer R> ? DeepReadonlyArray<R> :
+	T extends (...arguments: Array<never>) => unknown ? T :
 	T extends object ? DeepReadonlyObject<T> :
 	T
 )

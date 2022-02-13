@@ -1,6 +1,6 @@
 import { RuleConfiguration } from '../../../support/Rule.d'
 
-export type Options = ({
+export type Options = Array<{
 	"object": string
 	property?: string
 	message?: string
@@ -8,7 +8,7 @@ export type Options = ({
 	"object"?: string
 	property: string
 	message?: string
-})[]
+}>
 
 type Configuration = RuleConfiguration<'no-restricted-properties', 'eslint', Options>
 

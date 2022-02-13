@@ -1,16 +1,16 @@
 import { RuleConfigurationOverride } from '../../../support/Rule.d'
 import BaseConfiguration from '../eslint/no-restricted-imports.d'
 
-export type Options = (any | {
+export type Options = Array<unknown | {
 	allowTypeImports?: boolean
-})[] | {
-	paths?: (any | {
+}> | Array<{
+	paths?: Array<unknown | {
 		allowTypeImports?: boolean
-	})[]
-	patterns?: any | {
+	}>
+	patterns?: unknown | Array<{
 		allowTypeImports?: boolean
-	}[]
-}[]
+	}>
+}>
 
 type Configuration = RuleConfigurationOverride<BaseConfiguration, '@typescript-eslint/no-restricted-imports', '@typescript-eslint/eslint-plugin', Options>
 
