@@ -1,4 +1,5 @@
 import __typescriptEslint__ from './@typescript-eslint'
+import __compat__ from './compat'
 import __eslint__ from './eslint'
 import __import__ from './import'
 import __node__ from './node'
@@ -7,6 +8,7 @@ import __unusedImports__ from './unused-imports'
 
 export default [
 	...__typescriptEslint__,
+	...__compat__,
 	...__eslint__,
 	...__import__,
 	...__node__,

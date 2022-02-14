@@ -61,6 +61,7 @@
 		"ava": "^4.0.1",
 		"case-anything": "^1.1.5",
 		"eslint": "^8.7.0",
+		"eslint-plugin-compat": "^4.0.2",
 		"eslint-plugin-import": "^2.25.4",
 		"eslint-plugin-jsdoc": "^37.6.3",
 		"eslint-plugin-node": "^11.1.0",
@@ -106,5 +107,8 @@
 			"ts-node/register"
 		],
 		"verbose": true
-	}
+	},
+	"browserslist": [
+		"maintained node versions"
+	]
 }
