@@ -6,6 +6,7 @@ export type Options = Array<{
 	allowHigherOrderFunctions?: boolean
 	allowDirectConstAssertionInArrowFunctions?: boolean
 	allowConciseArrowFunctionExpressionsStartingWithVoid?: boolean
+	allowedNames?: Array<string>
 }>
 
 type Configuration = RuleConfiguration<'@typescript-eslint/explicit-function-return-type', '@typescript-eslint/eslint-plugin', Options>

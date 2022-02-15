@@ -142,11 +142,9 @@ function normalizeSchema (schema:JSONSchema | Array<JSONSchema>) : JSONSchema {
 
 	const keys = Object.keys(schema) as Array<keyof typeof schema | number>
 
-	// only non-numeric keys
-	if (keys.every((key) => Number.isNaN(Number.parseInt(key as string)))) return schema
-	// mixed numeric/non-numeric keys
-	if (keys.some((key) => Number.isNaN(Number.parseInt(key as string)))) return fixWeirdWrongButWorkingSchema(schema)
-	// only numeric keys
+	// non-numeric keys
+	if (keys.some((key) => Number.isNaN(Number.parseInt(key as string)))) return schema
+	// numeric keys
 
 	const schemaArray:Array<JSONSchema> = []
 
@@ -165,23 +163,6 @@ function wrapSchemaArray (schemas:Array<JSONSchema>) : JSONSchema {
 		minItems: 0,
 		maxItems: schemas.length,
 	}
-}
-
-import weirdSchemaThing from './.rules-definitions/@typescript-eslint/no-magic-numbers'
-
-function fixWeirdWrongButWorkingSchema (schema:JSONSchema) {
-	// ./.rules-definitions/eslint/no-magic-numbers.ts
-	// Strangely, eslint seems to be fine with that 👆 and handling all parameters…
-	// @see https://github.com/typescript-eslint/typescript-eslint/blob/c8e650f0c124d24b24beaeb376eaf61ee8d9e6fb/packages/eslint-plugin/src/rules/no-magic-numbers.ts#L12
-	const { 0: weird, properties } = schema as unknown as typeof weirdSchemaThing['meta']['schema'][number]
-
-	return JSON.parse(JSON.stringify({
-		...weird,
-		properties: {
-			...weird.properties,
-			...properties,
-		},
-	})) as JSONSchema
 }
 
 function generateConfig (item:RuleData, bundle:RuleBundle) {
