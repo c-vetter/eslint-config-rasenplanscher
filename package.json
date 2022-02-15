@@ -1,6 +1,6 @@
 {
 	"name": "eslint-config-rasenplanscher",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"description": "Being a manifest of how eslint should be configured, according to the author's considered opinion. PRs welcome!",
 	"main": "eslintrc.js",
 	"files": [
@@ -28,7 +28,7 @@
 		"ensure-docs": "ts-node support/ensure-docs.ts",
 		"update-types": "ts-node support/update-types.ts",
 		"test": "ava __tests__/tests.ts",
-		"prepublishOnly": "run-s ensure-docs update-types start:cleanup test"
+		"prepublishOnly": "npm i && run-s ensure-docs update-types start:cleanup test"
 	},
 	"repository": {
 		"type": "git",

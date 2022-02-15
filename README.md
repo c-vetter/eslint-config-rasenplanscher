@@ -33,7 +33,7 @@ What's in it, how to use it
 ---------------------------
 First, install it (as well as the plugins you want):
 ```sh
-npm install --save-dev eslint-config-rasenplanscher eslint@^8.7.0 @typescript-eslint/eslint-plugin@^5.10.0 @typescript-eslint/parser@^5.10.0 eslint-plugin-import@^2.25.4 eslint-plugin-unused-imports@^2.0.0
+npm install --save-dev eslint-config-rasenplanscher eslint@^8.7.0 @typescript-eslint/eslint-plugin@^5.10.0 @typescript-eslint/parser@^5.10.0 eslint-plugin-compat@^4.0.2 eslint-plugin-import@^2.25.4 eslint-plugin-node@^11.1.0 eslint-plugin-simple-import-sort@^7.0.0 eslint-plugin-unused-imports@^2.0.0
 ```
 
 Then either add this to your `package.json`:
@@ -106,6 +106,47 @@ module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 
 
 # Changelog
+
+## [2.1.0]
++ add support for `eslint-plugin-compat`
++ 37 new rule configurations
+	+ [no-void](.src/rules-configurations/eslint/no-void.md)
+	+ [@typescript-eslint/adjacent-overload-signatures](.src/rules-configurations/@typescript-eslint/adjacent-overload-signatures.md)
+	+ [@typescript-eslint/array-type](.src/rules-configurations/@typescript-eslint/array-type.md)
+	+ [@typescript-eslint/await-thenable](.src/rules-configurations/@typescript-eslint/await-thenable.md)
+	+ [@typescript-eslint/ban-ts-comment](.src/rules-configurations/@typescript-eslint/ban-ts-comment.md)
+	+ [@typescript-eslint/ban-tslint-comment](.src/rules-configurations/@typescript-eslint/ban-tslint-comment.md)
+	+ [@typescript-eslint/ban-types](.src/rules-configurations/@typescript-eslint/ban-types.md)
+	+ [@typescript-eslint/explicit-function-return-type](.src/rules-configurations/@typescript-eslint/explicit-function-return-type.md)
+	+ [@typescript-eslint/no-empty-interface](.src/rules-configurations/@typescript-eslint/no-empty-interface.md)
+	+ [@typescript-eslint/no-explicit-any](.src/rules-configurations/@typescript-eslint/no-explicit-any.md)
+	+ [@typescript-eslint/no-extra-non-null-assertion](.src/rules-configurations/@typescript-eslint/no-extra-non-null-assertion.md)
+	+ [@typescript-eslint/no-floating-promises](.src/rules-configurations/@typescript-eslint/no-floating-promises.md)
+	+ [@typescript-eslint/no-for-in-array](.src/rules-configurations/@typescript-eslint/no-for-in-array.md)
+	+ [@typescript-eslint/no-inferrable-types](.src/rules-configurations/@typescript-eslint/no-inferrable-types.md)
+	+ [@typescript-eslint/no-meaningless-void-operator](.src/rules-configurations/@typescript-eslint/no-meaningless-void-operator.md)
+	+ [@typescript-eslint/no-misused-new](.src/rules-configurations/@typescript-eslint/no-misused-new.md)
+	+ [@typescript-eslint/no-misused-promises](.src/rules-configurations/@typescript-eslint/no-misused-promises.md)
+	+ [@typescript-eslint/no-namespace](.src/rules-configurations/@typescript-eslint/no-namespace.md)
+	+ [@typescript-eslint/no-non-null-asserted-nullish-coalescing](.src/rules-configurations/@typescript-eslint/no-non-null-asserted-nullish-coalescing.md)
+	+ [@typescript-eslint/no-non-null-asserted-optional-chain](.src/rules-configurations/@typescript-eslint/no-non-null-asserted-optional-chain.md)
+	+ [@typescript-eslint/no-non-null-assertion](.src/rules-configurations/@typescript-eslint/no-non-null-assertion.md)
+	+ [@typescript-eslint/no-this-alias](.src/rules-configurations/@typescript-eslint/no-this-alias.md)
+	+ [@typescript-eslint/no-unsafe-argument](.src/rules-configurations/@typescript-eslint/no-unsafe-argument.md)
+	+ [@typescript-eslint/no-unsafe-assignment](.src/rules-configurations/@typescript-eslint/no-unsafe-assignment.md)
+	+ [@typescript-eslint/no-unsafe-call](.src/rules-configurations/@typescript-eslint/no-unsafe-call.md)
+	+ [@typescript-eslint/no-unsafe-member-access](.src/rules-configurations/@typescript-eslint/no-unsafe-member-access.md)
+	+ [@typescript-eslint/no-unsafe-return](.src/rules-configurations/@typescript-eslint/no-unsafe-return.md)
+	+ [@typescript-eslint/no-var-requires](.src/rules-configurations/@typescript-eslint/no-var-requires.md)
+	+ [@typescript-eslint/prefer-as-const](.src/rules-configurations/@typescript-eslint/prefer-as-const.md)
+	+ [@typescript-eslint/prefer-namespace-keyword](.src/rules-configurations/@typescript-eslint/prefer-namespace-keyword.md)
+	+ [@typescript-eslint/prefer-nullish-coalescing](.src/rules-configurations/@typescript-eslint/prefer-nullish-coalescing.md)
+	+ [@typescript-eslint/restrict-plus-operands](.src/rules-configurations/@typescript-eslint/restrict-plus-operands.md)
+	+ [@typescript-eslint/restrict-template-expressions](.src/rules-configurations/@typescript-eslint/restrict-template-expressions.md)
+	+ [@typescript-eslint/triple-slash-reference](.src/rules-configurations/@typescript-eslint/triple-slash-reference.md)
+	+ [@typescript-eslint/unbound-method](.src/rules-configurations/@typescript-eslint/unbound-method.md)
+	+ [compat/compat](.src/rules-configurations/compat/compat.md)
+	+ [import/no-namespace](.src/rules-configurations/import/no-namespace.md)
 
 ## [2.0.0]
 + Breaking Change: deactivate overridden rules instead of ignoring
