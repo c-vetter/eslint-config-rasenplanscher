@@ -188,6 +188,7 @@ function checkFiles (t: ExecutionContext, paths: Paths) {
 						),
 						testResults,
 					)
+					.replace(/\r\n/g, `\n`)
 					.replace(/\\/g, `/`)
 					.replace(
 						p.endsWith(`eslint.log`) ? /[ ]{2,}/g : `\t`,

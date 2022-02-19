@@ -85,7 +85,16 @@ function selectRule (filteredRules:Array<RuleData>) {
 
 	const ruleAnswers = filteredRules
 	.map((data) => ({
-		name: data.rule.key,
+		name: `${
+			data.rule.meta.docs?.recommended === undefined
+			|| data.rule.meta.docs.recommended === false
+			? `  `
+			: `👍`
+		} ${
+			typeof data.rule.meta.fixable === `string`
+			? `🛠 `
+			: `  `
+		} ${data.rule.key}`,
 		value: data,
 	}))
 

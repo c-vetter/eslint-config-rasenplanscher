@@ -95,7 +95,7 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 			types
 			.replace(/;$/gm, ``)
 			.replace(/(?<=(?:^|\n)( {4})*) {4}/g, `\t`)
-			.replace(/\(\)\[\]$/, `never[]`)
+			.replace(/\((?:\{\})?\)\[\]$/, `never[]`)
 		}
 
 		type ${configTypeToken} = ${
@@ -136,7 +136,9 @@ export function generateTypes (item:RuleData, bundle:RuleBundle) {
 	))
 }
 
-function normalizeSchema (schema:JSONSchema | Array<JSONSchema>) : JSONSchema {
+function normalizeSchema (schema?:JSONSchema | Array<JSONSchema>) : JSONSchema {
+	if (!schema) return wrapSchemaArray([])
+
 	if (Array.isArray(schema)) return wrapSchemaArray(schema)
 	if (Object.prototype.hasOwnProperty.call(schema, `type`)) return schema
 

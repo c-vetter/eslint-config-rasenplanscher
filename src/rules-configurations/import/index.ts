@@ -4,6 +4,7 @@ import _extensions_ from './extensions'
 import _named_ from './named'
 import _namespace_ from './namespace'
 import _noAbsolutePath_ from './no-absolute-path'
+import _noDeprecated_ from './no-deprecated'
 import _noDuplicates_ from './no-duplicates'
 import _noExtraneousDependencies_ from './no-extraneous-dependencies'
 import _noNamedAsDefault_ from './no-named-as-default'
@@ -20,6 +21,7 @@ export default [
 	_named_,
 	_namespace_,
 	_noAbsolutePath_,
+	_noDeprecated_,
 	_noDuplicates_,
 	_noExtraneousDependencies_,
 	_noNamedAsDefaultMember_,

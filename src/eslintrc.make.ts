@@ -16,6 +16,27 @@ import import_order from './rules-configurations/import/order'
 import simpleImportSort_imports from './rules-configurations/simple-import-sort/imports'
 import unusedImports_noUnusedVars from './rules-configurations/unused-imports/no-unused-vars'
 
+
+type ProvidersMap = typeof providers
+type ProviderId = keyof ProvidersMap
+type ProviderKey = Exclude<ProvidersMap[ProviderId], false>
+
+const [
+	availableProvidersIds,
+	availableProvidersKeys,
+] = Object.entries(providers).reduce(
+	([ids, keys], [id, key]) => (
+		key === false
+		? [ids, keys]
+		: [
+			[...ids, id],
+			[...keys, key],
+		]
+	),
+	[[], []] as [Array<ProviderId>, Array<ProviderKey>],
+)
+
+
 type Configurations = typeof rulesConfigurations
 type Configuration = Configurations[number]
 
@@ -50,13 +71,19 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Arr
 		})
 	}
 
+	if (!availableProvidersIds.includes(`eslint`)) {
+		throw new Error(`eslint not found, please make sure to install eslint and all desired plugins`)
+	}
+
 	const {
 		priorities,
 		dangerzone,
 		overrides,
 	} = configuration
 
-	const availableConfigurations = rulesConfigurations.filter((config) => providers[config.providerId])
+	const availableConfigurations = rulesConfigurations.filter(
+		(config) : config is Configuration & { providerId: ProviderId } => availableProvidersIds.includes(config.providerId),
+	)
 
 	// TODO: make this available as an advanced config setting and react to activation instead of availability
 	if (availableConfigurations.includes(simpleImportSort_imports)) {
@@ -82,14 +109,21 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Arr
 	const parserTs = `@typescript-eslint/parser`
 	const parserVue = `vue-eslint-parser`
 
-	if (parser === undefined) {
-		if (canRequire(parserTs)) {
-			parser = parserTs
-		}
+	if (parser === undefined && canRequire(parserTs)) {
+		parser = parserTs
+	}
+
+	const settings : Linter.Config[`settings`] = ensureRecord(overrides?.settings)
+
+	if ( availableProvidersKeys.includes(`react`) ) {
+		const reactSettings = ensureRecord(settings[`react`])
+
+		reactSettings[`version`] ??= `detect`
+		settings[`react`] = reactSettings
 	}
 
 	if (
-		typeof providers[`eslint-plugin-vue`] === `string`
+		availableProvidersKeys.includes(`vue`)
 		&& parser !== parserVue
 		&& parserOptions[`parser`] === undefined
 	) {
@@ -101,13 +135,12 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Arr
 		]
 	}
 
-	if (typeof providers[`eslint-plugin-import`] === `string`) {
+	if (availableProvidersKeys.includes(`import`)) {
 		if (parserOptions.sourceType === `script`) {
-			throw new Error(
-				// no outdent in order to not have dependencies for a config
-				`Cannot use \`eslint-plugin-import\` with source type script.`
-				+ `See https://github.com/import-js/eslint-plugin-import/blob/68cea3e6b6fe5fd61e5cf2e2c7c0be9e8dc597cb/config/recommended.js#L22`,
-			)
+			throw new Error(outdent`
+				Cannot use \`eslint-plugin-import\` with source type script.
+				See https://github.com/import-js/eslint-plugin-import/blob/68cea3e6b6fe5fd61e5cf2e2c7c0be9e8dc597cb/config/recommended.js#L22
+			`)
 		}
 
 		parserOptions.sourceType = `module`
@@ -119,11 +152,10 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Arr
 			&& parserOptions.ecmaVersion !== `latest`
 			&& parserOptions.ecmaVersion < minEcmaVersion
 		) {
-			throw new Error(
-				// no outdent in order to not have dependencies for a config
-				`Cannot use \`eslint-plugin-import\` with ecma version less than 2018`
-				+ `See https://github.com/import-js/eslint-plugin-import/blob/68cea3e6b6fe5fd61e5cf2e2c7c0be9e8dc597cb/config/recommended.js#L22`,
-			)
+			throw new Error(outdent`
+				Cannot use \`eslint-plugin-import\` with ecma version less than 2018
+				See https://github.com/import-js/eslint-plugin-import/blob/68cea3e6b6fe5fd61e5cf2e2c7c0be9e8dc597cb/config/recommended.js#L22
+			`)
 		}
 
 		parserOptions.ecmaVersion = parserOptions.ecmaVersion ?? minEcmaVersion
@@ -134,10 +166,37 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Arr
 			deactivateRule(availableConfigurations, typescript_noDuplicateImports)
 		}
 
-		if (typeof providers[`@typescript-eslint/eslint-plugin`] === `string`) {
+		if (availableProvidersKeys.includes(`@typescript-eslint`)) {
 			// TODO: ensure only available configs will be added to this
 			extend.push(`plugin:import/typescript`)
 		}
+	}
+
+	if (availableProvidersKeys.includes(`react`)) {
+		parserOptions.ecmaFeatures = {
+			...parserOptions.ecmaFeatures,
+			jsx: parserOptions.ecmaFeatures?.jsx ?? true,
+		}
+	}
+
+	const env : Linter.Config[`env`] = overrides?.env ?? {}
+
+	if (
+		env[`browser`] === undefined
+		&& (
+			availableProvidersKeys.includes(`react`)
+			|| availableProvidersKeys.includes(`react-hooks`)
+			|| availableProvidersKeys.includes(`vue`)
+		)
+	) {
+		env[`browser`] = true
+	}
+
+	if (
+		env[`node`] === undefined
+		&& availableProvidersKeys.includes(`node`)
+	) {
+		env[`node`] = true
 	}
 
 	const overrideConfigurations:Array<RuleConfigurationOverride> = availableConfigurations.filter(
@@ -259,14 +318,11 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Arr
 		off = `off`,
 	}
 
-	const settings = (
+	const ruleSettings = (
 		setConfigurations
 		.map(
 			(config) => ({
-				plugin: providers[config.providerId] as Exclude<
-					typeof providers[typeof config['providerId']],
-					false // this has been implicitly excluded by selecting `config` based on the provider name being truthy
-				>,
+				provider: providers[config.providerId] as ProviderKey, // this assertion is ensured by `availableConfigurations`
 				rule: config.ruleId,
 				setting: (
 					config.activate
@@ -290,16 +346,16 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Arr
 		)
 	)
 
-	const plugins = new Set<Exclude<typeof providers[keyof typeof providers], false>>()
+	const plugins = new Set<ProviderKey>()
 	const rules : Partial<Linter.RulesRecord> = {}
 
-	settings.forEach(({ plugin, rule, setting }) => {
-		if (plugin !== `eslint`) plugins.add(plugin)
+	ruleSettings.forEach(({ provider, rule, setting }) => {
+		if (provider !== `eslint`) plugins.add(provider)
 
 		rules[rule] = setting
 	})
 
-	if (typeof providers[`eslint-plugin-vue`] === `string`) plugins.add(`vue`)
+	if (availableProvidersKeys.includes(`vue`)) plugins.add(`vue`)
 
 	return {
 		...overrides,
@@ -307,6 +363,7 @@ function makeEslintrc (configuration:(Options | Priority), ...morePriorities:Arr
 		extends: extend,
 		parser,
 		parserOptions,
+		settings,
 		plugins: ([
 			...plugins,
 			...(overrides?.plugins ?? []),
@@ -333,7 +390,7 @@ function ensureArray<T> (data?:(Array<T> | T)) : Array<T> {
 	return [data]
 }
 
-function ensureRecord<T extends Record<string, unknown> = Record<string, unknown>> (data?:T) : Partial<T> {
+function ensureRecord<T extends Record<string, unknown> = Record<string, unknown>> (data?:T) : unknown extends T ? Record<string, unknown> : Partial<T> {
 	if (data === undefined) return {}
 
 	return {...data}
@@ -384,4 +441,17 @@ function deactivated<
 
 function isIgnored (configuration:RuleConfiguration | RuleConfigurationOverride) : configuration is RuleConfigurationIgnored {
 	return configuration.ignore ?? false
+}
+
+//
+
+function outdent (strings:TemplateStringsArray, ...interpolations:Array<string>) {
+	return (
+		strings
+		.flatMap((string, index) => [string, interpolations[index]])
+		.slice(0, -1) // eslint-disable-line @typescript-eslint/no-magic-numbers
+		.join(``)
+		.trim()
+		.replace(/^\t+/gm, ``)
+	)
 }

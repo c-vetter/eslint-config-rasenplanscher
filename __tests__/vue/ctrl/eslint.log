@@ -1,7 +1,4 @@
 
-__test-results__/vue/App.vue
-	2:8	error	'HelloWorld' is defined but never used	@typescript-eslint/no-unused-vars
-
 __test-results__/vue/HelloWorld.vue
 	4:1	error	Unsafe call of an `any` typed value	@typescript-eslint/no-unsafe-call
 	4:1	error	'defineProps' is not defined	no-undef
@@ -10,5 +7,5 @@ __test-results__/vue/HelloWorld.vue
 	6:15	error	Unsafe call of an `any` typed value	@typescript-eslint/no-unsafe-call
 	6:19	error	No magic number: 0	@typescript-eslint/no-magic-numbers
 
-Γ£û 7 problems (7 errors, 0 warnings)
+Γ£û 6 problems (6 errors, 0 warnings)
 
