@@ -1,6 +1,6 @@
 {
 	"name": "eslint-config-rasenplanscher",
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"description": "Being a manifest of how eslint should be configured, according to the author's considered opinion. PRs welcome!",
 	"main": "eslintrc.js",
 	"files": [

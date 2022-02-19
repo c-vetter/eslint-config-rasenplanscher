@@ -33,7 +33,7 @@ What's in it, how to use it
 ---------------------------
 First, install it (as well as the plugins you want):
 ```sh
-npm install --save-dev eslint-config-rasenplanscher eslint@^8.7.0 @typescript-eslint/eslint-plugin@^5.10.0 @typescript-eslint/parser@^5.10.0 eslint-plugin-compat@^4.0.2 eslint-plugin-import@^2.25.4 eslint-plugin-node@^11.1.0 eslint-plugin-simple-import-sort@^7.0.0 eslint-plugin-unused-imports@^2.0.0
+npm install --save-dev eslint-config-rasenplanscher eslint@^8.7.0 @typescript-eslint/eslint-plugin@^5.10.0 @typescript-eslint/parser@^5.10.0 eslint-plugin-compat@^4.0.2 eslint-plugin-import@^2.25.4 eslint-plugin-node@^11.1.0 eslint-plugin-react@^7.28.0 eslint-plugin-simple-import-sort@^7.0.0 eslint-plugin-unused-imports@^2.0.0
 ```
 
 Then either add this to your `package.json`:
@@ -106,6 +106,36 @@ module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 
 
 # Changelog
+
+## [2.2.0]
++ add support for `eslint-plugin-react`
++ 26 new rule configurations
+	+ [import/no-deprecated](./src/rules-configurations/import/no-deprecated.md)
+	+ [react/display-name](./src/rules-configurations/react/display-name.md)
+	+ [react/jsx-key](./src/rules-configurations/react/jsx-key.md)
+	+ [react/jsx-no-comment-textnodes](./src/rules-configurations/react/jsx-no-comment-textnodes.md)
+	+ [react/jsx-no-duplicate-props](./src/rules-configurations/react/jsx-no-duplicate-props.md)
+	+ [react/jsx-no-target-blank](./src/rules-configurations/react/jsx-no-target-blank.md)
+	+ [react/jsx-no-undef](./src/rules-configurations/react/jsx-no-undef.md)
+	+ [react/jsx-uses-react](./src/rules-configurations/react/jsx-uses-react.md)
+	+ [react/jsx-uses-vars](./src/rules-configurations/react/jsx-uses-vars.md)
+	+ [react/no-children-prop](./src/rules-configurations/react/no-children-prop.md)
+	+ [react/no-danger-with-children](./src/rules-configurations/react/no-danger-with-children.md)
+	+ [react/no-deprecated](./src/rules-configurations/react/no-deprecated.md)
+	+ [react/no-direct-mutation-state](./src/rules-configurations/react/no-direct-mutation-state.md)
+	+ [react/no-find-dom-node](./src/rules-configurations/react/no-find-dom-node.md)
+	+ [react/no-is-mounted](./src/rules-configurations/react/no-is-mounted.md)
+	+ [react/no-render-return-value](./src/rules-configurations/react/no-render-return-value.md)
+	+ [react/no-string-refs](./src/rules-configurations/react/no-string-refs.md)
+	+ [react/no-unescaped-entities](./src/rules-configurations/react/no-unescaped-entities.md)
+	+ [react/no-unknown-property](./src/rules-configurations/react/no-unknown-property.md)
+	+ [react/no-unsafe](./src/rules-configurations/react/no-unsafe.md)
+	+ [react/prop-types](./src/rules-configurations/react/prop-types.md)
+	+ [react/react-in-jsx-scope](./src/rules-configurations/react/react-in-jsx-scope.md)
+	+ [react/require-render-return](./src/rules-configurations/react/require-render-return.md)
+	+ [vue/jsx-uses-vars](./src/rules-configurations/vue/jsx-uses-vars.md)
+	+ [vue/require-render-return](./src/rules-configurations/vue/require-render-return.md)
+	+ [vue/script-setup-uses-vars](./src/rules-configurations/vue/script-setup-uses-vars.md)
 
 ## [2.1.0]
 + add support for `eslint-plugin-compat`
