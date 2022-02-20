@@ -107,8 +107,13 @@ module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 
 # Changelog
 
+## [2.2.1]
++ fix README
+
 ## [2.2.0]
-+ add support for `eslint-plugin-react`
++ support for `eslint-plugin-react`
++ add `browser` environment for `eslint-plugin-react`, `eslint-plugin-react-hooks`, and `eslint-plugin-vue`
++ add `node` environment for `eslint-plugin-node`
 + 26 new rule configurations
 	+ [import/no-deprecated](./src/rules-configurations/import/no-deprecated.md)
 	+ [react/display-name](./src/rules-configurations/react/display-name.md)
@@ -138,7 +143,7 @@ module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 	+ [vue/script-setup-uses-vars](./src/rules-configurations/vue/script-setup-uses-vars.md)
 
 ## [2.1.0]
-+ add support for `eslint-plugin-compat`
++ support for `eslint-plugin-compat`
 + 37 new rule configurations
 	+ [no-void](.src/rules-configurations/eslint/no-void.md)
 	+ [@typescript-eslint/adjacent-overload-signatures](.src/rules-configurations/@typescript-eslint/adjacent-overload-signatures.md)
@@ -181,8 +186,8 @@ module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 ## [2.0.0]
 + Breaking Change: deactivate overridden rules instead of ignoring
 + Breaking Change: emit warnings instead of errors for `TASTE` level rules
-+ add support for `eslint-plugin-vue`
-+ add support for `eslint-plugin-simple-import-sort`
++ support for `eslint-plugin-vue`
++ support for `eslint-plugin-simple-import-sort`
 + 70 new rule configurations
 	+ [getter-return](./src/rules-configurations/eslint/getter-return.md)
 	+ [no-async-promise-executor](./src/rules-configurations/eslint/no-async-promise-executor.md)
@@ -257,8 +262,8 @@ module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 
 
 ## [1.3.0]
-+	add note to README about de-prioritization of detailed rules documentation
-+	add call to action for un-documented rule configurations
++	note in README about de-prioritization of detailed rules documentation
++	call to action for un-documented rule configurations
 +	147 new rule configurations
 	+ [accessor-pairs](./src/rules-configurations/eslint/accessor-pairs.md)
 	+ [array-bracket-newline](./src/rules-configurations/eslint/array-bracket-newline.md)
@@ -412,7 +417,7 @@ module.exports = require('eslint-config-rasenplanscher/eslintrc.make')({
 
 ## [1.2.0]
 +	fix `peerDependencies`
-+	add note to README about `parserOptions.project` for `@typescript-eslint/eslint-plugin`
++	note in README about `parserOptions.project` for `@typescript-eslint/eslint-plugin`
 +	8 new rule configurations
 	+ [no-constant-condition](./src/rules-configurations/eslint/no-constant-condition.md)
 	+
