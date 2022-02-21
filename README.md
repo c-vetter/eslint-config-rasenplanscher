@@ -1,3 +1,17 @@
+<table><thead><tr><th>⚠ Deprecation Notice ⚠</th></tr></thead><tr><td>
+
+Due to a shift in focus and plans for additional features out of scope for a package like this, there is now a successor, in spirit and in code:  
+[👉 @professional-js/eslint-config](https://www.npmjs.com/package/@professional-js/eslint-config)
+([GitHub](https://github.com/professional-js/eslint-config))
+
+That package has the exact same feature set at the time of writing but will be maintained and extended.
+Work on `eslint-config-rasenplanscher` ceases immediately and completely.
+
+Please make sure to switch.
+
+</td></tr></table>
+
+
 eslint-config-rasenplanscher
 ============================
 
@@ -13,10 +27,9 @@ If you disagree with something rationally, please [open an issue](https://github
 
 Also, if you'd like a setting that's missing here, just open a PR and it shall be included if the reasoning is up to snuff.
 
-#### Note
-Due to time constraints, this goal has been de-prioritized.
-If you are unclear why a certain rule is configured the way it is, please [open an issue](https://github.com/rasenplanscher/eslint-config-rasenplanscher/issues).
-PRs are also welcome, of course.
+| Note |
+|:---- |
+| Due to time constraints, this goal has been de-prioritized. If you are unclear why a certain rule is configured the way it is, please [open an issue](https://github.com/rasenplanscher/eslint-config-rasenplanscher/issues). PRs are also still welcome, of course. |
 
 ### “reactive”
 This configuration determines whether your project uses the eslint plugins it has rules for and only activates those rules for the available plugins. That way, you can set up your project and just add the plugins you're interested in. The configuration will handle the rest.
